@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>杨公著作背诵</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;justify-content:center}
+.app{width:100%;max-width:480px;min-height:100vh}
+@media(min-width:600px){body{background:#060d1b;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.7)}.screen{min-height:0!important}}
+.screen{display:none;flex-direction:column;padding:14px 14px calc(env(safe-area-inset-bottom,0px) + 28px);min-height:100vh;min-height:100svh}
+.screen.active{display:flex}
+.tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
+.tbk{background:none;border:none;color:#64748b;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.tbk:hover{background:#1e293b;color:#94a3b8}
+.tbtitle{flex:1;text-align:center;font-size:14px;color:#94a3b8}
+.btn{width:100%;padding:12px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none}
+.btn:active{transform:scale(.98)}
+.btn-g{background:#10b981;color:#fff}.btn-g:hover{background:#059669}
+.btn-d{background:#1e293b;color:#94a3b8}.btn-d:hover{background:#273549}
+.btn-a{background:#78350f;color:#fcd34d}.btn-a:hover{background:#92400e}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#334155;color:#e2e8f0;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.toast.show{opacity:1}
+
+/* HOME */
+.hdr{text-align:center;padding:22px 0 14px}
+.htitle{font-size:26px;font-weight:bold;color:#10b981;letter-spacing:4px}
+.hsub{font-size:11px;color:#475569;margin-top:4px;letter-spacing:4px}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
+.hstat{background:#1e293b;border-radius:11px;padding:10px 6px;text-align:center}
+.hstat-v{font-size:20px;font-weight:bold;color:#10b981}
+.hstat-l{font-size:10px;color:#475569;margin-top:2px}
+.bk{border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;display:flex;align-items:center;gap:12px}
+.bk:hover{border-color:rgba(255,255,255,.12)}
+.bk:active{transform:scale(.99)}
+.bk-icon{font-size:26px;flex-shrink:0;width:38px;text-align:center}
+.bk-info{flex:1}
+.bk-name{font-size:16px;font-weight:bold;color:#e2e8f0}
+.bk-meta{font-size:11px;color:#64748b;margin-top:2px}
+.bk-prog{text-align:right;flex-shrink:0}
+.bk-n{font-size:18px;font-weight:bold;color:#10b981}
+.bk-nl{font-size:10px;color:#475569}
+.bk-bar{height:4px;border-radius:2px;background:#1e293b;margin-top:5px;width:60px}
+.bk-bar-fill{height:100%;border-radius:2px;background:#10b981;transition:width .3s}
+.bk1{background:#0f1f3d}.bk2{background:#1a0f2e}.bk3{background:#0c2417}.bk4{background:#1c1000}.bk5{background:#1f0812}
+.all-btn{background:linear-gradient(135deg,#1e3a8a,#065f46);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
+.all-btn:hover{border-color:#10b981}.all-btn:active{transform:scale(.99)}
+.all-btn-t{font-size:16px;font-weight:bold;color:#e2e8f0}
+.all-btn-s{font-size:11px;color:#64748b;margin-top:3px}
+
+/* PRACTICE */
+.pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0}
+.pp-counter{font-size:12px;color:#64748b}
+.pp-known{font-size:12px;color:#10b981}
+.prog-wrap{height:4px;background:#1e293b;border-radius:2px;margin-bottom:12px;flex-shrink:0}
+.prog-fill{height:100%;border-radius:2px;background:#10b981;transition:width .3s}
+.card{background:#1e293b;border-radius:18px;padding:18px 16px;flex:1;display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:box-shadow .15s;min-height:0}
+.card:hover{box-shadow:0 0 0 2px #334155}
+.card-badge{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-shrink:0}
+.badge-book{font-size:11px;font-weight:bold;padding:2px 9px;border-radius:8px;color:#fff}
+.b1{background:#1e3a8a}.b2{background:#4c1d95}.b3{background:#065f46}.b4{background:#92400e}.b5{background:#881337}
+.badge-ctx{font-size:11px;color:#475569;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-front{font-size:19px;line-height:2;color:#e2e8f0;flex-shrink:0}
+.card-sep{border:none;border-top:1px dashed #334155;margin:12px 0;flex-shrink:0;position:relative}
+.card-sep::after{content:'▼ 点击揭示';position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#1e293b;padding:0 8px;font-size:11px;color:#475569}
+.card-back-wrap{flex:1;overflow-y:auto;min-height:0}
+.card-back{font-size:19px;line-height:2;color:#94a3b8}
+.card-back .hi{color:#f59e0b;font-weight:bold}
+.card-placeholder{display:flex;align-items:center;justify-content:center;flex:1;color:#334155;font-size:13px;text-align:center;padding:20px 0;flex-direction:column;gap:8px}
+.card-placeholder-icon{font-size:32px;opacity:.4}
+.action-row{display:flex;gap:9px;margin-top:10px;flex-shrink:0;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:#0f172a;padding:6px 0 2px}
+.action-row .btn{flex:1;font-size:15px;padding:14px}
+
+/* RESULT */
+.res-hero{text-align:center;padding:20px 0 10px}
+.res-emoji{font-size:52px;margin-bottom:6px}
+.res-pct{font-size:56px;font-weight:bold;color:#10b981;line-height:1}
+.res-lbl{font-size:11px;color:#475569;margin-top:4px;letter-spacing:2px}
+.res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:10px 0}
+.res-box{background:#1e293b;border-radius:11px;padding:10px 6px;text-align:center}
+.res-v{font-size:18px;font-weight:bold;color:#e2e8f0}
+.res-l{font-size:10px;color:#475569;margin-top:2px}
+.review-list{background:#1e293b;border-radius:14px;padding:12px 14px;margin:8px 0;flex:1;overflow-y:auto}
+.review-hdr{font-size:11px;color:#ef4444;margin-bottom:8px;font-weight:bold}
+.review-item{font-size:13px;color:#94a3b8;padding:5px 0;border-bottom:1px solid #0f172a;line-height:1.6}
+.review-item:last-child{border-bottom:none}
+.review-ctx{font-size:10px;color:#475569;margin-bottom:1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- HOME -->
+<div id="ph" class="screen active">
+  <div class="hdr"><div class="htitle">杨公著作</div><div class="hsub">背诵练习 · 每日精进</div></div>
+  <div class="hstats">
+    <div class="hstat"><div class="hstat-v" id="h-total">0</div><div class="hstat-l">今日已背</div></div>
+    <div class="hstat"><div class="hstat-v" id="h-known">0</div><div class="hstat-l">记住</div></div>
+    <div class="hstat"><div class="hstat-v" id="h-streak">0</div><div class="hstat-l">连续天数</div></div>
+  </div>
+  <div id="book-list"></div>
+  <div class="all-btn" onclick="startSession('all')">
+    <div class="all-btn-t">🎲 全部随机练习</div>
+    <div class="all-btn-s">五本著作混合，随机抽题</div>
+  </div>
+</div>
+
+<!-- PRACTICE -->
+<div id="pp" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="confirmHome()">✕</button>
+    <div class="tbtitle" id="pp-title">背诵练习</div>
+  </div>
+  <div class="pp-top">
+    <span class="pp-counter" id="pp-counter">1/0</span>
+    <span class="pp-known" id="pp-known">✓ 0</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="pp-bar" style="width:0%"></div></div>
+  <div class="card" id="pp-card" onclick="flipCard()">
+    <div class="card-badge">
+      <span class="badge-book" id="cb-book"></span>
+      <span class="badge-ctx" id="cb-ctx"></span>
+    </div>
+    <div class="card-front" id="c-front"></div>
+    <hr class="card-sep" id="c-sep">
+    <div class="card-back-wrap">
+      <div class="card-back" id="c-back">
+        <div class="card-placeholder">
+          <div class="card-placeholder-icon">💭</div>
+          <div>回忆后半段…<br><span style="font-size:11px;color:#475569">点击揭示答案</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="action-row" id="action-row" style="display:none">
+    <button class="btn btn-a" onclick="markCard(false)">↻ 再看</button>
+    <button class="btn btn-g" onclick="markCard(true)">✓ 记住了</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="pr" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">← 首页</button><div class="tbtitle">本轮结果</div></div>
+  <div class="res-hero">
+    <div class="res-emoji" id="r-emoji">🌿</div>
+    <div class="res-pct" id="r-pct">0%</div>
+    <div class="res-lbl">记住率</div>
+  </div>
+  <div class="res-grid">
+    <div class="res-box"><div class="res-v" id="r-total">0</div><div class="res-l">本轮总数</div></div>
+    <div class="res-box"><div class="res-v" id="r-known" style="color:#10b981">0</div><div class="res-l">记住了</div></div>
+    <div class="res-box"><div class="res-v" id="r-review" style="color:#f59e0b">0</div><div class="res-l">需再看</div></div>
+  </div>
+  <div class="review-list" id="r-list" style="display:none">
+    <div class="review-hdr" id="r-list-hdr"></div>
+    <div id="r-items"></div>
+  </div>
+  <button class="btn btn-a" id="r-retry" onclick="retryWeak()" style="margin:8px 0;display:none">↻ 再练不熟的</button>
+  <button class="btn btn-d" onclick="goHome()" style="margin:4px 0">← 返回首页</button>
+</div>
+
+</div>
+<div class="toast" id="el-toast"></div>
+<script>
+// ══ RAW DATA ══
+const RAW = {
+yangzhai:{name:'阳宅断',author:'廖绍宠',icon:'🏠',cls:'b1',bk:'bk1',
+paras:['问君阳宅如何断，先把星辰水道看。看他势到落何边，势到水缠祸福见。',
+'水道相冲定不祥，三合四冲之年应。不拘州镇与乡间，先要通融开煞路。',
+'煞路若闭主孤寒，长病淫欲家无救。天井若满成文曲，此室号为伶仃屋。',
+'八方切忌不通阳，定知未免遭回禄。燥火若见亦如知，阳风无制亦同推。',
+'丙丁嵯峨如逢木，三十年来一火灾。天井阴阴不见阳，鳏公寡母不离堂。',
+'入首若值双金煞，室女寡妇赘外郎。天井不宜深大阔，门前切记厕相当。',
+'乱石对门无大小，禾仓在后无灾殃。',
+'上堂连下堂，寡母守空房。前沟及后圳，随母嫁爷娘。',
+'左右房高压，奴婢欺主家。堂前两直屋，兄弟不和睦。',
+'前逼后有塘，伶仃不可挡。左窟右路入，男女好贪花。',
+'墙头若对门，病讼见重重。前后有空屋，儿孙多牢狱。',
+'前高后屋低，子媳受孤栖。酉方有闭煞，鸡母作雄啼。',
+'文曲沾疯脚，廉贞犯眼目。两沟合一圳，两人共一妻。',
+'莫行口角路，无事被人欺。廉贞带扫荡，黄犬作鸡啼。',
+'若犯廉贞星，鬼祟时见形。阳人二子死，锅灶不时鸣。',
+'扫荡见文曲，鬼与妇人情。文曲遇廉贞，水车绞死人。',
+'廉贞见文曲，儿孙多瞽目。房巷对禄存，子媳缺嘴唇。',
+'鸡母生小蛋，速闭兑方门。人家多丧事，水犯廉贞星。',
+'其他公位断，细细认山形。',
+'左有巷冲长子死，右边煞来小房凶。堂屋太阴孤二子，后头低陷五无踪。',
+'左肩受煞四子寒，右肩见白六九孤。入首太急五房虚，主星低陷更受煞。',
+'定断五八绝宗支。',
+'平地多因看土角，高山住屋认星辰。若居城市看沟道，顾相为祥反不宁。',
+'势体阴阳能会得，五百年来一地仙。人家屋暗煞逼身，定主妇人产下亡。',
+'花台一头高来一头低，一头发福一头啼。花台阳见阳，初年发一场。',
+'花台阴见阴，损财又损丁。花台金星摆火角，定主驼背并跛脚。',
+'寅位有煞来照身，定主入屋家里侵。巳方若有煞来照，有蛇入屋断不差。',
+'四方逼窄不通煞，未免回禄有灾殃。左右两边保屋短，名为吐舌招官方。',
+'中间屋短两边高，人家少死哭嘈嘈。两边屋短中间高，退尽田庄不见毫。',
+'门前余气少，定主儿孙赌。明堂如裂掌，贫穷无所依。',
+'门前八字路，定主离乡住。若有十字街，官事年年来。',
+'一代明堂二代穴，三代毡唇四代脉。五代化生六代贵，七代龙身接一段。',
+'八九十代逐步移，更看龙身长短取。']},
+
+yinzhai:{name:'阴宅断',author:'廖绍禄',icon:'⛰️',cls:'b2',bk:'bk2',
+paras:['先看星辰气脉中，阴阳顺逆要知踪。阳脉有气生茜草，阴脉有气紫草丛。',
+'界水分明棺不朽，模糊界水生蚁虫。披廉阳面多生蚁，披廉带煞满棺洪。',
+'阳脉离气生蛇鼠，阴脉离气生蚁虫。入水多是文曲口，黑烂定是到头雄。',
+'地漏翻棺遭阴杀，天风蛇鼠蚁虫穴。冷气入水断无差，斗脉黑烂定无疑。',
+'阳中阴胜多生水，阴中阳胜多生蚁。阴散阴窝多生水，阳散阳窝定如何。',
+'定断棺中生怪物，黄鳅白鲫污泥窝。穴后仰瓦多生蚁，面前乾流定入水。',
+'闭口曲气多生蚁，口阔无收定入水。阴窝煞重尸黑烂，阳窝煞重骸骨消。',
+'左右阳风定蚁窝，两边阴泄水尧尧。巽风吹动文曲口，树叶青青棺内有。',
+'巽风吹动禄存头，无骨生蛇及土狗。廉贞见火灭形骸，知此任君天下走。',
+'树根穿板如何断，阴露阳来死气散。枪头鼠尾定养尸，丫叉虎口一同推。',
+'平洋深葬皆有此，高山浅葬亦如云。任是人丁死丧尽，棺中尚有白黄丝。',
+'更有八方风吹穴，巽坤翻棺最凄惨。辰戌风吹绝人丁，子午满棺蛇鼠侵。',
+'卯酉风吹入树根，乾风白蚁出癫人。寅申巳亥风吹穴，板烂人亡妇女淫。',
+'丑未风吹水满棺，僧尼道巫疯癫生。面前红土照墓宅，定主妇人产下亡。',
+'面前若有小黑石，定主疮疥及瘟皇。还要分明认界水，模糊界水生蚁虫。',
+'此是吾家真口诀，泄漏壶中妙界真。等闲切莫度闲人。']},
+
+zhimi:{name:'指迷赋',author:'杨公',icon:'📜',cls:'b3',bk:'bk3',
+paras:['先看入首五星，次看八方罗列','分房各位所居，阴阳生克分别',
+'大看星体，小看土角','阳看窟突，阴看窝煞',
+'阳煞多主贫寒，阴煞多主败绝','逼陷则人丁稀少，走窜则狗盗鼠窃',
+'方正出人忠厚，低斜出人狡猾','空窝多出矜寡，淫乱必是荡穴',
+'山坑相射，男女贪花','峨眉带水，母妻接客',
+'小金生石，室女怀胎','太阴带煞，寡母生儿',
+'主星带荡，翁媳同眠','青龙摆首，嫂叔同榻',
+'破军带金，人生鬼子','披廉遇火，兽产人形',
+'砂手反背，忤逆无情之辈','峰峦斜侧，癫狂妖术之人',
+'木勺香炉，僧尼符法','灵龟横笛，医卜如神',
+'吉曜特正产英豪，子媳成名题雁塔','峰峦顿起旺人丁，水聚明堂多财帛',
+'奸雄柔恶破尖多，假贵虚名峰太杂','水直定知无财产，山压须知人丁稀',
+'山秀明堂水不回，定断丁多家无财','水聚明堂山高压，定主财旺人丁稀',
+'阴风地漏绝人丁，倒椁翻棺此中断','阳风天白主孤寒，须知白蚁蛇鼠见',
+'天白有土初代富，地漏坪广福绵远','尖奇砂曜多生贵，圆满出富当无疑',
+'左煞顺水长子去，右煞顺水三子离','外有峰峦插水边，离乡别祖方成贵',
+'明堂倾漏二子难，左肩带煞四子寒','右肩见白六九孤，入首太急五子虚',
+'主星低陷更受煞，定断五八绝宗支','明堂广阔初代怜，前山崩坡葬下凶',
+'陡脉立见人伤亡，离脉定主绝嗣','登穴若见水斜流，人财耗散',
+'下首若值空亡，家业空虚','前山露顶，男女奸偷',
+'主星低陷，子媳夭亡','龙虎擎拳，一家狼恶',
+'左右尖对，兄弟持刀','来短去长促逼穴，父不父而子不子',
+'左牵右拽脚斜飞，夫不夫而妻不妻','太阴水破贪狼，女人随客走',
+'太阳带煞下廉贞，男人为奴','破军带水，工匠之流',
+'扫荡带金，百蛰之辈','金星婉曲，姻亲富贵',
+'木星带水，捉客兴家','牙旗下见金星，为奴得贵',
+'太阴金伴廉贞，做婢身荣','金星登龙中抽木，接代需承继',
+'帐中出脉忽斜行，代代庶母生','太阳金垂土诰，男为驸马',
+'太阴金见金箱，女做宫妃','贪狼出火嘴尖长，武夫烈士',
+'太阳端正驳贪狼，一门贞洁','贪狼尖耸落天罡，满世忠良',
+'龙旺峰峦得地，少年科甲','穴吉山砂得位，白首登荣',
+'贪狼木星在东方，男清有准','峨眉金星居左泮，女婿为官',
+'太阴金穴后，丈人宰相','青龙高主男人豪杰',
+'白虎强则妻妾当权','明堂广阔，出人量大宽宏',
+'局势逼压，出人见小性刚','猪肚芒槌，抗尸入屋',
+'棕榈破伞，客死江湖','午位嵯峨，马伤人命',
+'戌位黑石，犬咬小儿','辰戌水冲，驼背瞽目',
+'丑未风吹，缺唇大足','寅位昂头，儿孙虎咬',
+'巳宫牵动，子媳蛇伤','山忌瘦小，砂忌斜飞',
+'水忌直冲，堂忌无余','凡此所者，仔细推详']},
+
+batiao:{name:'八条歌',author:'杨公',icon:'🎵',cls:'b4',bk:'bk4',type:'batiao',
+paras:['第一歌 乙坤土 地母卦名弼与辅','坤水合局','坤水合局主财富，寡母起家多仓库。','乙癸乾离四龙神，喜逢坤水坤砂顾，','山形卓拔旗旄样，女做将军男帅府，','忽然端拱正如圭，又主科甲不及武。','乱峰低小郡衙职，巡检小官亦堪数。','坤申并朝享厚福，先天后天会一方，','坤水破局','坤水破局势汪洋，妇女相继为孤孀。','抱花掀裙山再见，寡妇淫乱不可当；','尼姑念佛经千卷，定有山形钵盂样，','若是卯龙见坤水，克妻煞犯人悲伤。','若遇未水双朝入，廉贞煞曜两遭殃，','未少坤多遇阳局，每见男人吐血亡，','未多坤少遇阴局，女人吐血为夭殇。','乙水合局','乙水合局可催官，葬着坤龙实不难，','利名显达多生女，壬龙落脉贵一班。','乙辰双朝多继产，赘子妻财满心欢。','乙水破局','乙水破局手足疾，螟蛉继赘如亲男；','若与卯水混流入，定然克妻三五番；','时或乙辰交路至，抱愤自缢投河滩。','第二歌 武曲宿 兑丁巳丑金光透','酉水合局','酉水合局雅而清，鱼袋砂生登朝佑，','酉砂酉水巽峰高，贵近君王衣锦绣；','丁艮二龙出文官，惟有山朝兼水秀。','酉水破局','酉破淫乱不堪言，巽龙酉水煞相连，','无水有路亦非宜，犯罪遭刑罹灾咎。','酉水子午辰戌龙，室女偷情随人走；','酉方山陷巽卯龙，为官阵亡全军覆。','辛酉层层水入怀，虽富克妻害难救。','丁水合局','丁水合局南极星，男女康宁最多寿；','丙丁二宫名赦文，家无凶祸福频佑，','艮龙丁峰水持朝，王侯庙食言非谬，','策射金门第一流，酉龙丁方砂水秀。','丁水破局','丁水破局多腹痛，退败之时无可救。','巳水合局','巳水合局旺丁财，卯龙巨富巳水来，','赤蛇绕印佩金印，艮亥二龙实堪裁。','巳水破局','巳破吐血与痨瘵，少年多损见蛇害；','酉龙巳水或风射，杀身丧家刑狱埋；','丑龙巳水多杀戮，理叶金鸡怕蛇害；','巳向巽水多冷退，巽向巳水人口灾，','山向克水祸轻缓，水克山向祸速来。','巽巳双流水克水，岂能一勺救贫哉。','庚申乙卯同辛酉，艮寅壬亥一例排，','亥巳皆属长生地，巳为地户最宜开，','阴龙水口巳砂塞，妇人不孕绝婴孩，','阳龙巳口圆墩起，虽然怀孕也坠胎。','丑水合局','丑水合局旺田庄，卯龙丑水镇朝纲。','更兼文武双谋士，庚丙二龙发文章。','兑丁若见丑水入，科甲声名当世扬。','丑龙未水发牛羊，未龙丑水信佛道。','丑水破局','丑水破局多夭折，鳏寡僧道定不良，','辰戌二龙丑水入，翻棺覆槨人遭殃。','横逆恶死多癫疾，杀戮公事祸非常。','巽向丑水入冢宅，孽同巳酉凶难当，','四墓鱼袋非为吉，路死扛尸哭一场。','乾坤二龙见丑水，尖刀砂出屠侩郎。','第三歌 破军金 北方坎纳癸申辰','子水合局、癸水合局','子癸二水生六指，贮聚澄凝发富真，','水迎再得砂高拱，离龙入穴近金门；','阳龙坤离阴巽兑，定主双生不虚称；','坤离生男家即富，兑巽生女便伶仃。','子水破局、癸水破局','子癸破局桃花聋，女犯堕胎因圆墩，','水盛落水或黄肿，忽然缢死令人惊。','三条阴龙卯亥艮，最怕癸丑并朝坟，','若是混流或凝聚，兄弟屠戮女祸侵，','少亡毒药病腹胀，随母改嫁忘宗亲。','申水合局','申水合局旺丁财，少年发达逞英豪，','卯龙申水扦申向，化煞为官登将台。','申水破局','申破虚痨少年亡，卯龙庚向申水来，','人命犯来遭刑宪，逃窜绝亡实堪哀。','辰水合局','大旺人丁是辰水，乾龙得之最为美，','辰水去来皆不拘，总是冲开墓库垒，','坤龙得此辰水入，科甲翰苑贵无比；','辰龙辰水真难得，状元宰辅真可许。','辰水破局','辰破疯癫并落水，水亡之后家灭毁，','酉龙辰水多喑哑，或生露齿缺嘴唇；','丑未龙向痼疾生，横逆伶仃凶死鬼。','第四歌 廉贞鬼 震为长男庚亥未','卯水合局','卯水文官并武职，操持胆略人钦畏，','斩砍自由显权威，将相崛起英雄坠。','庚龙卯水能骤富，更喜高峰镇此位。','卯水破局','卯破偷盗兼淫乱，荡产多因贼牵累。','坤龙卯上水来去，定主杀戮徒刑罪。','庚水合局','卯龙庚水可催官，武人取贵更无难，','胸襟胆略世无敌，去来皆富合家欢。','庚砂高起旗旄状，再得兜鍪掌兵权，','四神八将来拱照，名播华夷镇大藩。','卯龙庚砂如此验，艮亥二龙又一班，','尖峰秀出如判笔，片言折狱称不凡。','若是巽龙庚砂耸，为官清正不污贪，','壬龙午向庚照穴，強盗头目赛楼兰。','庚水破局','如其破局丹庚水，偷窃时生不肖男，','庚申并朝射入穴，被人杀戮最凶顽，','若得丙丁砂水救，害众成家福禄全。','卯庚二水破阳局，宪法难逃刑最惨。','丙丁二宫名赦文，若得朝来免祸患。','亥水合局','亥水去来能合局，大旺人丁并财禄，','兑巽二龙见亥水，科甲及第家富足。','卯龙亥水为纳甲，文武全才食天禄。','亥龙亥水亥砂起，官居台阁发更速。','且因人家多积善，艮丙二龙尤富足。','亥水破局','亥破虚痨损少年，吐血症犯登鬼路，','午龙亥水损丁财，横过灾轻终少福。','未水合局','未水合局旺丁财，库守田庄最乐怀，','巽辛二龙未水入，为官得禄进横财，','出人拘谨信佛道，卯龙未水分去来，','水来雷击家渐富，水去雷击家渐衰。','艮亥二龙未水入，巨富何须进横财。','兑丁二龙本自配，科甲联登至三台。','未水破局','未水破局时念佛，尼姑僧道拜莲台。','辰戌二龙未水入，尤招鳏寡夭折谋，','悖逆不忠难制伏，尸山路死不闻回。','第五歌 艮丙垣 贪狼生气星不凡','艮水合局','艮水合局天市宿，世人财宝聚其间，','若见砂形柜库样，悠然水朝向坟前，','前出士宦资饶厚，富堪敌国不等闲，','砂若低小水情短，亦主温饱烂禾钱。','丙龙遇此砂水秀，黄甲声名当世传，','三台耸秀水凝聚，与国为姻禄绵绵。','艮水破局','艮水破局多冷退，亦主绝嗣祀不延，','虽有文章不显达，此方缺陷峰不全。','丙水合局','丙水合局多富寿，犯罪之家用此救，','丙丁赦文山水朝，皇恩浩荡叨原宥，','艮龙丙水可催官，纳甲之理宜参透，','凡地非砂贵难求，八个归元水最秀，','砂形印笏出公卿，库柜之形富豪佑，','辛酉亥龙实验之，亦须水朝如辐辏。','丙水破局','丙破败家或火烧，废而不起多灾咎，','水路丙午并流水，寅午戌年火难救。','第六歌 巨门宫 巽辛长女例相同','巽水合局','巽砂巽水龙辛亥，少年科甲考运通，','兄弟联芳入翰院，喜逢阳璇有双峰。','庚卯二龙巽砂起，经略之士振威风。','巽为长女水朝入，贞洁女儿美貌浓；','或因女家致财富，或因妻贵得恩荣，','若见峨眉山在巽，宮妃驸马两相逢。','巽丙丁号三阳水，潮来喜归鬼乡中。','东卯西庚皆鬼位，义门寿考福无穷。','巽水龙遇少男脉，寿算减兮福丰隆。','三阳水朝入震庚，食禄开府应三公，','更出仙翁与佛道，蓬莱真境超凡风。','巽水破局','巽水冷破多乞丐，抱花山现多淫风；','次或山碎水斜侧，室女怀胎好私通。','巽巳双流破阳局，那堪太乙起高峰。','香闺有女颜如玉，坠胎玷污春风容。','辛水合局','辛水最秀司文章，状元魁首姓名扬；','巽龙少年登科甲，翰林学士邀龙光。','更有如花女人貌，家多金帛珠翠香。','艮卯亥龙见辛处，水朝砂拱入明堂，','亚榜明经人人羡，阴龙阴水适相当。','亥山一丈能致富，辛山十丈富堪商；','虽然财帛夸富足，过房异姓终难养。','辛水破局','辛水破局家冷退，为乞无救至绝亡。','第七歌 禄存坠 乾甲纯阳北极内','乾水合局','乾水多贵而且富，龙神喜坐坤申数，','若见乾峰侵入云，世登要路居相位；','午龙乾方砂水秀，马上金阶出太尉；','辰龙乾水势汪洋，龙透天门格最美，','粟陈贯朽多税粮，更发显宦人钦畏。','乾水破局','乾水破局跛与聋，头痛驼矮例相通，','鳏寡绝嗣多不吉，继赘克妻叠叠逢。','艮丙巽龙见乾水，灾祸缓速分其中，','乾水来时祸则速，去则祸缓迟迟凶；','来主跛而不能履，去虽能履跛相同。','丙丁卯巽四龙脉，乾亥双朝人吐红，','咳嗽瘵夭频相见，戌乾双至鼓盆凶，','地力将衰向乾者，头多渐生癞痢翁。','甲水合局','甲水甲砂出富贵，乾龙得此最为美，','斐声魁第少年郎，文章价高人敬畏。','甲水破局','甲破跛足与疯癫，其方有峰非吉位。','文笔山来应画工，木笏多生道士类。','阳衡行龙杂阴玑，子孙世受疯癫累。','第八歌 南离 壬与寅戌文曲齐','午水合局','午水主富尤贵显，壬子癸龙最合宜。','龙虎抱卫砂水拱，公侯卿相贵无疑。','午水去来俱骤发，时至离乡是发期。','高峰独出遭回禄，乾壬泄制产英奇。','午水破局','午破火灾兼淫乱，盗贼时生来相犯，','若有圆墩免火灾，又主目盲堕胎患。','巳丙向中午流动，妇人吐血夫弦断，','卯艮二龙见午水，眼外虽明中多暗，','若从酉上流出口，妇人室女同淫滥。','乾龙午水人命伤，刑狱破家遭此难。','壬水合局','壬水骤富堪救贫，血财兴旺多利名。','午龙壬方砂水秀，文武全才为公卿。','单水主富无大贵，亦多纳粟贡行人。','大抵水来居家发，去则离家富贵成。','壬水破局','壬破骤败出游荡，水盛多生黄肿恙。','亦有水厄落水者，逃窜他方罹灾瘴。','寅水合局','寅水长生旺丁财，乙龙喜见寅水来，','坎离二龙发显宦，乾坤中结产婴孩，','来则为官生近福，去则他州发远财。','寅水破局','艮龙寅水为八煞，多主疯盲及虎灾，','坤山艮向寅水入，煞带廉贞血满怀。','寅甲小墩长而细，荡子虚夸博奕才，','圆则更名为木印，道士弄法敲符牌。','戌水合局','辰龙戌水广田庄，富堪敌国多税粮，','戌方砂水光照穴，翰林学士显文章。','戌龙戌砂扦辰向，辰水朝来为最旺，','忠臣孝子并礼仪，二十四龙第一旺。','戌水破局','戌破回禄瞎且聋，鼓盆之煞克妻重，','卯龙戌水人喑哑，艮龙戌水聋盲逢。','丑未龙来戌流注，少亡悖逆人不忠，','庚酉二龙见戌处，尖刀砂出屠刽郎。','午戌破局瞎眼者，或砂或水病不同，','砂凸眼珠亦凸出，水则珠凹陷眼中。','此是吾家真口诀，传给弟子莫乱说。']},
+
+sanbailiushi:{name:'三百六十形穴歌',author:'杨公',icon:'🗻',cls:'b5',bk:'bk5',
+paras:['三百六十龙形象，付与曾公望。上见龙来识五星，仔细辨真形。',
+'日出扶桑位上光，扦穴要居中。日落咸池位列西，扦穴近涟漪。',
+'乌鸦泊田生双翼，两穴人难识。凤凰为翼少人知，穴露眼边移。',
+'飞风必有御书案，随水看龙断。飞蛾扑壁人难识，左右生两翼。',
+'又见黄鹰来打蛇，头上穴为佳。猛虎出林扦虎额，时师莫疑识。',
+'若是低头伏虎形，鼻上安好坟。若是睡虎真形象，鼻中气独结。',
+'跳墙虎形口上安，形势仔细看。虎形虽是有多般，要看堆肉案。',
+'又见恶虎出高岗，鼻穴最为良。渴虎饮泉人不识，鼻穴堪扦觅。',
+'要葬御书口水扦，先凶后乃吉。出山虎形眼上穴，要取眼窠结。',
+'过江虎形口上穴，吐气穴堪说。坐山虎形在胸膛，家富足金银。',
+'整皮虎形膊上扦，富贵田财发。五虎聚会五足回，水缠流足归。',
+'兔子望月形小巧，穴出东方眼。狮子之形似虎形，头上可安穴。',
+'方是狮形圆是虎，仔细斟酌取。伏狮须是下狮头，王穴不须求。',
+'笑天狮形须下口，丁旺且富贵。烧香狮形口内藏，家有百年粮。',
+'狮子戏球球上穴，看气取穴也。若见黄鹰来打兔，家中定富豪。',
+'寻食虎形穴扦口，人丁钱财有。黄蛇赶鼠葬蛇头，鼠在面前游。',
+'鼠形要在田头出，仓库朝坟吉。群鼠夜游贯索麈，家富有声名。',
+'上山鼠形下头穴，大地世难寻。没泥蛇形七寸安，亦解出高官。',
+'堂中美女不相同，花羞人不识。要将男子葬其中，必定出三公。',
+'仙人跷足葬阴囊，穴乱点平岗。真武挂剑心头葬，百子千孙旺。',
+'真武踏龟脐上扦，龟蛇在面前。将军按剑形分晓，葬后出招讨。',
+'阴囊安穴似行云，节度大将军。仙人执杖葬心头，举子御阶游。',
+'仙人弹琴葬肚脐，琴案面前排。仙人下棋平地扦，将军立面前。',
+'美女梳妆眉心穴，镜台分前列。天然一穴葬阴中，从此出状元。',
+'寒婆问火气堂穴，时师仔细别。仙人纺车心上扦，高贵出明贤。',
+'渴龙饮水人难识，穴在河边觅。二龙戏珠珠上下，四水同围珠。',
+'黄龙吐珠口内装，珠是面前岗。飞天龙形天心穴，时师莫浪说。',
+'四边山水尽皆穴，看取远来龙。蟠龙须是下龙头，头尾要来朝。',
+'又有笑天龙一般，穴在口中安。黄龙出岗尾要直，穴在角边识。',
+'拦江龙形龙耳穴，葬后周年发。行雨龙形江内扦，下后旺田庄。',
+'出海龙形似飞龙，正穴出三公。行山象形背高曲，其穴两边伏。',
+'白象卷湖人不知，牙穴在深泥。倒地象形牙关穴，百年皆大发。',
+'犁沙象形极是难，眼畔好安扦。蛮王骑象人难识，穴在高山觅。',
+'群牛下水膝中扦，点穴是神仙。美女报绫梭上扦，下后进牛田。',
+'观音望海出江边，其穴自天然。走马过江擔凹下，举子面前也。',
+'仙人下马饮泉池，踏蹬不须移。太公钓鱼安钓上，八十年中旺。',
+'渔翁撒网面前收，其穴在心头。寒牛出栏扦额头，时师仔细别。',
+'瘦牛倒地似牛眠，下了进园田。黄牛拖车扦槽穴，时师难甄别。',
+'此穴扼扼中扦面，富贵可朝天。雄鸡鼓翼如鸡样，穴在气堂上。',
+'仙人舞剑如剑例，争著锦衣贵。上山龟形粪门穴，螣蛇弯弯入。',
+'下山龟形下山膊，富贵田园发。随水龟形看上下，螺蛳为案也。',
+'出洞龟形肩上扦，只要近塘田。荷叶盖龟扦肚气，要近田塘内。',
+'朝天龟形在平洋，富贵名传扬。通天大龟形势勇，田园千万顷。',
+'挺身正火坐天然，自官一朝天。没泥龟形吐气穴，时师不敢说。',
+'磨沙龟形肩上扦，下后旺牛田。群龟赶食田中去，螺蛳作朝揖。',
+'奔江龟形扦大江，牛马满山岗。龟形须要螺蛳案，定出曹州判。',
+'南方行龙作龟形，先富后提刑。西方星月人难识，月角好安坟。',
+'面前若有一流星，葬后有声名。东方月形七星案，好向月中扦。',
+'月在东西四面生，方是好真形。祥云捧月两角安，葬后出清官。',
+'众星拱月串珠案，富贵声名扬。南北二边若有月，不须去登穴。',
+'南是游鱼北是龟，时师宜仔细。江鳅出在田塘内，不要山朝对。',
+'只有四边水围坟，家富旺儿孙。上水游鱼扦眼穴，随水看形结。',
+'下水游鱼要葬脐，须近大江溪。上水游鱼须葬口，人旺田禾有。',
+'大江屈曲若朝来，管取出官僚。三龙出穴真奇巽，穴在溪边是。',
+'雌雄二穴可安坟，富贵出明贤。张天海螺扦口穴，落处天然结。',
+'近江海螺开口扦，富贵百余年。蜈蚣之形身多浪，冉冉飞天上。',
+'飞天蜈蚣葬脑珠，下了世间无。下山蜈蚣须葬口，富贵得长久。',
+'蚯蚓之形如蛇形，要在平地上。若有时师识不真，乱道是蛇形。',
+'犬眠之形如犬样，仰穴粪门上。有人说道大蟠龙，仔细认真踪。',
+'犬眠须有狗槽案，此地真难讨。认说一穴是高强，荫得万年粮。',
+'金盘形成金盘样，覆盏四边浪。四水流归向掌心，正好去安坟。',
+'挂壁金钗不怕高，粉盆面前朝。倒地金钗人难识，牙梳左右觅。',
+'插地金钗下腰脐，一举上云梯。钗形还出大官僚，谷食足丰饶。',
+'风吹罗带同心穴，玉尺面前列。顿旗之形下旗锁，穴在木星结。',
+'展旗之形葬旗心，此穴值千金。子午卯酉向中安，武射分明看。',
+'饿猪翻槽一似猪，禾谷满乡闾。野猪到田形势好，眼穴分明讨。',
+'雄鸡拍翼又难识，口中气端的。吐气口中真可寻，会者值千金。',
+'驱羊出阵最难扦，口中气更全。出多头角好安坟，头上甚分明。',
+'走兔形势似驱羊，穴果在平阳。燕子盘梁人不识，作穴看形别。',
+'燕子出窠窠内安，先富后为官。白鹤冲天葬尾穴，仔细看融结。',
+'白鹤御书冠上裁，富贵达京台。鸬鹚驱鱼鱼上下，富贵人嗟呀。',
+'寒獭捕鱼眼上真，近水认真形。上山蛇形粪门穴，下了周年发。',
+'下山蛇形下脑珠，其地遇诚稀。没泥蛇形王字穴，二十四年发。',
+'挂树蛇形七寸安，亦解出高官。乱蛇出草如丝乱，罗带人堪断。',
+'若见龟蛇聚会时，肩膊最为奇。黄蛇出洞人堪断，前有蛤蟆案。',
+'莲花出水花心穴，仔细看龙格，时师着眼看真形，家富足金银。',
+'行山象形鼻上按，家富有多般。白象卷湖牙根扦，富贵百余年。',
+'杨公三百六十龙，付与曾公望。望见龙来分五星，仔细看真形。',
+'看得龙真穴也真，不会误凡人。筠松只去虔州住，认得杨公路。',
+'得师口诀值千金，尽在掌中心。']}
+};
+
+// ══ CARD BUILDING ══
+function makeFront(text){
+  const i1=text.indexOf('。');
+  if(i1>3&&i1<text.length-1&&i1<text.length*.65)return text.slice(0,i1+1);
+  const i2=text.indexOf('，');
+  if(i2>3&&i2<text.length-1)return text.slice(0,i2+1);
+  const h=Math.ceil(text.length/2);
+  return text.slice(0,h)+'…';
+}
+function buildCards(key){
+  const raw=RAW[key];
+  if(raw.type==='batiao') return buildBatiaoCards(raw.paras,raw.name,raw.cls);
+  return raw.paras.map((text,i)=>({id:`${key}_${i}`,book:raw.name,cls:raw.cls,ctx:'',front:makeFront(text),full:text}));
+}
+function buildBatiaoCards(paras,bookName,cls){
+  const cards=[];let songCtx='',secCtx='',id=0;
+  for(const para of paras){
+    if(/^第[一二三四五六七八]歌/.test(para)){songCtx=para.match(/^第[一二三四五六七八]歌/)[0];secCtx='';continue;}
+    if(para.length<=25&&!/[，。；]/.test(para)){secCtx=para;continue;}
+    const ctx=songCtx+(secCtx?' · '+secCtx:'');
+    cards.push({id:`batiao_${id++}`,book:bookName,cls,ctx,front:makeFront(para),full:para});
+  }
+  return cards;
+}
+const ALL_BOOKS=Object.keys(RAW);
+const BOOK_CARDS={};
+ALL_BOOKS.forEach(k=>{BOOK_CARDS[k]=buildCards(k);});
+
+// ══ STORAGE ══
+function getStore(){try{return JSON.parse(localStorage.getItem('yangpu')||'{}')}catch{return{}}}
+function saveStore(d){localStorage.setItem('yangpu',JSON.stringify(d))}
+function todayStr(){return new Date().toISOString().slice(0,10)}
+
+// ══ STATE ══
+let G={deck:[],idx:0,known:new Set(),review:new Set(),flipped:false,bookKey:'',startTime:0};
+
+// ══ NAVIGATION ══
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function goHome(){initHome();show('ph');}
+function confirmHome(){
+  if(G.deck.length>0&&G.idx>0&&!confirm('退出当前练习？'))return;
+  goHome();
+}
+function toast(msg){const t=document.getElementById('el-toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+// ══ HOME ══
+function initHome(){
+  const store=getStore();
+  const today=todayStr();
+  let totalToday=0,knownToday=0;
+  ALL_BOOKS.forEach(k=>{if(store[k]&&store[k].date===today){totalToday+=store[k].seen||0;knownToday+=store[k].known||0;}});
+  document.getElementById('h-total').textContent=totalToday;
+  document.getElementById('h-known').textContent=knownToday;
+  // streak
+  let streak=0,dt=new Date();
+  for(let i=0;i<60;i++){
+    const ds=dt.toISOString().slice(0,10);
+    const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0);
+    if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
+  }
+  document.getElementById('h-streak').textContent=streak;
+
+  // book list
+  const el=document.getElementById('book-list');
+  el.innerHTML=ALL_BOOKS.map(k=>{
+    const raw=RAW[k];const total=BOOK_CARDS[k].length;
+    const kd=store[k]&&store[k].date===today?store[k]:{};
+    const seen=kd.seen||0,kn=kd.known||0;
+    const pct=seen>0?Math.round(kn/seen*100):0;
+    return `<div class="bk ${raw.bk}" onclick="startSession('${k}')">
+      <div class="bk-icon">${raw.icon}</div>
+      <div class="bk-info">
+        <div class="bk-name">${raw.name}</div>
+        <div class="bk-meta">${raw.author} · ${total}段</div>
+      </div>
+      <div class="bk-prog">
+        <div class="bk-n">${seen>0?kn+'/'+seen:'—'}</div>
+        <div class="bk-nl">${seen>0?'今日':'点击开始'}</div>
+        <div class="bk-bar"><div class="bk-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ══ SESSION ══
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startSession(bookKey){
+  let deck;
+  if(bookKey==='all'){
+    deck=shuffle(ALL_BOOKS.flatMap(k=>BOOK_CARDS[k]));
+    document.getElementById('pp-title').textContent='全部随机练习';
+  }else{
+    deck=shuffle([...BOOK_CARDS[bookKey]]);
+    document.getElementById('pp-title').textContent=RAW[bookKey].name;
+  }
+  G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now()};
+  show('pp');
+  showCard();
+}
+
+function showCard(){
+  if(G.idx>=G.deck.length){endSession();return;}
+  const card=G.deck[G.idx];
+  G.flipped=false;
+  document.getElementById('cb-book').textContent=card.book;
+  document.getElementById('cb-book').className='badge-book '+card.cls;
+  document.getElementById('cb-ctx').textContent=card.ctx;
+  document.getElementById('c-front').textContent=card.front;
+  document.getElementById('c-back').innerHTML=`<div class="card-placeholder"><div class="card-placeholder-icon">💭</div><div>回忆后半段…<br><span style="font-size:11px;color:#475569">点击揭示答案</span></div></div>`;
+  document.getElementById('c-sep').style.display='';
+  document.getElementById('action-row').style.display='none';
+  const total=G.deck.length;
+  document.getElementById('pp-counter').textContent=`${G.idx+1} / ${total}`;
+  document.getElementById('pp-known').textContent=`✓ ${G.known.size}`;
+  document.getElementById('pp-bar').style.width=`${G.idx/total*100}%`;
+}
+
+function flipCard(){
+  if(G.flipped)return;
+  G.flipped=true;
+  const card=G.deck[G.idx];
+  // Show the BACK (full text) with front highlighted
+  const front=card.front;
+  const full=card.full;
+  const rest=full.slice(front.length);
+  document.getElementById('c-back').innerHTML=`<span style="color:#e2e8f0">${escHtml(front)}</span><span class="hi">${escHtml(rest)}</span>`;
+  document.getElementById('c-sep').style.display='none';
+  document.getElementById('action-row').style.display='flex';
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function markCard(known){
+  if(!G.flipped)return;
+  const card=G.deck[G.idx];
+  if(known){G.known.add(card.id);}else{G.review.add(card.id);}
+  G.idx++;
+  showCard();
+}
+
+function endSession(){
+  const elapsed=Math.round((Date.now()-G.startTime)/1000);
+  const total=G.deck.length;
+  const kn=G.known.size;
+  const rv=G.review.size;
+  const skipped=total-kn-rv;
+  const pct=total>0?Math.round(kn/total*100):0;
+  const emoji=pct>=90?'🏆':pct>=70?'🥇':pct>=50?'🥈':pct>=30?'🥉':'🌱';
+
+  document.getElementById('r-emoji').textContent=emoji;
+  document.getElementById('r-pct').textContent=pct+'%';
+  document.getElementById('r-total').textContent=total;
+  document.getElementById('r-known').textContent=kn;
+  document.getElementById('r-review').textContent=rv+(skipped>0?'+'+skipped+'跳':'');
+
+  // save to store
+  const store=getStore();
+  const today=todayStr();
+  if(G.bookKey!=='all'){
+    const prev=store[G.bookKey]&&store[G.bookKey].date===today?store[G.bookKey]:{date:today,seen:0,known:0};
+    prev.seen+=total;prev.known+=kn;
+    store[G.bookKey]={...prev};
+  }else{
+    // attribute to each book
+    const byBook={};
+    G.deck.forEach((card,i)=>{
+      const bk=ALL_BOOKS.find(k=>card.id.startsWith(k));
+      if(!bk)return;
+      if(!byBook[bk])byBook[bk]={seen:0,known:0};
+      byBook[bk].seen++;
+      if(G.known.has(card.id))byBook[bk].known++;
+    });
+    Object.entries(byBook).forEach(([bk,{seen,known}])=>{
+      const prev=store[bk]&&store[bk].date===today?store[bk]:{date:today,seen:0,known:0};
+      prev.seen+=seen;prev.known+=known;
+      store[bk]={...prev};
+    });
+  }
+  saveStore(store);
+
+  // review list
+  const reviewCards=G.deck.filter(c=>G.review.has(c.id));
+  const rl=document.getElementById('r-list');
+  const ri=document.getElementById('r-items');
+  if(reviewCards.length>0){
+    rl.style.display='block';
+    document.getElementById('r-list-hdr').textContent=`需要加强（${reviewCards.length} 段）`;
+    ri.innerHTML=reviewCards.map(c=>`<div class="review-item">${c.ctx?`<div class="review-ctx">${c.book} · ${c.ctx}</div>`:`<div class="review-ctx">${c.book}</div>`}<div>${escHtml(c.full)}</div></div>`).join('');
+    document.getElementById('r-retry').style.display='';
+  }else{
+    rl.style.display='none';
+    document.getElementById('r-retry').style.display='none';
+  }
+
+  show('pr');
+}
+
+function retryWeak(){
+  const reviewCards=G.deck.filter(c=>G.review.has(c.id));
+  if(!reviewCards.length){toast('没有需要复习的段落了！');return;}
+  G={deck:shuffle(reviewCards),idx:0,known:new Set(),review:new Set(),flipped:false,bookKey:G.bookKey,startTime:Date.now()};
+  document.getElementById('pp-title').textContent='复习不熟的段落';
+  show('pp');showCard();
+}
+
+// ══ KEYBOARD ══
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('pp').classList.contains('active'))return;
+  if(e.code==='Space'){e.preventDefault();flipCard();}
+  if((e.code==='Digit1'||e.code==='KeyZ')&&G.flipped)markCard(false);
+  if((e.code==='Digit2'||e.code==='KeyX')&&G.flipped)markCard(true);
+});
+
+// ══ INIT ══
+initHome();
+</script>
+</body>
+</html>
