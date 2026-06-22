@@ -49,6 +49,53 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .all-btn-t{font-size:16px;font-weight:bold;color:#e2e8f0}
 .all-btn-s{font-size:11px;color:#64748b;margin-top:3px}
 
+/* MODULE ACCORDION */
+.module{border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid #1e293b}
+.mod-hdr{display:flex;align-items:center;gap:10px;padding:14px 15px;cursor:pointer;user-select:none;background:#1a2740;transition:background .15s}
+.mod-hdr:hover{background:#1f2f4a}
+.mod-hdr:active{transform:scale(.99)}
+.mod-tri{font-size:11px;color:#64748b;width:14px;flex-shrink:0;transition:transform .2s}
+.mod-icon{font-size:20px;flex-shrink:0}
+.mod-title{flex:1;font-size:15px;font-weight:bold;color:#cbd5e1}
+.mod-count{font-size:11px;color:#475569;flex-shrink:0}
+.mod-body{display:none;padding:10px;background:#111827;border-top:1px solid #0f172a}
+.mod-body.open{display:block}
+
+/* SOURCE ACCORDIONS (inside 口诀 module) */
+.sacc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid #1e293b}
+.sacc-hdr{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none;background:#162032;transition:background .15s}
+.sacc-hdr:hover{background:#1c2d44}
+.sacc-hdr:active{transform:scale(.98)}
+.sacc-tri{font-size:10px;color:#475569;width:12px;flex-shrink:0}
+.sacc-icon{font-size:17px;flex-shrink:0}
+.sacc-title{flex:1;font-size:13px;font-weight:bold;color:#94a3b8}
+.sacc-body{display:none;padding:10px 12px;background:#0d1829;border-top:1px solid #0f172a}
+.sacc-body.open{display:block}
+
+/* KJ ITEMS */
+.kj-cat-hdr{font-size:11px;color:#64748b;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #1e293b}
+.kj-cat-hdr:first-child{margin-top:2px}
+.kj-items{margin-bottom:6px}
+.kj-item{display:flex;align-items:flex-start;gap:8px;padding:7px 4px;border-bottom:1px dashed #1a2740}
+.kj-item:last-child{border-bottom:none}
+.kj-text{flex:1;font-size:13px;color:#cbd5e1;line-height:1.9;word-break:break-all}
+.kj-del{flex-shrink:0;background:none;border:none;color:#334155;cursor:pointer;font-size:16px;padding:1px 5px;border-radius:6px;transition:color .15s;line-height:1}
+.kj-del:hover{color:#ef4444;background:#2d1515}
+
+/* KJ ADD FORM */
+.kj-add-row{display:flex;gap:6px;margin-top:6px;align-items:flex-start}
+.kj-add-inp{flex:1;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:7px 9px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6}
+.kj-add-inp:focus{outline:none;border-color:#3b82f6}
+.kj-add-btn{flex-shrink:0;background:#1e3a8a;border:none;border-radius:8px;color:#93c5fd;padding:7px 11px;font-size:12px;cursor:pointer;white-space:nowrap}
+.kj-add-btn:hover{background:#1d4ed8}
+
+/* KJ NEW CATEGORY FORM */
+.kj-newcat-row{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #1e293b}
+.kj-newcat-inp{flex:1;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:7px 9px;font-size:12px;color:#e2e8f0;font-family:inherit}
+.kj-newcat-inp:focus{outline:none;border-color:#3b82f6}
+.kj-newcat-btn{flex-shrink:0;background:#0f2d1f;border:none;border-radius:8px;color:#4ade80;padding:7px 11px;font-size:12px;cursor:pointer;white-space:nowrap}
+.kj-newcat-btn:hover{background:#14532d}
+
 /* PRACTICE */
 .pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0}
 .pp-counter{font-size:12px;color:#64748b}
@@ -99,10 +146,35 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="hstat"><div class="hstat-v" id="h-known">0</div><div class="hstat-l">记住</div></div>
     <div class="hstat"><div class="hstat-v" id="h-streak">0</div><div class="hstat-l">连续天数</div></div>
   </div>
-  <div id="book-list"></div>
-  <div class="all-btn" onclick="startSession('all')">
-    <div class="all-btn-t">🎲 全部随机练习</div>
-    <div class="all-btn-s">五本著作混合，随机抽题</div>
+
+  <!-- 背诵练习模块 -->
+  <div class="module">
+    <div class="mod-hdr" onclick="toggleMod('mod-bs','tri-bs')">
+      <span class="mod-tri" id="tri-bs">▼</span>
+      <span class="mod-icon">📚</span>
+      <span class="mod-title">杨公著作 · 背诵练习</span>
+      <span class="mod-count" id="mod-bs-count"></span>
+    </div>
+    <div class="mod-body open" id="mod-bs">
+      <div id="book-list"></div>
+      <div class="all-btn" onclick="startSession('all')">
+        <div class="all-btn-t">🎲 全部随机练习</div>
+        <div class="all-btn-s">五本著作混合，随机抽题</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 口诀速查模块 -->
+  <div class="module">
+    <div class="mod-hdr" onclick="toggleMod('mod-kj','tri-kj')">
+      <span class="mod-tri" id="tri-kj">▶</span>
+      <span class="mod-icon">📋</span>
+      <span class="mod-title">口诀 · 速查手册</span>
+      <span class="mod-count" id="mod-kj-count"></span>
+    </div>
+    <div class="mod-body" id="mod-kj">
+      <div id="kj-body"></div>
+    </div>
   </div>
 </div>
 
@@ -399,7 +471,6 @@ function initHome(){
   ALL_BOOKS.forEach(k=>{if(store[k]&&store[k].date===today){totalToday+=store[k].seen||0;knownToday+=store[k].known||0;}});
   document.getElementById('h-total').textContent=totalToday;
   document.getElementById('h-known').textContent=knownToday;
-  // streak
   let streak=0,dt=new Date();
   for(let i=0;i<60;i++){
     const ds=dt.toISOString().slice(0,10);
@@ -407,8 +478,6 @@ function initHome(){
     if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
   }
   document.getElementById('h-streak').textContent=streak;
-
-  // book list
   const el=document.getElementById('book-list');
   el.innerHTML=ALL_BOOKS.map(k=>{
     const raw=RAW[k];const total=BOOK_CARDS[k].length;
@@ -428,6 +497,14 @@ function initHome(){
       </div>
     </div>`;
   }).join('');
+}
+
+// ══ MODULE TOGGLE ══
+function toggleMod(bodyId,triId){
+  const b=document.getElementById(bodyId);
+  const t=document.getElementById(triId);
+  const isOpen=b.classList.toggle('open');
+  t.textContent=isOpen?'▼':'▶';
 }
 
 // ══ SESSION ══
@@ -468,7 +545,6 @@ function flipCard(){
   if(G.flipped)return;
   G.flipped=true;
   const card=G.deck[G.idx];
-  // Show the BACK (full text) with front highlighted
   const front=card.front;
   const full=card.full;
   const rest=full.slice(front.length);
@@ -495,14 +571,11 @@ function endSession(){
   const skipped=total-kn-rv;
   const pct=total>0?Math.round(kn/total*100):0;
   const emoji=pct>=90?'🏆':pct>=70?'🥇':pct>=50?'🥈':pct>=30?'🥉':'🌱';
-
   document.getElementById('r-emoji').textContent=emoji;
   document.getElementById('r-pct').textContent=pct+'%';
   document.getElementById('r-total').textContent=total;
   document.getElementById('r-known').textContent=kn;
   document.getElementById('r-review').textContent=rv+(skipped>0?'+'+skipped+'跳':'');
-
-  // save to store
   const store=getStore();
   const today=todayStr();
   if(G.bookKey!=='all'){
@@ -510,9 +583,8 @@ function endSession(){
     prev.seen+=total;prev.known+=kn;
     store[G.bookKey]={...prev};
   }else{
-    // attribute to each book
     const byBook={};
-    G.deck.forEach((card,i)=>{
+    G.deck.forEach((card)=>{
       const bk=ALL_BOOKS.find(k=>card.id.startsWith(k));
       if(!bk)return;
       if(!byBook[bk])byBook[bk]={seen:0,known:0};
@@ -526,8 +598,6 @@ function endSession(){
     });
   }
   saveStore(store);
-
-  // review list
   const reviewCards=G.deck.filter(c=>G.review.has(c.id));
   const rl=document.getElementById('r-list');
   const ri=document.getElementById('r-items');
@@ -540,7 +610,6 @@ function endSession(){
     rl.style.display='none';
     document.getElementById('r-retry').style.display='none';
   }
-
   show('pr');
 }
 
@@ -560,8 +629,141 @@ document.addEventListener('keydown',e=>{
   if((e.code==='Digit2'||e.code==='KeyX')&&G.flipped)markCard(true);
 });
 
+// ══ 口诀模块 ══
+const DEFAULT_KJ=[
+  {id:'jiaju',name:'家居风水高级课程',icon:'🏠',cats:[
+    {id:'jj1',name:'八煞黄泉',items:[
+      {id:'jj1a',text:'坎龙坤兔震山猴，巽鸡乾马兑蛇头，艮虎离猪为曜煞，宅墓逢之一齐休'}
+    ]},
+    {id:'jj2',name:'廿四山劫煞',items:[
+      {id:'jj2a',text:'坎龙申巳巳，坤兔癸乙癸，震猴丙丁申，巽鸡未癸酉，乾马丑卯乙，兑蛇午寅丑，艮虎辰丁未，离猪辛酉寅'}
+    ]},
+    {id:'jj3',name:'救贫黄泉',items:[
+      {id:'jj3a',text:'辛入乾宫百万庄，癸归艮位发文章；乙向巽流清富贵，丁坤终是万斯箱'}
+    ]},
+    {id:'jj4',name:'反复黄泉',items:[
+      {id:'jj4a',text:'庚向坤上是黄泉，坤上庚水切莫言；丙向须防巽水先，巽向忌行丙水上；甲木向上休见艮，艮逢甲水祸连连；壬方水路怕当乾，乾向壬水祸亦然'}
+    ]}
+  ]},
+  {id:'zhongji',name:'杨公风水中级合集',icon:'📖',cats:[
+    {id:'zj1',name:'三元阴阳夫妇交媾诀',items:[
+      {id:'zj1a',text:'一六四九双双起，少有时师通此义，二七三八两同临，通晓天机地理精'},
+      {id:'zj1b',text:'壬戌子乾癸亥交，庚未酉坤辛申要，丙辰午巽丁巳垢，甲丑卯艮乙寅求'}
+    ]},
+    {id:'zj2',name:'太乙数口诀',items:[
+      {id:'zj2a',text:'乙女一羊牧野中，二蛇兔吐到壬宫，三龙坤上三般癸，甲子弄猴有四工，六马庚前排六虎，七丁七犬叫山中，八亥金鸡惊丙火，耕辛天下九牛功'}
+    ]},
+    {id:'zj3',name:'先后天水法',items:[
+      {id:'zj3a',text:'乾六离九是朝宗，坤二坎一脉合通，天三地八为朋友，天七地四气相从，离九来龙穴定震，巽龙入脉要坤宫，坎水来时朝至兑，源出地八到六宫，后天来龙先天向，生成催照互相融，谁人识得斯真诀，何愁大地不相逢'}
+    ]},
+    {id:'zj4',name:'天乙贵人峰',items:[
+      {id:'zj4a',text:'甲戊庚牛羊，乙己鼠猴乡，丙丁猪鸡位，壬癸兔蛇藏，六辛逢马虎，此是贵人方'}
+    ]},
+    {id:'zj5',name:'赖公拨砂口诀',items:[
+      {id:'zj5a',text:'子午卯酉太阳火，甲庚丙壬太阴火，乾坤艮巽本属木，乙辛丁癸便属土，辰戌丑未即是金，寅申巳亥皆属水，此是拨砂真妙法'}
+    ]},
+    {id:'zj6',name:'十二将星催贵法',items:[
+      {id:'zj6a',text:'山蛇寻地鼠，天犬配西牛，雷猪风羊角，水龙杀火猴'}
+    ]}
+  ]}
+];
+
+let _kjOpen={};
+
+function getKjData(){
+  try{const d=localStorage.getItem('yangpu_kj');if(d)return JSON.parse(d);}catch{}
+  return JSON.parse(JSON.stringify(DEFAULT_KJ));
+}
+function saveKjData(d){localStorage.setItem('yangpu_kj',JSON.stringify(d));}
+function genId(){return Math.random().toString(36).slice(2,9);}
+
+function toggleSacc(srcId){
+  _kjOpen[srcId]=!_kjOpen[srcId];
+  const b=document.getElementById('sacc-'+srcId);
+  const t=document.getElementById('satri-'+srcId);
+  if(_kjOpen[srcId]){
+    b&&b.classList.add('open');
+    if(t)t.textContent='▼';
+  }else{
+    b&&b.classList.remove('open');
+    if(t)t.textContent='▶';
+  }
+}
+
+function kjDel(srcId,catId,itemId){
+  const d=getKjData();
+  const src=d.find(s=>s.id===srcId);if(!src)return;
+  const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
+  cat.items=cat.items.filter(i=>i.id!==itemId);
+  saveKjData(d);renderKj();
+}
+
+function kjAdd(srcId,catId){
+  const inp=document.getElementById('kjinp-'+srcId+'-'+catId);
+  if(!inp)return;
+  const text=inp.value.trim();
+  if(!text){toast('请输入口诀内容');return;}
+  const d=getKjData();
+  const src=d.find(s=>s.id===srcId);if(!src)return;
+  const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
+  cat.items.push({id:genId(),text});
+  saveKjData(d);renderKj();
+}
+
+function kjAddCat(srcId){
+  const inp=document.getElementById('kjcat-'+srcId);
+  if(!inp)return;
+  const name=inp.value.trim();
+  if(!name){toast('请输入分类名称');return;}
+  const d=getKjData();
+  const src=d.find(s=>s.id===srcId);if(!src)return;
+  src.cats.push({id:genId(),name,items:[]});
+  saveKjData(d);renderKj();
+}
+
+function renderKj(){
+  const d=getKjData();
+  const el=document.getElementById('kj-body');
+  if(!el)return;
+  let totalItems=0;
+  d.forEach(s=>s.cats.forEach(c=>totalItems+=c.items.length));
+  const countEl=document.getElementById('mod-kj-count');
+  if(countEl)countEl.textContent=totalItems+'条';
+
+  el.innerHTML=d.map(src=>{
+    const open=!!_kjOpen[src.id];
+    return `<div class="sacc">
+  <div class="sacc-hdr" onclick="toggleSacc('${src.id}')">
+    <span class="sacc-tri" id="satri-${src.id}">${open?'▼':'▶'}</span>
+    <span class="sacc-icon">${src.icon}</span>
+    <span class="sacc-title">${escHtml(src.name)}</span>
+  </div>
+  <div class="sacc-body${open?' open':''}" id="sacc-${src.id}">
+    ${src.cats.map(cat=>`
+    <div class="kj-cat-hdr">${escHtml(cat.name)}</div>
+    <div class="kj-items">
+      ${cat.items.map(item=>`
+      <div class="kj-item">
+        <span class="kj-text">${escHtml(item.text)}</span>
+        <button class="kj-del" onclick="kjDel('${src.id}','${cat.id}','${item.id}')" title="删除">×</button>
+      </div>`).join('')}
+      <div class="kj-add-row">
+        <textarea class="kj-add-inp" id="kjinp-${src.id}-${cat.id}" placeholder="添加新口诀…" rows="2"></textarea>
+        <button class="kj-add-btn" onclick="kjAdd('${src.id}','${cat.id}')">添加</button>
+      </div>
+    </div>`).join('')}
+    <div class="kj-newcat-row">
+      <input class="kj-newcat-inp" id="kjcat-${src.id}" placeholder="新分类名称…">
+      <button class="kj-newcat-btn" onclick="kjAddCat('${src.id}')">＋ 添加分类</button>
+    </div>
+  </div>
+</div>`;
+  }).join('');
+}
+
 // ══ INIT ══
 initHome();
+renderKj();
 </script>
 </body>
 </html>
