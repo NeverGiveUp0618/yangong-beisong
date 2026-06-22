@@ -100,6 +100,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .kj-note-save{margin-top:4px;background:#1e3a5f;border:none;border-radius:6px;color:#93c5fd;padding:4px 14px;font-size:11px;cursor:pointer}
 .kj-note-save:hover{background:#1d4ed8}
 
+/* BOOK READER */
+.read-para{font-size:14px;color:#cbd5e1;line-height:2.1;padding:10px 4px;border-bottom:1px dashed #1a2740}
+.read-para:last-child{border-bottom:none}
+.read-song-hdr{font-size:13px;font-weight:bold;color:#10b981;margin:16px 0 6px;padding:7px 11px;background:#0a1628;border-radius:8px;border-left:3px solid #10b981}
+.read-song-hdr:first-child{margin-top:4px}
+.read-sec-hdr{font-size:12px;color:#60a5fa;font-weight:bold;margin:10px 0 3px;padding:3px 10px;letter-spacing:1px;border-left:2px solid #1e3a5f;background:#0d1829;border-radius:0 6px 6px 0}
+
 /* KJ SOURCE ADD FORM */
 .kj-src-add{margin-top:12px;padding:10px;background:#0a1628;border-radius:8px;border:1px dashed #1e3a5f}
 .kj-src-add-label{font-size:11px;color:#475569;margin-bottom:5px;display:block}
@@ -166,15 +173,28 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="hstat"><div class="hstat-v" id="h-streak">0</div><div class="hstat-l">连续天数</div></div>
   </div>
 
-  <!-- 背诵练习模块 -->
+  <!-- 模块一：书本内容展示 -->
+  <div class="module">
+    <div class="mod-hdr" onclick="toggleMod('mod-read','tri-read')">
+      <span class="mod-tri" id="tri-read">▶</span>
+      <span class="mod-icon">📖</span>
+      <span class="mod-title">书本内容 · 原文阅读</span>
+      <span class="mod-count"></span>
+    </div>
+    <div class="mod-body" id="mod-read">
+      <div id="read-book-list"></div>
+    </div>
+  </div>
+
+  <!-- 模块二：背诵练习 -->
   <div class="module">
     <div class="mod-hdr" onclick="toggleMod('mod-bs','tri-bs')">
-      <span class="mod-tri" id="tri-bs">▼</span>
+      <span class="mod-tri" id="tri-bs">▶</span>
       <span class="mod-icon">📚</span>
-      <span class="mod-title">风水著作 · 背诵练习</span>
+      <span class="mod-title">背诵练习 · 闪卡训练</span>
       <span class="mod-count" id="mod-bs-count"></span>
     </div>
-    <div class="mod-body open" id="mod-bs">
+    <div class="mod-body" id="mod-bs">
       <div id="book-list"></div>
       <div class="all-btn" onclick="startSession('all')">
         <div class="all-btn-t">🎲 全部随机练习</div>
@@ -183,7 +203,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     </div>
   </div>
 
-  <!-- 口诀速查模块 -->
+  <!-- 模块三：口诀速查 -->
   <div class="module">
     <div class="mod-hdr" onclick="toggleMod('mod-kj','tri-kj')">
       <span class="mod-tri" id="tri-kj">▶</span>
@@ -195,6 +215,15 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
       <div id="kj-body"></div>
     </div>
   </div>
+</div>
+
+<!-- BOOK READER -->
+<div id="pread" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">← 首页</button>
+    <div class="tbtitle" id="pread-title">原文阅读</div>
+  </div>
+  <div id="pread-body" style="flex:1;overflow-y:auto;padding:4px 2px"></div>
 </div>
 
 <!-- PRACTICE -->
@@ -513,6 +542,30 @@ function confirmHome(){
   if(G.deck.length>0&&G.idx>0&&!confirm('退出当前练习？'))return;
   goHome();
 }
+
+// ══ 书本阅读 ══
+function openBook(key){
+  const raw=RAW[key];
+  document.getElementById('pread-title').textContent=raw.icon+' '+raw.name;
+  const body=document.getElementById('pread-body');
+  let html='';
+  if(raw.type==='batiao'){
+    for(const para of raw.paras){
+      if(/^第[一二三四五六七八]歌/.test(para)){
+        html+=`<div class="read-song-hdr">${escHtml(para)}</div>`;
+      }else if(para.length<=15&&!/[，。；]/.test(para)){
+        html+=`<div class="read-sec-hdr">${escHtml(para)}</div>`;
+      }else{
+        html+=`<div class="read-para">${escHtml(para)}</div>`;
+      }
+    }
+  }else{
+    html=raw.paras.map(p=>`<div class="read-para">${escHtml(p)}</div>`).join('');
+  }
+  body.innerHTML=html;
+  body.scrollTop=0;
+  show('pread');
+}
 function toast(msg){const t=document.getElementById('el-toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
 // ══ 每日格言 ══
@@ -572,12 +625,18 @@ function initHome(){
     if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
   }
   document.getElementById('h-streak').textContent=streak;
-  const el=document.getElementById('book-list');
-  el.innerHTML=ALL_BOOKS.map(k=>{
+  const bookCard=k=>{
     const raw=RAW[k];const total=BOOK_CARDS[k].length;
     const kd=store[k]&&store[k].date===today?store[k]:{};
     const seen=kd.seen||0,kn=kd.known||0;
     const pct=seen>0?Math.round(kn/seen*100):0;
+    return {raw,total,seen,kn,pct};
+  };
+
+  // 模块二：背诵练习书单
+  const el=document.getElementById('book-list');
+  el.innerHTML=ALL_BOOKS.map(k=>{
+    const {raw,total,seen,kn,pct}=bookCard(k);
     return `<div class="bk ${raw.bk}" onclick="startSession('${k}')">
       <div class="bk-icon">${raw.icon}</div>
       <div class="bk-info">
@@ -588,6 +647,23 @@ function initHome(){
         <div class="bk-n">${seen>0?kn+'/'+seen:'—'}</div>
         <div class="bk-nl">${seen>0?'今日':'点击开始'}</div>
         <div class="bk-bar"><div class="bk-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // 模块一：原文阅读书单
+  const rel=document.getElementById('read-book-list');
+  rel.innerHTML=ALL_BOOKS.map(k=>{
+    const {raw,total}=bookCard(k);
+    return `<div class="bk ${raw.bk}" onclick="openBook('${k}')">
+      <div class="bk-icon">${raw.icon}</div>
+      <div class="bk-info">
+        <div class="bk-name">${raw.name}</div>
+        <div class="bk-meta">${raw.author} · ${total}段</div>
+      </div>
+      <div class="bk-prog">
+        <div class="bk-n" style="font-size:22px">▶</div>
+        <div class="bk-nl">阅读</div>
       </div>
     </div>`;
   }).join('');
