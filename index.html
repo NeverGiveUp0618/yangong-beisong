@@ -24,9 +24,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .toast.show{opacity:1}
 
 /* HOME */
-.hdr{text-align:center;padding:22px 0 14px}
+.hdr{text-align:center;padding:22px 0 10px}
 .htitle{font-size:26px;font-weight:bold;color:#10b981;letter-spacing:4px}
 .hsub{font-size:11px;color:#475569;margin-top:4px;letter-spacing:4px}
+.hdate{font-size:12px;color:#334155;margin-top:8px;letter-spacing:1px}
+.hquote{margin:10px 0 4px;padding:11px 14px;background:#0a1628;border-radius:12px;border-left:3px solid #10b981;text-align:left}
+.hquote-text{font-size:13px;color:#7dd3fc;line-height:1.8;font-style:italic}
+.hquote-src{font-size:11px;color:#334155;margin-top:5px;text-align:right}
 .hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
 .hstat{background:#1e293b;border-radius:11px;padding:10px 6px;text-align:center}
 .hstat-v{font-size:20px;font-weight:bold;color:#10b981}
@@ -150,7 +154,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
 <!-- HOME -->
 <div id="ph" class="screen active">
-  <div class="hdr"><div class="htitle">杨公著作</div><div class="hsub">背诵练习 · 每日精进</div></div>
+  <div class="hdr">
+    <div class="htitle">杨公著作</div>
+    <div class="hsub">背诵练习 · 每日精进</div>
+    <div class="hdate" id="h-date"></div>
+    <div class="hquote" id="h-quote"></div>
+  </div>
   <div class="hstats">
     <div class="hstat"><div class="hstat-v" id="h-total">0</div><div class="hstat-l">今日已背</div></div>
     <div class="hstat"><div class="hstat-v" id="h-known">0</div><div class="hstat-l">记住</div></div>
@@ -506,8 +515,50 @@ function confirmHome(){
 }
 function toast(msg){const t=document.getElementById('el-toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
+// ══ 每日格言 ══
+const QUOTES=[
+  {t:'不积跬步，无以至千里；不积小流，无以成江海。',s:'荀子'},
+  {t:'锲而不舍，金石可镂。',s:'荀子'},
+  {t:'宝剑锋从磨砺出，梅花香自苦寒来。',s:''},
+  {t:'绳锯木断，水滴石穿，学道者须加力索。',s:'罗大经'},
+  {t:'业精于勤，荒于嬉；行成于思，毁于随。',s:'韩愈'},
+  {t:'天行健，君子以自强不息。',s:'《周易》'},
+  {t:'路虽远，行则将至；事虽难，做则必成。',s:''},
+  {t:'精诚所至，金石为开。',s:'《后汉书》'},
+  {t:'苦心人，天不负；卧薪尝胆，三千越甲可吞吴。',s:'蒲松龄'},
+  {t:'有志者，事竟成，破釜沉舟，百二秦关终属楚。',s:'蒲松龄'},
+  {t:'非淡泊无以明志，非宁静无以致远。',s:'诸葛亮'},
+  {t:'知之者不如好之者，好之者不如乐之者。',s:'孔子'},
+  {t:'学而不思则罔，思而不学则殆。',s:'孔子'},
+  {t:'温故而知新，可以为师矣。',s:'孔子'},
+  {t:'吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？',s:'曾子'},
+  {t:'千里之行，始于足下。',s:'老子'},
+  {t:'胜人者有力，自胜者强。',s:'老子'},
+  {t:'志不强者智不达，言不信者行不果。',s:'墨子'},
+  {t:'铁杵磨成针，功到自然成。',s:''},
+  {t:'滴水穿石不是靠力，而是靠坚持。',s:''},
+  {t:'每一个你羡慕的成就，背后都是你吃不了的苦。',s:''},
+  {t:'当你想放弃的时候，想想为什么当初坚持。',s:''},
+  {t:'今日之苦，皆是明日之基。坚持，是对自己最好的交代。',s:''},
+  {t:'山再高，往上攀，总能登顶；路再长，走下去，定能到达。',s:''},
+  {t:'没有人能随随便便成功，它来自彻底的自我管理和意志。',s:''},
+  {t:'坚持是一种信仰，唯有相信，才能坚持到底。',s:''},
+  {t:'哪有什么天赋，不过是比别人多练了几万次。',s:''},
+  {t:'不怕慢，就怕站。每天前进一小步，终将抵达。',s:''},
+  {t:'成大事者，必先苦其心志，劳其筋骨，饿其体肤。',s:'孟子'},
+  {t:'古之立大事者，不惟有超世之才，亦必有坚忍不拔之志。',s:'苏轼'}
+];
+
 // ══ HOME ══
 function initHome(){
+  const now=new Date();
+  const weeks=['日','一','二','三','四','五','六'];
+  document.getElementById('h-date').textContent=
+    `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日  星期${weeks[now.getDay()]}`;
+  const q=QUOTES[Math.floor(now.getTime()/86400000)%QUOTES.length];
+  document.getElementById('h-quote').innerHTML=
+    `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
+
   const store=getStore();
   const today=todayStr();
   let totalToday=0,knownToday=0;
