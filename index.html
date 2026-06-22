@@ -69,8 +69,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .sacc-tri{font-size:10px;color:#475569;width:12px;flex-shrink:0}
 .sacc-icon{font-size:17px;flex-shrink:0}
 .sacc-title{flex:1;font-size:13px;font-weight:bold;color:#94a3b8}
+.sacc-prac{flex-shrink:0;background:#162840;border:1px solid #1e3a5f;color:#60a5fa;font-size:11px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
+.sacc-prac:hover{background:#1d4ed8;border-color:#3b82f6;color:#fff}
 .sacc-body{display:none;padding:10px 12px;background:#0d1829;border-top:1px solid #0f172a}
 .sacc-body.open{display:block}
+.kj-all-prac{margin-bottom:4px}
 
 /* KJ ITEMS */
 .kj-cat-hdr{font-size:11px;color:#64748b;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #1e293b}
@@ -237,6 +240,39 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   </div>
   <button class="btn btn-a" id="r-retry" onclick="retryWeak()" style="margin:8px 0;display:none">↻ 再练不熟的</button>
   <button class="btn btn-d" onclick="goHome()" style="margin:4px 0">← 返回首页</button>
+</div>
+
+<!-- KJ PRACTICE -->
+<div id="pkj" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="confirmKjHome()">✕</button>
+    <div class="tbtitle" id="pkj-title">口诀练习</div>
+  </div>
+  <div class="pp-top">
+    <span class="pp-counter" id="pkj-counter">1/0</span>
+    <span class="pp-known" id="pkj-known">✓ 0</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="pkj-bar" style="width:0%"></div></div>
+  <div class="card" id="pkj-card" onclick="kjFlipCard()">
+    <div class="card-badge">
+      <span class="badge-book" id="pkj-badge" style="background:#162840;color:#93c5fd"></span>
+      <span class="badge-ctx" id="pkj-ctx"></span>
+    </div>
+    <div class="card-front" id="pkj-front" style="font-size:16px;color:#cbd5e1;text-align:center;padding:8px 0"></div>
+    <hr class="card-sep" id="pkj-sep">
+    <div class="card-back-wrap">
+      <div class="card-back" id="pkj-back">
+        <div class="card-placeholder">
+          <div class="card-placeholder-icon">📋</div>
+          <div>回忆口诀…<br><span style="font-size:11px;color:#475569">点击查看</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="action-row" id="pkj-actions" style="display:none">
+    <button class="btn btn-a" onclick="kjMarkCard(false)">↻ 再背</button>
+    <button class="btn btn-g" onclick="kjMarkCard(true)">✓ 背会了</button>
+  </div>
 </div>
 
 </div>
@@ -807,10 +843,14 @@ function formatVerse(text){
 }
 
 function kjDel(srcId,catId,itemId){
-  if(!confirm('删除这条口诀？'))return;
   const d=getKjData();
   const src=d.find(s=>s.id===srcId);if(!src)return;
   const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
+  const item=cat.items.find(i=>i.id===itemId);if(!item)return;
+  const key=item.text.replace(/[，。；、\s]/g,'').slice(0,4);
+  const input=prompt(`确认删除请输入口诀开头四字（不含标点）：\n「${key}」`);
+  if(input===null)return;
+  if(input.trim()!==key){toast('输入不匹配，已取消删除');return;}
   cat.items=cat.items.filter(i=>i.id!==itemId);
   saveKjData(d);renderKj();
 }
@@ -851,6 +891,101 @@ function kjAddSrc(srcId){
   saveKjData(d);renderKj();
 }
 
+// ══ 口诀练习 ══
+let KJ_G={deck:[],idx:0,known:new Set(),review:new Set(),flipped:false,srcId:'',startTime:0};
+
+function startKjPractice(srcId){
+  const d=getKjData();
+  let items,title;
+  if(srcId==='all'){
+    items=d.flatMap(src=>src.cats.flatMap(cat=>cat.items.map(item=>({
+      id:item.id,srcName:src.name,srcIcon:src.icon,catName:cat.name,text:item.text
+    }))));
+    title='全部口诀随机练习';
+  }else{
+    const src=d.find(s=>s.id===srcId);
+    if(!src){toast('来源不存在');return;}
+    items=src.cats.flatMap(cat=>cat.items.map(item=>({
+      id:item.id,srcName:src.name,srcIcon:src.icon,catName:cat.name,text:item.text
+    })));
+    title=src.name+' · 专题练习';
+  }
+  if(!items.length){toast('暂无口诀可练习');return;}
+  KJ_G={deck:shuffle(items),idx:0,known:new Set(),review:new Set(),flipped:false,srcId,startTime:Date.now()};
+  document.getElementById('pkj-title').textContent=title;
+  show('pkj');kjShowCard();
+}
+
+function kjShowCard(){
+  if(KJ_G.idx>=KJ_G.deck.length){kjEndSession();return;}
+  const card=KJ_G.deck[KJ_G.idx];
+  KJ_G.flipped=false;
+  document.getElementById('pkj-badge').textContent=card.srcIcon+' '+card.srcName;
+  document.getElementById('pkj-ctx').textContent=card.catName;
+  document.getElementById('pkj-front').textContent='【'+card.catName+'】';
+  document.getElementById('pkj-back').innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>回忆口诀…<br><span style="font-size:11px;color:#475569">点击查看</span></div></div>';
+  document.getElementById('pkj-sep').style.display='';
+  document.getElementById('pkj-actions').style.display='none';
+  const total=KJ_G.deck.length;
+  document.getElementById('pkj-counter').textContent=`${KJ_G.idx+1} / ${total}`;
+  document.getElementById('pkj-known').textContent=`✓ ${KJ_G.known.size}`;
+  document.getElementById('pkj-bar').style.width=`${KJ_G.idx/total*100}%`;
+}
+
+function kjFlipCard(){
+  if(KJ_G.flipped)return;
+  KJ_G.flipped=true;
+  const card=KJ_G.deck[KJ_G.idx];
+  document.getElementById('pkj-back').innerHTML=`<div class="kj-verse" style="padding:6px 0;text-align:center">${formatVerse(card.text)}</div>`;
+  document.getElementById('pkj-sep').style.display='none';
+  document.getElementById('pkj-actions').style.display='flex';
+}
+
+function kjMarkCard(known){
+  if(!KJ_G.flipped)return;
+  const card=KJ_G.deck[KJ_G.idx];
+  if(known)KJ_G.known.add(card.id);else KJ_G.review.add(card.id);
+  KJ_G.idx++;kjShowCard();
+}
+
+function kjEndSession(){
+  const total=KJ_G.deck.length,kn=KJ_G.known.size,rv=KJ_G.review.size;
+  const skipped=total-kn-rv;
+  const pct=total>0?Math.round(kn/total*100):0;
+  const emoji=pct>=90?'🏆':pct>=70?'🥇':pct>=50?'🥈':pct>=30?'🥉':'🌱';
+  document.getElementById('r-emoji').textContent=emoji;
+  document.getElementById('r-pct').textContent=pct+'%';
+  document.getElementById('r-total').textContent=total;
+  document.getElementById('r-known').textContent=kn;
+  document.getElementById('r-review').textContent=rv+(skipped>0?'+'+skipped+'跳':'');
+  const reviewCards=KJ_G.deck.filter(c=>KJ_G.review.has(c.id));
+  const rl=document.getElementById('r-list'),ri=document.getElementById('r-items');
+  const retryBtn=document.getElementById('r-retry');
+  if(reviewCards.length>0){
+    rl.style.display='block';
+    document.getElementById('r-list-hdr').textContent=`需要加强（${reviewCards.length} 条）`;
+    ri.innerHTML=reviewCards.map(c=>`<div class="review-item"><div class="review-ctx">${c.srcIcon} ${escHtml(c.srcName)} · ${escHtml(c.catName)}</div><div>${escHtml(c.text)}</div></div>`).join('');
+    retryBtn.style.display='';
+    retryBtn.onclick=kjRetryWeak;
+  }else{
+    rl.style.display='none';retryBtn.style.display='none';
+  }
+  show('pr');
+}
+
+function kjRetryWeak(){
+  const reviewCards=KJ_G.deck.filter(c=>KJ_G.review.has(c.id));
+  if(!reviewCards.length){toast('没有需要复习的口诀了！');return;}
+  KJ_G={deck:shuffle(reviewCards),idx:0,known:new Set(),review:new Set(),flipped:false,srcId:KJ_G.srcId,startTime:Date.now()};
+  document.getElementById('pkj-title').textContent='复习不熟的口诀';
+  show('pkj');kjShowCard();
+}
+
+function confirmKjHome(){
+  if(KJ_G.deck.length>0&&KJ_G.idx>0&&!confirm('退出当前练习？'))return;
+  goHome();
+}
+
 function renderKj(){
   const d=getKjData();
   const el=document.getElementById('kj-body');
@@ -860,7 +995,7 @@ function renderKj(){
   const countEl=document.getElementById('mod-kj-count');
   if(countEl)countEl.textContent=totalItems+'条';
 
-  el.innerHTML=d.map(src=>{
+  el.innerHTML=`<div class="kj-all-prac"><button class="btn btn-d" onclick="startKjPractice('all')" style="font-size:13px;padding:10px 0">📋 全部口诀随机练习</button></div>`+d.map(src=>{
     const open=!!_kjOpen[src.id];
     const catOptions=src.cats.map(c=>`<option value="${escHtml(c.name)}">`).join('');
     return `<div class="sacc">
@@ -868,6 +1003,7 @@ function renderKj(){
     <span class="sacc-tri" id="satri-${src.id}">${open?'▼':'▶'}</span>
     <span class="sacc-icon">${src.icon}</span>
     <span class="sacc-title">${escHtml(src.name)}</span>
+    <span class="sacc-prac" onclick="event.stopPropagation();startKjPractice('${src.id}')">专题练习</span>
   </div>
   <div class="sacc-body${open?' open':''}" id="sacc-${src.id}">
     ${src.cats.map(cat=>`
