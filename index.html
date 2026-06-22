@@ -76,25 +76,32 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .kj-cat-hdr{font-size:11px;color:#64748b;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #1e293b}
 .kj-cat-hdr:first-child{margin-top:2px}
 .kj-items{margin-bottom:6px}
-.kj-item{display:flex;align-items:flex-start;gap:8px;padding:7px 4px;border-bottom:1px dashed #1a2740}
+.kj-item{padding:8px 4px;border-bottom:1px dashed #1a2740}
 .kj-item:last-child{border-bottom:none}
-.kj-text{flex:1;font-size:13px;color:#cbd5e1;line-height:1.9;word-break:break-all}
-.kj-del{flex-shrink:0;background:none;border:none;color:#334155;cursor:pointer;font-size:16px;padding:1px 5px;border-radius:6px;transition:color .15s;line-height:1}
+.kj-verse{font-size:13px;color:#cbd5e1;line-height:2.1;letter-spacing:.3px;display:block}
+.kj-verse-line{display:block}
+.kj-item-actions{display:flex;gap:6px;margin-top:5px;justify-content:flex-end}
+.kj-note-btn{background:none;border:1px solid #1e3a5f;color:#64748b;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:10px;transition:all .15s}
+.kj-note-btn:hover,.kj-note-btn.active{border-color:#3b82f6;color:#93c5fd;background:#1e3a5f33}
+.kj-del{background:none;border:none;color:#334155;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px;transition:color .15s}
 .kj-del:hover{color:#ef4444;background:#2d1515}
+.kj-note-show{font-size:11px;color:#475569;margin-top:5px;padding:4px 8px;background:#0f172a;border-radius:6px;border-left:2px solid #1e3a5f;white-space:pre-wrap}
+.kj-note-edit{margin-top:6px;display:none}
+.kj-note-edit.open{display:block}
+.kj-note-inp{width:100%;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-note-inp:focus{outline:none;border-color:#3b82f6}
+.kj-note-save{margin-top:4px;background:#1e3a5f;border:none;border-radius:6px;color:#93c5fd;padding:4px 14px;font-size:11px;cursor:pointer}
+.kj-note-save:hover{background:#1d4ed8}
 
-/* KJ ADD FORM */
-.kj-add-row{display:flex;gap:6px;margin-top:6px;align-items:flex-start}
-.kj-add-inp{flex:1;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:7px 9px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6}
-.kj-add-inp:focus{outline:none;border-color:#3b82f6}
-.kj-add-btn{flex-shrink:0;background:#1e3a8a;border:none;border-radius:8px;color:#93c5fd;padding:7px 11px;font-size:12px;cursor:pointer;white-space:nowrap}
-.kj-add-btn:hover{background:#1d4ed8}
-
-/* KJ NEW CATEGORY FORM */
-.kj-newcat-row{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #1e293b}
-.kj-newcat-inp{flex:1;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:7px 9px;font-size:12px;color:#e2e8f0;font-family:inherit}
-.kj-newcat-inp:focus{outline:none;border-color:#3b82f6}
-.kj-newcat-btn{flex-shrink:0;background:#0f2d1f;border:none;border-radius:8px;color:#4ade80;padding:7px 11px;font-size:12px;cursor:pointer;white-space:nowrap}
-.kj-newcat-btn:hover{background:#14532d}
+/* KJ SOURCE ADD FORM */
+.kj-src-add{margin-top:12px;padding:10px;background:#0a1628;border-radius:8px;border:1px dashed #1e3a5f}
+.kj-src-add-label{font-size:11px;color:#475569;margin-bottom:5px;display:block}
+.kj-src-add-cat{width:100%;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;font-family:inherit;box-sizing:border-box;margin-bottom:6px}
+.kj-src-add-cat:focus{outline:none;border-color:#3b82f6}
+.kj-src-add-inp{width:100%;background:#1a2740;border:1px solid #1e3a5f;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-src-add-inp:focus{outline:none;border-color:#3b82f6}
+.kj-src-add-btn{margin-top:6px;background:#1e3a8a;border:none;border-radius:8px;color:#93c5fd;padding:7px 0;font-size:12px;cursor:pointer;width:100%}
+.kj-src-add-btn:hover{background:#1d4ed8}
 
 /* PRACTICE */
 .pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0}
@@ -790,7 +797,17 @@ function toggleSacc(srcId){
   }
 }
 
+function formatVerse(text){
+  // split on Chinese commas/semicolons (keep delimiter attached to preceding part)
+  const parts=text.split(/(?<=[，；])/);
+  if(parts.length<=1)return`<span class="kj-verse-line">${escHtml(text)}</span>`;
+  const lines=[];
+  for(let i=0;i<parts.length;i+=2)lines.push(parts.slice(i,i+2).join(''));
+  return lines.map(l=>`<span class="kj-verse-line">${escHtml(l)}</span>`).join('');
+}
+
 function kjDel(srcId,catId,itemId){
+  if(!confirm('删除这条口诀？'))return;
   const d=getKjData();
   const src=d.find(s=>s.id===srcId);if(!src)return;
   const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
@@ -798,26 +815,39 @@ function kjDel(srcId,catId,itemId){
   saveKjData(d);renderKj();
 }
 
-function kjAdd(srcId,catId){
-  const inp=document.getElementById('kjinp-'+srcId+'-'+catId);
+function kjToggleNote(itemId){
+  const ed=document.getElementById('kjned-'+itemId);
+  const btn=document.getElementById('kjnbtn-'+itemId);
+  if(!ed)return;
+  const open=ed.classList.toggle('open');
+  btn.classList.toggle('active',open);
+}
+
+function kjSaveNote(srcId,catId,itemId){
+  const inp=document.getElementById('kjni-'+itemId);
   if(!inp)return;
-  const text=inp.value.trim();
-  if(!text){toast('请输入口诀内容');return;}
+  const note=inp.value.trim();
   const d=getKjData();
   const src=d.find(s=>s.id===srcId);if(!src)return;
   const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
-  cat.items.push({id:genId(),text});
+  const item=cat.items.find(i=>i.id===itemId);if(!item)return;
+  item.note=note;
   saveKjData(d);renderKj();
 }
 
-function kjAddCat(srcId){
-  const inp=document.getElementById('kjcat-'+srcId);
-  if(!inp)return;
-  const name=inp.value.trim();
-  if(!name){toast('请输入分类名称');return;}
+function kjAddSrc(srcId){
+  const catInp=document.getElementById('kjac-'+srcId);
+  const textInp=document.getElementById('kjat-'+srcId);
+  if(!catInp||!textInp)return;
+  const catName=catInp.value.trim()||'自添加';
+  const text=textInp.value.trim();
+  if(!text){toast('请输入口诀内容');return;}
   const d=getKjData();
   const src=d.find(s=>s.id===srcId);if(!src)return;
-  src.cats.push({id:genId(),name,items:[]});
+  let cat=src.cats.find(c=>c.name===catName);
+  if(!cat){cat={id:genId(),name:catName,items:[]};src.cats.push(cat);}
+  cat.items.push({id:genId(),text});
+  catInp.value='';textInp.value='';
   saveKjData(d);renderKj();
 }
 
@@ -832,6 +862,7 @@ function renderKj(){
 
   el.innerHTML=d.map(src=>{
     const open=!!_kjOpen[src.id];
+    const catOptions=src.cats.map(c=>`<option value="${escHtml(c.name)}">`).join('');
     return `<div class="sacc">
   <div class="sacc-hdr" onclick="toggleSacc('${src.id}')">
     <span class="sacc-tri" id="satri-${src.id}">${open?'▼':'▶'}</span>
@@ -844,17 +875,24 @@ function renderKj(){
     <div class="kj-items">
       ${cat.items.map(item=>`
       <div class="kj-item">
-        <span class="kj-text">${escHtml(item.text)}</span>
-        <button class="kj-del" onclick="kjDel('${src.id}','${cat.id}','${item.id}')" title="删除">×</button>
+        <span class="kj-verse">${formatVerse(item.text)}</span>
+        ${item.note?`<div class="kj-note-show">${escHtml(item.note)}</div>`:''}
+        <div class="kj-item-actions">
+          <button class="kj-note-btn" id="kjnbtn-${item.id}" onclick="kjToggleNote('${item.id}')">备注</button>
+          <button class="kj-del" onclick="kjDel('${src.id}','${cat.id}','${item.id}')" title="删除">×</button>
+        </div>
+        <div class="kj-note-edit" id="kjned-${item.id}">
+          <textarea class="kj-note-inp" id="kjni-${item.id}" rows="2" placeholder="添加备注…">${escHtml(item.note||'')}</textarea>
+          <button class="kj-note-save" onclick="kjSaveNote('${src.id}','${cat.id}','${item.id}')">保存备注</button>
+        </div>
       </div>`).join('')}
-      <div class="kj-add-row">
-        <textarea class="kj-add-inp" id="kjinp-${src.id}-${cat.id}" placeholder="添加新口诀…" rows="2"></textarea>
-        <button class="kj-add-btn" onclick="kjAdd('${src.id}','${cat.id}')">添加</button>
-      </div>
     </div>`).join('')}
-    <div class="kj-newcat-row">
-      <input class="kj-newcat-inp" id="kjcat-${src.id}" placeholder="新分类名称…">
-      <button class="kj-newcat-btn" onclick="kjAddCat('${src.id}')">＋ 添加分类</button>
+    <div class="kj-src-add">
+      <span class="kj-src-add-label">添加口诀到《${escHtml(src.name)}》</span>
+      <datalist id="kjdl-${src.id}">${catOptions}</datalist>
+      <input class="kj-src-add-cat" id="kjac-${src.id}" list="kjdl-${src.id}" placeholder="分类名（可输入已有或新建）">
+      <textarea class="kj-src-add-inp" id="kjat-${src.id}" rows="2" placeholder="输入口诀内容…"></textarea>
+      <button class="kj-src-add-btn" onclick="kjAddSrc('${src.id}')">＋ 添加口诀</button>
     </div>
   </div>
 </div>`;
