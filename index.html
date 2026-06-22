@@ -1029,6 +1029,27 @@ function kjToggleNote(itemId){
   btn.classList.toggle('active',open);
 }
 
+function kjToggleEdit(itemId){
+  const ed=document.getElementById('kjedit-'+itemId);
+  const btn=document.getElementById('kjebtn-'+itemId);
+  if(!ed)return;
+  const open=ed.classList.toggle('open');
+  btn.classList.toggle('active',open);
+}
+
+function kjSaveEdit(srcId,catId,itemId){
+  const inp=document.getElementById('kjei-'+itemId);
+  if(!inp)return;
+  const text=inp.value.trim();
+  if(!text){toast('口诀内容不能为空');return;}
+  const d=getKjData();
+  const src=d.find(s=>s.id===srcId);if(!src)return;
+  const cat=src.cats.find(c=>c.id===catId);if(!cat)return;
+  const item=cat.items.find(i=>i.id===itemId);if(!item)return;
+  item.text=text;
+  saveKjData(d);renderKj();toast('已保存');
+}
+
 function kjSaveNote(srcId,catId,itemId){
   const inp=document.getElementById('kjni-'+itemId);
   if(!inp)return;
@@ -1181,11 +1202,16 @@ function renderKj(){
         ${item.note?`<div class="kj-note-show">${escHtml(item.note)}</div>`:''}
         <div class="kj-item-actions">
           <button class="kj-note-btn" id="kjnbtn-${item.id}" onclick="kjToggleNote('${item.id}')">备注</button>
+          <button class="kj-note-btn" id="kjebtn-${item.id}" onclick="kjToggleEdit('${item.id}')">✎ 编辑</button>
           <button class="kj-del" onclick="kjDel('${src.id}','${cat.id}','${item.id}')" title="删除">×</button>
         </div>
         <div class="kj-note-edit" id="kjned-${item.id}">
           <textarea class="kj-note-inp" id="kjni-${item.id}" rows="2" placeholder="添加备注…">${escHtml(item.note||'')}</textarea>
           <button class="kj-note-save" onclick="kjSaveNote('${src.id}','${cat.id}','${item.id}')">保存备注</button>
+        </div>
+        <div class="kj-note-edit" id="kjedit-${item.id}">
+          <textarea class="kj-note-inp" id="kjei-${item.id}" rows="3">${escHtml(item.text)}</textarea>
+          <button class="kj-note-save" onclick="kjSaveEdit('${src.id}','${cat.id}','${item.id}')">保存修改</button>
         </div>
       </div>`).join('')}
     </div>`).join('')}
