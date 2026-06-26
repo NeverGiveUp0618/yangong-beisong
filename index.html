@@ -616,12 +616,13 @@ function initHome(){
   const today=todayStr();
   let totalToday=0,knownToday=0;
   ALL_BOOKS.forEach(k=>{if(store[k]&&store[k].date===today){totalToday+=store[k].seen||0;knownToday+=store[k].known||0;}});
+  if(store['_kj']&&store['_kj'].date===today){totalToday+=store['_kj'].seen||0;knownToday+=store['_kj'].known||0;}
   document.getElementById('h-total').textContent=totalToday;
   document.getElementById('h-known').textContent=knownToday;
   let streak=0,dt=new Date();
   for(let i=0;i<60;i++){
     const ds=dt.toISOString().slice(0,10);
-    const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0);
+    const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0)||(store['_kj']&&store['_kj'].date===ds&&(store['_kj'].seen||0)>0);
     if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
   }
   document.getElementById('h-streak').textContent=streak;
@@ -1233,6 +1234,9 @@ function kjEndSession(){
   }else{
     rl.style.display='none';retryBtn.style.display='none';
   }
+  const _s=getStore(),_t=todayStr();
+  const _p=_s['_kj']&&_s['_kj'].date===_t?_s['_kj']:{date:_t,seen:0,known:0};
+  _p.seen+=total;_p.known+=kn;_s['_kj']={..._p};saveStore(_s);
   show('pr');
 }
 
