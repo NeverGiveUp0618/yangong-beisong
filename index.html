@@ -48,6 +48,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .bk-bar{height:4px;border-radius:2px;background:#1e293b;margin-top:5px;width:60px}
 .bk-bar-fill{height:100%;border-radius:2px;background:#10b981;transition:width .3s}
 .bk1{background:#0f1f3d}.bk2{background:#1a0f2e}.bk3{background:#0c2417}.bk4{background:#1c1000}.bk5{background:#1f0812}
+
+/* HEATMAP */
+.hmap{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0 4px}
+.hmap-cell{aspect-ratio:1;border-radius:4px;background:#1e293b;cursor:default;transition:transform .1s}
+.hmap-cell:hover{transform:scale(1.15)}
+.hmap-cell.lv1{background:#166534}.hmap-cell.lv2{background:#16a34a}.hmap-cell.lv3{background:#22c55e}.hmap-cell.lv4{background:#4ade80}
+.hmap-cell.today{outline:2px solid #10b981;outline-offset:1px}
+.hmap-label{font-size:10px;color:#334155;text-align:right;margin-bottom:2px}
 .all-btn{background:linear-gradient(135deg,#1e3a8a,#065f46);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
 .all-btn:hover{border-color:#10b981}.all-btn:active{transform:scale(.99)}
 .all-btn-t{font-size:16px;font-weight:bold;color:#e2e8f0}
@@ -179,6 +187,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="hstat"><div class="hstat-v" id="h-known">0</div><div class="hstat-l">记住</div></div>
     <div class="hstat"><div class="hstat-v" id="h-streak">0</div><div class="hstat-l">连续天数</div></div>
   </div>
+  <div class="hmap-label" id="h-hmap-label">近35天练习</div>
+  <div class="hmap" id="h-hmap"></div>
 
   <!-- 模块一：书本内容展示 -->
   <div class="module">
@@ -663,6 +673,24 @@ function initHome(){
     </div>`;
   }).join('');
 
+  // 热力图
+  const hmap=document.getElementById('h-hmap');
+  if(hmap){
+    const hist=store._history||[];
+    const dayMap={};
+    hist.forEach(h=>{dayMap[h.date]=(dayMap[h.date]||0)+(h.total||0);});
+    const cells=[];
+    for(let i=34;i>=0;i--){
+      const d=new Date();d.setDate(d.getDate()-i);
+      const ds=d.toISOString().slice(0,10);
+      const cnt=dayMap[ds]||0;
+      const lv=cnt===0?'':cnt<5?'lv1':cnt<15?'lv2':cnt<30?'lv3':'lv4';
+      const isToday=ds===today;
+      cells.push(`<div class="hmap-cell${lv?' '+lv:''}${isToday?' today':''}" title="${ds} ${cnt?cnt+'段':''}">`+'</div>');
+    }
+    hmap.innerHTML=cells.join('');
+  }
+
   // 模块一：原文阅读书单
   const rel=document.getElementById('read-book-list');
   rel.innerHTML=ALL_BOOKS.map(k=>{
@@ -779,6 +807,9 @@ function endSession(){
       store[bk]={...prev};
     });
   }
+  const hist=store._history||[];
+  hist.unshift({date:today,type:'book',bookKey:G.bookKey,total,kn});
+  store._history=hist.slice(0,180);
   saveStore(store);
   const reviewCards=G.deck.filter(c=>G.review.has(c.id));
   const rl=document.getElementById('r-list');
@@ -1281,7 +1312,9 @@ function kjEndSession(){
   }
   const _s=getStore(),_t=todayStr();
   const _p=_s['_kj']&&_s['_kj'].date===_t?_s['_kj']:{date:_t,seen:0,known:0};
-  _p.seen+=total;_p.known+=kn;_s['_kj']={..._p};saveStore(_s);
+  _p.seen+=total;_p.known+=kn;_s['_kj']={..._p};
+  const _h=_s._history||[];_h.unshift({date:_t,type:'kj',total,kn});_s._history=_h.slice(0,180);
+  saveStore(_s);
   show('pr');
 }
 
