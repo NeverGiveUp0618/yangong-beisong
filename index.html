@@ -56,6 +56,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .hmap-cell.lv1{background:#166534}.hmap-cell.lv2{background:#16a34a}.hmap-cell.lv3{background:#22c55e}.hmap-cell.lv4{background:#4ade80}
 .hmap-cell.today{outline:2px solid #10b981;outline-offset:1px}
 .hmap-label{font-size:10px;color:#334155;text-align:right;margin-bottom:2px}
+.bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #1e293b;background:rgba(0,0,0,.2)}
+.bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #1e3a5f;border-radius:8px;background:#0d1829;color:#60a5fa;cursor:pointer;transition:all .15s;user-select:none}
+.bt-song-btn:hover{background:#1e3a5f;color:#fff}
 .all-btn{background:linear-gradient(135deg,#1e3a8a,#065f46);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
 .all-btn:hover{border-color:#10b981}.all-btn:active{transform:scale(.99)}
 .all-btn-t{font-size:16px;font-weight:bold;color:#e2e8f0}
@@ -657,20 +660,27 @@ function initHome(){
 
   // 模块二：背诵练习书单
   const el=document.getElementById('book-list');
+  const batiaoSongs=RAW.batiao.paras
+    .filter(p=>/^第[一二三四五六七八]歌/.test(p))
+    .map(p=>p.match(/^(第[一二三四五六七八]歌)/)[1]);
   el.innerHTML=ALL_BOOKS.map(k=>{
     const {raw,total,seen,kn,pct}=bookCard(k);
-    return `<div class="bk ${raw.bk}" onclick="startSession('${k}')">
+    const mainRow=`<div style="display:flex;align-items:center;gap:12px;padding:13px 15px" onclick="startSession('${k}')">
       <div class="bk-icon">${raw.icon}</div>
       <div class="bk-info">
         <div class="bk-name">${raw.name}</div>
-        <div class="bk-meta">${raw.author} · ${total}段</div>
+        <div class="bk-meta">${raw.author} · ${total}段${k==='batiao'?' · 点击练全部':''}</div>
       </div>
       <div class="bk-prog">
         <div class="bk-n">${seen>0?kn+'/'+seen:'—'}</div>
-        <div class="bk-nl">${seen>0?'今日':'点击开始'}</div>
+        <div class="bk-nl">${seen>0?'今日':'开始'}</div>
         <div class="bk-bar"><div class="bk-bar-fill" style="width:${pct}%"></div></div>
       </div>
     </div>`;
+    const subRow=k==='batiao'?`<div class="bt-songs">
+      ${batiaoSongs.map(s=>`<button class="bt-song-btn" onclick="startSession('batiao','${s}')">${s}</button>`).join('')}
+    </div>`:'';
+    return `<div class="bk ${raw.bk}" style="padding:0;display:block;cursor:default">${mainRow}${subRow}</div>`;
   }).join('');
 
   // 热力图
@@ -720,14 +730,16 @@ function toggleMod(bodyId,triId){
 // ══ SESSION ══
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-function startSession(bookKey){
+function startSession(bookKey,songCtx){
   let deck;
   if(bookKey==='all'){
     deck=shuffle(ALL_BOOKS.flatMap(k=>BOOK_CARDS[k]));
     document.getElementById('pp-title').textContent='全部随机练习';
   }else{
-    deck=shuffle([...BOOK_CARDS[bookKey]]);
-    document.getElementById('pp-title').textContent=RAW[bookKey].name;
+    let cards=[...BOOK_CARDS[bookKey]];
+    if(songCtx)cards=cards.filter(c=>c.ctx.startsWith(songCtx));
+    deck=shuffle(cards);
+    document.getElementById('pp-title').textContent=songCtx||(RAW[bookKey].name);
   }
   G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now()};
   show('pp');
