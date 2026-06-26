@@ -1259,6 +1259,33 @@ function confirmKjHome(){
   goHome();
 }
 
+function exportKj(){
+  const d=getKjData();
+  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`yangpu-kj-${todayStr()}.json`;a.click();
+  URL.revokeObjectURL(url);toast('口诀数据已导出');
+}
+function importKj(){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!Array.isArray(data))throw new Error('格式错误');
+        if(!confirm(`导入 ${data.length} 个合集的口诀？当前自定义数据将被覆盖。`))return;
+        saveKjData(data);renderKj();toast('导入成功');
+      }catch(err){toast('导入失败：'+err.message);}
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
 function renderKj(){
   const d=getKjData();
   const el=document.getElementById('kj-body');
@@ -1268,7 +1295,13 @@ function renderKj(){
   const countEl=document.getElementById('mod-kj-count');
   if(countEl)countEl.textContent=totalItems+'条';
 
-  el.innerHTML=`<div class="kj-all-prac"><button class="btn btn-d" onclick="startKjPractice('all')" style="font-size:13px;padding:10px 0">📋 全部口诀随机练习</button></div>`+d.map(src=>{
+  el.innerHTML=`<div class="kj-all-prac">
+  <button class="btn btn-d" onclick="startKjPractice('all')" style="font-size:13px;padding:10px 0">📋 全部口诀随机练习</button>
+  <div style="display:flex;gap:8px;margin-top:6px">
+    <button class="btn btn-d" onclick="exportKj()" style="font-size:12px;padding:8px 0;flex:1">⬇ 导出备份</button>
+    <button class="btn btn-d" onclick="importKj()" style="font-size:12px;padding:8px 0;flex:1">⬆ 导入恢复</button>
+  </div>
+</div>`+d.map(src=>{
     const open=!!_kjOpen[src.id];
     const catOptions=src.cats.map(c=>`<option value="${escHtml(c.name)}">`).join('');
     return `<div class="sacc">
