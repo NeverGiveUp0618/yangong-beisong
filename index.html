@@ -794,10 +794,16 @@ function retryWeak(){
 
 // ══ KEYBOARD ══
 document.addEventListener('keydown',e=>{
-  if(!document.getElementById('pp').classList.contains('active'))return;
-  if(e.code==='Space'){e.preventDefault();flipCard();}
-  if((e.code==='Digit1'||e.code==='KeyZ')&&G.flipped)markCard(false);
-  if((e.code==='Digit2'||e.code==='KeyX')&&G.flipped)markCard(true);
+  if(document.getElementById('pp').classList.contains('active')){
+    if(e.code==='Space'){e.preventDefault();flipCard();}
+    if((e.code==='Digit1'||e.code==='KeyZ')&&G.flipped)markCard(false);
+    if((e.code==='Digit2'||e.code==='KeyX')&&G.flipped)markCard(true);
+  }
+  if(document.getElementById('pkj').classList.contains('active')){
+    if(e.code==='Space'){e.preventDefault();kjFlipCard();}
+    if((e.code==='Digit1'||e.code==='KeyZ')&&KJ_G.flipped)kjMarkCard(false);
+    if((e.code==='Digit2'||e.code==='KeyX')&&KJ_G.flipped)kjMarkCard(true);
+  }
 });
 
 // ══ 口诀模块 ══
