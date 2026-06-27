@@ -50,12 +50,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .bk1{background:#0d1e12}.bk2{background:#1a0f2e}.bk3{background:#0c2417}.bk4{background:#121e0a}.bk5{background:#1f0812}
 
 /* HEATMAP */
-.hmap{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0 4px}
-.hmap-cell{aspect-ratio:1;border-radius:4px;background:#111e18;cursor:default;transition:transform .1s}
-.hmap-cell:hover{transform:scale(1.15)}
-.hmap-cell.lv1{background:#236640}.hmap-cell.lv2{background:#2EA068}.hmap-cell.lv3{background:#3BB87A}.hmap-cell.lv4{background:#5DD89A}
-.hmap-cell.today{outline:2px solid #3BA87A;outline-offset:1px}
-.hmap-label{font-size:10px;color:#1e3028;text-align:right;margin-bottom:2px}
+.hmap{display:grid;grid-template-columns:repeat(35,1fr);gap:2px;margin-bottom:10px}
+.hmap-cell{height:10px;border-radius:2px;background:#111e18;border:1px solid #1e3028}
+.hmap-cell.lv1{background:#1a5c3880;border-color:#2EA06880}.hmap-cell.lv2{background:#2EA06880;border-color:#3BA87A}.hmap-cell.lv3{background:#3BA87AB0;border-color:#2EA068}.hmap-cell.lv4{background:#3BA87A;border-color:#2EA068}
+.hmap-cell.today{outline:2px solid #5DD89A;outline-offset:1px}
+.hmap-label{font-size:10px;color:#8aab98;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
 .bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #111e18;background:rgba(0,0,0,.2)}
 .bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #163a28;border-radius:8px;background:#0c1a10;color:#5DCEA0;cursor:pointer;transition:all .15s;user-select:none}
 .bt-song-btn:hover{background:#163a28;color:#fff}
