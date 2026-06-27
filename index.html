@@ -172,6 +172,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .kj-mode-btn.active{background:#1e3a8a;color:#93c5fd}
 .kj-wk-hidden{color:#334155;letter-spacing:2px}
 .kj-wk-hidden.revealed{color:#fbbf24}
+.update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#10b981;flex-shrink:0}
+.update-bar-text{font-size:12px;color:#64748b;flex:1;letter-spacing:.5px}
+.update-bar-btn{font-size:12px;color:#10b981;white-space:nowrap}
+.update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
+.dev-log{background:#1e293b;border-radius:12px;padding:10px 14px;margin-bottom:10px}
+.dev-log-title{font-size:10px;color:#475569;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
 </style>
 </head>
 <body>
@@ -179,6 +186,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
 <!-- HOME -->
 <div id="ph" class="screen active">
+  <div class="update-bar" onclick="location.href=location.pathname+'?r='+Date.now()">
+    <div class="update-bar-dot"></div>
+    <span class="update-bar-text">近期有更新</span>
+    <span class="update-bar-btn">点击刷新 ↻</span>
+  </div>
   <div class="hdr">
     <div class="htitle">风水著作</div>
     <div class="hsub">背诵练习 · 每日精进</div>
@@ -233,6 +245,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     </div>
     <div class="mod-body" id="mod-kj">
       <div id="kj-body"></div>
+    </div>
+  </div>
+
+  <!-- 开发时间节点 -->
+  <div class="dev-log">
+    <div class="dev-log-title">开发时间节点</div>
+    <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#64748b;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#64748b;font-size:12px">📚 口诀库扩充至100+条·专题练习·全随机</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.17</span><span style="color:#64748b;font-size:12px">🏗 项目初始化，杨公风水著作背诵正式上线</span></div>
     </div>
   </div>
 </div>
