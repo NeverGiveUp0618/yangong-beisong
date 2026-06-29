@@ -178,6 +178,33 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
 .dev-log{background:#1e293b;border-radius:12px;padding:10px 14px;margin-bottom:10px}
 .dev-log-title{font-size:10px;color:#475569;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
+
+/* ── 易学图谱 ── */
+.bg-sec-t{font-size:12px;font-weight:bold;color:#10b981;letter-spacing:2px;margin:14px 0 8px;padding:5px 10px;border-left:3px solid #10b981;background:#0a1628;border-radius:0 6px 6px 0}
+.bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:4px}
+.bg-cell{border-radius:10px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:72px;background:#1e293b}
+.bg-cell-ctr{background:#0a1628;border:1px solid #263040}
+.bg-sym{font-size:24px;line-height:1.1}
+.bg-name{font-size:13px;font-weight:bold}
+.bg-sub{font-size:10px;color:#475569}
+.bg-no{font-size:10px;color:#334155;margin-top:1px}
+.c-jin .bg-sym,.c-jin .bg-name{color:#fbbf24}
+.c-mu .bg-sym,.c-mu .bg-name{color:#10b981}
+.c-shui .bg-sym,.c-shui .bg-name{color:#38bdf8}
+.c-huo .bg-sym,.c-huo .bg-name{color:#f97316}
+.c-tu .bg-sym,.c-tu .bg-name{color:#a78bfa}
+.bg64-grp{border-radius:12px;overflow:hidden;margin-bottom:7px;border:1px solid #1e293b}
+.bg64-hdr{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none;background:#162218;transition:background .15s}
+.bg64-hdr:hover{background:#172a1a}
+.bg64-tri{font-size:10px;color:#64748b;width:12px;flex-shrink:0;transition:transform .2s}
+.bg64-sym{font-size:18px;flex-shrink:0}
+.bg64-title{flex:1;font-size:13px;font-weight:bold;color:#94a3b8}
+.bg64-body{display:none;padding:7px;background:#0a1628;border-top:1px solid #1e293b}
+.bg64-body.open{display:block}
+.bg64-cells{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.bg64-cell{background:#1e293b;border-radius:8px;padding:7px 3px;text-align:center}
+.bg64-no{font-size:9px;color:#334155;margin-bottom:2px}
+.bg64-cname{font-size:11px;color:#cbd5e1;line-height:1.4}
 </style>
 </head>
 <body>
@@ -247,10 +274,21 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     </div>
   </div>
 
+  <!-- 模块四：易学图谱 -->
+  <div class="module">
+    <div class="mod-hdr" onclick="show('pbg')" style="border-radius:16px">
+      <span class="mod-tri" style="font-size:15px;color:#10b981">☯</span>
+      <span class="mod-icon">🔯</span>
+      <span class="mod-title">易学图谱 · 先天后天六十四卦</span>
+      <span style="font-size:12px;color:#475569">→</span>
+    </div>
+  </div>
+
   <!-- 开发时间节点 -->
   <div class="dev-log">
     <div class="dev-log-title">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#64748b;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#64748b;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
@@ -357,6 +395,192 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <div class="action-row" id="pkj-actions" style="display:none">
     <button class="btn btn-a" onclick="kjMarkCard(false)">↻ 再背</button>
     <button class="btn btn-g" onclick="kjMarkCard(true)">✓ 背会了</button>
+  </div>
+</div>
+
+<!-- 易学图谱 -->
+<div id="pbg" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">← 首页</button><div class="tbtitle">易学图谱</div></div>
+  <div style="flex:1;overflow-y:auto;padding:2px 0">
+
+    <!-- 先天八卦 -->
+    <div class="bg-sec-t">先天八卦 · 伏羲</div>
+    <div style="text-align:center;font-size:10px;color:#475569;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为先天序</div>
+    <div class="bg-grid">
+      <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">西北·风</div><div class="bg-no">⑤</div></div>
+      <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">正南·天</div><div class="bg-no">①</div></div>
+      <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">东南·泽</div><div class="bg-no">②</div></div>
+      <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正西·水</div><div class="bg-no">⑥</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#10b981">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正东·火</div><div class="bg-no">③</div></div>
+      <div class="bg-cell c-tu"><div class="bg-sym">☶</div><div class="bg-name">艮</div><div class="bg-sub">西南·山</div><div class="bg-no">⑦</div></div>
+      <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">正北·地</div><div class="bg-no">⑧</div></div>
+      <div class="bg-cell c-mu"><div class="bg-sym">☳</div><div class="bg-name">震</div><div class="bg-sub">东北·雷</div><div class="bg-no">④</div></div>
+    </div>
+
+    <!-- 后天八卦 -->
+    <div class="bg-sec-t">后天八卦 · 文王</div>
+    <div style="text-align:center;font-size:10px;color:#475569;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为洛书数</div>
+    <div class="bg-grid">
+      <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">西南·地</div><div class="bg-no">②</div></div>
+      <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正南·火</div><div class="bg-no">⑨</div></div>
+      <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">东南·风</div><div class="bg-no">④</div></div>
+      <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">正西·泽</div><div class="bg-no">⑦</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#10b981">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell c-mu"><div class="bg-sym">☳</div><div class="bg-name">震</div><div class="bg-sub">正东·雷</div><div class="bg-no">③</div></div>
+      <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">西北·天</div><div class="bg-no">⑥</div></div>
+      <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正北·水</div><div class="bg-no">①</div></div>
+      <div class="bg-cell c-tu"><div class="bg-sym">☶</div><div class="bg-name">艮</div><div class="bg-sub">东北·山</div><div class="bg-no">⑧</div></div>
+    </div>
+
+    <!-- 六十四卦 -->
+    <div class="bg-sec-t" style="margin-top:6px">六十四卦 · 上卦分组 · 下卦后天序</div>
+
+    <!-- 乾上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-1" onclick="togBG(1)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#fbbf24">☰</span>
+        <span class="bg64-title">乾上 · 天___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-1"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">01</div><div class="bg64-cname">乾为天</div></div>
+        <div class="bg64-cell"><div class="bg64-no">06</div><div class="bg64-cname">天水讼</div></div>
+        <div class="bg64-cell"><div class="bg64-no">33</div><div class="bg64-cname">天山遁</div></div>
+        <div class="bg64-cell"><div class="bg64-no">25</div><div class="bg64-cname">天雷无妄</div></div>
+        <div class="bg64-cell"><div class="bg64-no">44</div><div class="bg64-cname">天风姤</div></div>
+        <div class="bg64-cell"><div class="bg64-no">13</div><div class="bg64-cname">天火同人</div></div>
+        <div class="bg64-cell"><div class="bg64-no">12</div><div class="bg64-cname">天地否</div></div>
+        <div class="bg64-cell"><div class="bg64-no">10</div><div class="bg64-cname">天泽履</div></div>
+      </div></div>
+    </div>
+
+    <!-- 坎上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-2" onclick="togBG(2)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#38bdf8">☵</span>
+        <span class="bg64-title">坎上 · 水___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-2"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">05</div><div class="bg64-cname">水天需</div></div>
+        <div class="bg64-cell"><div class="bg64-no">29</div><div class="bg64-cname">坎为水</div></div>
+        <div class="bg64-cell"><div class="bg64-no">39</div><div class="bg64-cname">水山蹇</div></div>
+        <div class="bg64-cell"><div class="bg64-no">03</div><div class="bg64-cname">水雷屯</div></div>
+        <div class="bg64-cell"><div class="bg64-no">48</div><div class="bg64-cname">水风井</div></div>
+        <div class="bg64-cell"><div class="bg64-no">63</div><div class="bg64-cname">水火既济</div></div>
+        <div class="bg64-cell"><div class="bg64-no">08</div><div class="bg64-cname">水地比</div></div>
+        <div class="bg64-cell"><div class="bg64-no">60</div><div class="bg64-cname">水泽节</div></div>
+      </div></div>
+    </div>
+
+    <!-- 艮上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-3" onclick="togBG(3)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#a78bfa">☶</span>
+        <span class="bg64-title">艮上 · 山___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-3"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">26</div><div class="bg64-cname">山天大畜</div></div>
+        <div class="bg64-cell"><div class="bg64-no">04</div><div class="bg64-cname">山水蒙</div></div>
+        <div class="bg64-cell"><div class="bg64-no">52</div><div class="bg64-cname">艮为山</div></div>
+        <div class="bg64-cell"><div class="bg64-no">27</div><div class="bg64-cname">山雷颐</div></div>
+        <div class="bg64-cell"><div class="bg64-no">18</div><div class="bg64-cname">山风蛊</div></div>
+        <div class="bg64-cell"><div class="bg64-no">22</div><div class="bg64-cname">山火贲</div></div>
+        <div class="bg64-cell"><div class="bg64-no">23</div><div class="bg64-cname">山地剥</div></div>
+        <div class="bg64-cell"><div class="bg64-no">41</div><div class="bg64-cname">山泽损</div></div>
+      </div></div>
+    </div>
+
+    <!-- 震上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-4" onclick="togBG(4)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#10b981">☳</span>
+        <span class="bg64-title">震上 · 雷___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-4"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">34</div><div class="bg64-cname">雷天大壮</div></div>
+        <div class="bg64-cell"><div class="bg64-no">40</div><div class="bg64-cname">雷水解</div></div>
+        <div class="bg64-cell"><div class="bg64-no">62</div><div class="bg64-cname">雷山小过</div></div>
+        <div class="bg64-cell"><div class="bg64-no">51</div><div class="bg64-cname">震为雷</div></div>
+        <div class="bg64-cell"><div class="bg64-no">32</div><div class="bg64-cname">雷风恒</div></div>
+        <div class="bg64-cell"><div class="bg64-no">55</div><div class="bg64-cname">雷火丰</div></div>
+        <div class="bg64-cell"><div class="bg64-no">16</div><div class="bg64-cname">雷地豫</div></div>
+        <div class="bg64-cell"><div class="bg64-no">54</div><div class="bg64-cname">雷泽归妹</div></div>
+      </div></div>
+    </div>
+
+    <!-- 巽上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-5" onclick="togBG(5)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4ade80">☴</span>
+        <span class="bg64-title">巽上 · 风___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-5"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">09</div><div class="bg64-cname">风天小畜</div></div>
+        <div class="bg64-cell"><div class="bg64-no">59</div><div class="bg64-cname">风水涣</div></div>
+        <div class="bg64-cell"><div class="bg64-no">53</div><div class="bg64-cname">风山渐</div></div>
+        <div class="bg64-cell"><div class="bg64-no">42</div><div class="bg64-cname">风雷益</div></div>
+        <div class="bg64-cell"><div class="bg64-no">57</div><div class="bg64-cname">巽为风</div></div>
+        <div class="bg64-cell"><div class="bg64-no">37</div><div class="bg64-cname">风火家人</div></div>
+        <div class="bg64-cell"><div class="bg64-no">20</div><div class="bg64-cname">风地观</div></div>
+        <div class="bg64-cell"><div class="bg64-no">61</div><div class="bg64-cname">风泽中孚</div></div>
+      </div></div>
+    </div>
+
+    <!-- 离上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-6" onclick="togBG(6)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#f97316">☲</span>
+        <span class="bg64-title">离上 · 火___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-6"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">14</div><div class="bg64-cname">火天大有</div></div>
+        <div class="bg64-cell"><div class="bg64-no">64</div><div class="bg64-cname">火水未济</div></div>
+        <div class="bg64-cell"><div class="bg64-no">56</div><div class="bg64-cname">火山旅</div></div>
+        <div class="bg64-cell"><div class="bg64-no">21</div><div class="bg64-cname">火雷噬嗑</div></div>
+        <div class="bg64-cell"><div class="bg64-no">50</div><div class="bg64-cname">火风鼎</div></div>
+        <div class="bg64-cell"><div class="bg64-no">30</div><div class="bg64-cname">离为火</div></div>
+        <div class="bg64-cell"><div class="bg64-no">35</div><div class="bg64-cname">火地晋</div></div>
+        <div class="bg64-cell"><div class="bg64-no">38</div><div class="bg64-cname">火泽睽</div></div>
+      </div></div>
+    </div>
+
+    <!-- 坤上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-7" onclick="togBG(7)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#a78bfa">☷</span>
+        <span class="bg64-title">坤上 · 地___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-7"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">11</div><div class="bg64-cname">地天泰</div></div>
+        <div class="bg64-cell"><div class="bg64-no">07</div><div class="bg64-cname">地水师</div></div>
+        <div class="bg64-cell"><div class="bg64-no">15</div><div class="bg64-cname">地山谦</div></div>
+        <div class="bg64-cell"><div class="bg64-no">24</div><div class="bg64-cname">地雷复</div></div>
+        <div class="bg64-cell"><div class="bg64-no">46</div><div class="bg64-cname">地风升</div></div>
+        <div class="bg64-cell"><div class="bg64-no">36</div><div class="bg64-cname">地火明夷</div></div>
+        <div class="bg64-cell"><div class="bg64-no">02</div><div class="bg64-cname">坤为地</div></div>
+        <div class="bg64-cell"><div class="bg64-no">19</div><div class="bg64-cname">地泽临</div></div>
+      </div></div>
+    </div>
+
+    <!-- 兑上 -->
+    <div class="bg64-grp">
+      <div class="bg64-hdr" id="bg64h-8" onclick="togBG(8)">
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#fbbf24">☱</span>
+        <span class="bg64-title">兑上 · 泽___</span><span style="font-size:10px;color:#334155">8卦</span>
+      </div>
+      <div class="bg64-body" id="bg64-8"><div class="bg64-cells">
+        <div class="bg64-cell"><div class="bg64-no">43</div><div class="bg64-cname">泽天夬</div></div>
+        <div class="bg64-cell"><div class="bg64-no">47</div><div class="bg64-cname">泽水困</div></div>
+        <div class="bg64-cell"><div class="bg64-no">31</div><div class="bg64-cname">泽山咸</div></div>
+        <div class="bg64-cell"><div class="bg64-no">17</div><div class="bg64-cname">泽雷随</div></div>
+        <div class="bg64-cell"><div class="bg64-no">28</div><div class="bg64-cname">泽风大过</div></div>
+        <div class="bg64-cell"><div class="bg64-no">49</div><div class="bg64-cname">泽火革</div></div>
+        <div class="bg64-cell"><div class="bg64-no">45</div><div class="bg64-cname">泽地萃</div></div>
+        <div class="bg64-cell"><div class="bg64-no">58</div><div class="bg64-cname">兑为泽</div></div>
+      </div></div>
+    </div>
+
+    <div style="height:16px"></div>
   </div>
 </div>
 
@@ -588,6 +812,12 @@ function goHome(){initHome();show('ph');}
 function confirmHome(){
   if(G.deck.length>0&&G.idx>0&&!confirm('退出当前练习？'))return;
   goHome();
+}
+function togBG(n){
+  const b=document.getElementById('bg64-'+n);
+  const t=document.querySelector('#bg64h-'+n+' .bg64-tri');
+  const op=b.classList.toggle('open');
+  if(t)t.style.transform=op?'rotate(90deg)':'';
 }
 
 // ══ 书本阅读 ══
