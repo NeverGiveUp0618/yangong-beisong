@@ -6,205 +6,205 @@
 <title>风水著作背诵</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-serif;background:#F5F0E6;color:#1E2E22;min-height:100vh;display:flex;justify-content:center}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-serif;background:#F3ECD8;color:#1C2820;min-height:100vh;display:flex;justify-content:center}
 .app{width:100%;max-width:480px;min-height:100vh}
-@media(min-width:600px){body{background:#EAE4D6;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.7)}.screen{min-height:0!important}}
+@media(min-width:600px){body{background:#EDE0C4;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.7)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px calc(env(safe-area-inset-bottom,0px) + 28px);min-height:100vh;min-height:100svh}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
-.tbk{background:none;border:none;color:#6E8272;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
-.tbk:hover{background:#EDE7D8;color:#4E6254}
-.tbtitle{flex:1;text-align:center;font-size:14px;color:#4E6254}
+.tbk{background:none;border:none;color:#6E7A5C;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.tbk:hover{background:#E6DCC4;color:#4E5A3E}
+.tbtitle{flex:1;text-align:center;font-size:14px;color:#4E5A3E}
 .btn{width:100%;padding:12px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none}
 .btn:active{transform:scale(.98)}
-.btn-g{background:#4A8060;color:#fff}.btn-g:hover{background:#3A6B50}
-.btn-d{background:#EDE7D8;color:#4E6254}.btn-d:hover{background:#D8E8DC}
+.btn-g{background:#4A7050;color:#fff}.btn-g:hover{background:#3A5C40}
+.btn-d{background:#E6DCC4;color:#4E5A3E}.btn-d:hover{background:#D4C8A0}
 .btn-a{background:#78350f;color:#fcd34d}.btn-a:hover{background:#7A5824}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#A8B8AA;color:#1E2E22;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#A0AA88;color:#1C2820;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)}
 .toast.show{opacity:1}
 
 /* HOME */
 .hdr{text-align:center;padding:22px 0 10px}
-.htitle{font-size:26px;font-weight:bold;color:#4A8060;letter-spacing:4px}
-.hsub{font-size:11px;color:#8A9E8A;margin-top:4px;letter-spacing:4px}
-.hdate{font-size:12px;color:#A8B8AA;margin-top:8px;letter-spacing:1px}
-.hquote{margin:10px 0 4px;padding:11px 14px;background:#E4DDD0;border-radius:12px;border-left:3px solid #4A8060;text-align:left}
-.hquote-text{font-size:13px;color:#2A607A;line-height:1.8;font-style:italic}
-.hquote-src{font-size:11px;color:#A8B8AA;margin-top:5px;text-align:right}
+.htitle{font-size:26px;font-weight:bold;color:#4A7050;letter-spacing:4px}
+.hsub{font-size:11px;color:#8A9A78;margin-top:4px;letter-spacing:4px}
+.hdate{font-size:12px;color:#A0AA88;margin-top:8px;letter-spacing:1px}
+.hquote{margin:10px 0 4px;padding:11px 14px;background:#DAD0B8;border-radius:12px;border-left:3px solid #A83830;text-align:left}
+.hquote-text{font-size:13px;color:#5A3820;line-height:1.8;font-style:italic}
+.hquote-src{font-size:11px;color:#A0AA88;margin-top:5px;text-align:right}
 .hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
-.hstat{background:#EDE7D8;border-radius:11px;padding:10px 6px;text-align:center}
-.hstat-v{font-size:20px;font-weight:bold;color:#4A8060}
-.hstat-l{font-size:10px;color:#8A9E8A;margin-top:2px}
+.hstat{background:#E6DCC4;border-radius:11px;padding:10px 6px;text-align:center}
+.hstat-v{font-size:20px;font-weight:bold;color:#4A7050}
+.hstat-l{font-size:10px;color:#8A9A78;margin-top:2px}
 .bk{border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;display:flex;align-items:center;gap:12px}
 .bk:hover{border-color:rgba(0,0,0,.10)}
 .bk:active{transform:scale(.99)}
 .bk-icon{font-size:26px;flex-shrink:0;width:38px;text-align:center}
 .bk-info{flex:1}
-.bk-name{font-size:16px;font-weight:bold;color:#1E2E22}
-.bk-meta{font-size:11px;color:#6E8272;margin-top:2px}
+.bk-name{font-size:16px;font-weight:bold;color:#1C2820}
+.bk-meta{font-size:11px;color:#6E7A5C;margin-top:2px}
 .bk-prog{text-align:right;flex-shrink:0}
-.bk-n{font-size:18px;font-weight:bold;color:#4A8060}
-.bk-nl{font-size:10px;color:#8A9E8A}
-.bk-bar{height:4px;border-radius:2px;background:#EDE7D8;margin-top:5px;width:60px}
-.bk-bar-fill{height:100%;border-radius:2px;background:#4A8060;transition:width .3s}
-.bk1{background:#E6EEF0}.bk2{background:#EEE8F2}.bk3{background:#E2EEE8}.bk4{background:#F0EAE0}.bk5{background:#F0E6EC}
+.bk-n{font-size:18px;font-weight:bold;color:#4A7050}
+.bk-nl{font-size:10px;color:#8A9A78}
+.bk-bar{height:4px;border-radius:2px;background:#E6DCC4;margin-top:5px;width:60px}
+.bk-bar-fill{height:100%;border-radius:2px;background:#4A7050;transition:width .3s}
+.bk1{background:#EADFCC}.bk2{background:#E6D8C0}.bk3{background:#E2DCCA}.bk4{background:#EDE0C8}.bk5{background:#E8D8C4}
 
 /* HEATMAP */
 .hmap{display:grid;grid-template-columns:repeat(35,1fr);gap:2px;margin-bottom:10px}
-.hmap-cell{height:10px;border-radius:2px;background:#EDE7D8;border:1px solid #C0D4C4}
-.hmap-cell.lv1{background:#3A6B5080;border-color:#5B9A7080}.hmap-cell.lv2{background:#5B9A7080;border-color:#4A8060}.hmap-cell.lv3{background:#4A8060B0;border-color:#5B9A70}.hmap-cell.lv4{background:#4A8060;border-color:#5B9A70}
-.hmap-cell.today{outline:2px solid #4A8060;outline-offset:1px}
-.hmap-label{font-size:10px;color:#4E6254;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
-.bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #C8D8C0;background:rgba(74,128,96,0.07)}
-.bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #A8C8B0;border-radius:8px;background:#E4DDD0;color:#4A8060;cursor:pointer;transition:all .15s;user-select:none}
-.bt-song-btn:hover{background:#3A6B50;color:#fff}
-.all-btn{background:linear-gradient(135deg,#3A6B50,#4A7A58);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
-.all-btn:hover{border-color:#2E5840}.all-btn:active{transform:scale(.99)}
+.hmap-cell{height:10px;border-radius:2px;background:#E6DCC4;border:1px solid #BEB080}
+.hmap-cell.lv1{background:#3A5C4080;border-color:#5A704880}.hmap-cell.lv2{background:#5A704880;border-color:#4A7050}.hmap-cell.lv3{background:#4A7050B0;border-color:#5A7048}.hmap-cell.lv4{background:#4A7050;border-color:#5A7048}
+.hmap-cell.today{outline:2px solid #4A7050;outline-offset:1px}
+.hmap-label{font-size:10px;color:#4E5A3E;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
+.bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #C4B888;background:rgba(74,112,80,0.07)}
+.bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #BEB080;border-radius:8px;background:#DAD0B8;color:#4A7050;cursor:pointer;transition:all .15s;user-select:none}
+.bt-song-btn:hover{background:#3A5C40;color:#fff}
+.all-btn{background:linear-gradient(135deg,#3A5C40,#4A7050);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
+.all-btn:hover{border-color:#2C4C34}.all-btn:active{transform:scale(.99)}
 .all-btn-t{font-size:16px;font-weight:bold;color:#fff}
 .all-btn-s{font-size:11px;color:rgba(255,255,255,0.65);margin-top:3px}
 
 /* MODULE ACCORDION */
-.module{border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid #EDE7D8}
-.mod-hdr{display:flex;align-items:center;gap:10px;padding:14px 15px;cursor:pointer;user-select:none;background:#D6EAE0;transition:background .15s}
-.mod-hdr:hover{background:#C8DECE}
+.module{border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid #E6DCC4}
+.mod-hdr{display:flex;align-items:center;gap:10px;padding:14px 15px;cursor:pointer;user-select:none;background:#D4C8A8;transition:background .15s}
+.mod-hdr:hover{background:#C4B898}
 .mod-hdr:active{transform:scale(.99)}
-.mod-tri{font-size:11px;color:#6E8272;width:14px;flex-shrink:0;transition:transform .2s}
+.mod-tri{font-size:11px;color:#6E7A5C;width:14px;flex-shrink:0;transition:transform .2s}
 .mod-icon{font-size:20px;flex-shrink:0}
-.mod-title{flex:1;font-size:15px;font-weight:bold;color:#2E4032}
-.mod-count{font-size:11px;color:#8A9E8A;flex-shrink:0}
-.mod-body{display:none;padding:10px;background:#E4DDD0;border-top:1px solid #EDE7D8}
+.mod-title{flex:1;font-size:15px;font-weight:bold;color:#2C3C24}
+.mod-count{font-size:11px;color:#8A9A78;flex-shrink:0}
+.mod-body{display:none;padding:10px;background:#DAD0B8;border-top:1px solid #E6DCC4}
 .mod-body.open{display:block}
 
 /* SOURCE ACCORDIONS (inside 口诀 module) */
-.sacc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid #EDE7D8}
-.sacc-hdr{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none;background:#D3E8DD;transition:background .15s}
-.sacc-hdr:hover{background:#C5DBCB}
+.sacc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid #E6DCC4}
+.sacc-hdr{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none;background:#CEC0A0;transition:background .15s}
+.sacc-hdr:hover{background:#BAA88C}
 .sacc-hdr:active{transform:scale(.98)}
-.sacc-tri{font-size:10px;color:#8A9E8A;width:12px;flex-shrink:0}
+.sacc-tri{font-size:10px;color:#8A9A78;width:12px;flex-shrink:0}
 .sacc-icon{font-size:17px;flex-shrink:0}
-.sacc-title{flex:1;font-size:13px;font-weight:bold;color:#4E6254}
-.sacc-prac{flex-shrink:0;background:#D0E2D8;border:1px solid #A8C8B0;color:#4A8060;font-size:11px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
-.sacc-prac:hover{background:#3A6B50;border-color:#4A8060;color:#fff}
-.sacc-body{display:none;padding:10px 12px;background:#E4DDD0;border-top:1px solid #EDE7D8}
+.sacc-title{flex:1;font-size:13px;font-weight:bold;color:#4E5A3E}
+.sacc-prac{flex-shrink:0;background:#CFC4A0;border:1px solid #BEB080;color:#4A7050;font-size:11px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
+.sacc-prac:hover{background:#3A5C40;border-color:#4A7050;color:#fff}
+.sacc-body{display:none;padding:10px 12px;background:#DAD0B8;border-top:1px solid #E6DCC4}
 .sacc-body.open{display:block}
 .kj-all-prac{margin-bottom:4px}
 
 /* KJ ITEMS */
-.kj-cat-hdr{font-size:11px;color:#6E8272;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #EDE7D8}
+.kj-cat-hdr{font-size:11px;color:#6E7A5C;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #E6DCC4}
 .kj-cat-hdr:first-child{margin-top:2px}
 .kj-items{margin-bottom:6px}
-.kj-item{padding:8px 4px;border-bottom:1px dashed #D6EAE0}
+.kj-item{padding:8px 4px;border-bottom:1px dashed #D4C8A8}
 .kj-item:last-child{border-bottom:none}
-.kj-verse{font-size:13px;color:#2E4032;line-height:2.1;letter-spacing:.3px;display:block}
+.kj-verse{font-size:13px;color:#2C3C24;line-height:2.1;letter-spacing:.3px;display:block}
 .kj-verse-line{display:block}
 .kj-item-actions{display:flex;gap:6px;margin-top:5px;justify-content:flex-end}
-.kj-note-btn{background:none;border:1px solid #A8C8B0;color:#6E8272;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:10px;transition:all .15s}
-.kj-note-btn:hover,.kj-note-btn.active{border-color:#4A8060;color:#2A6080;background:#A8C8B033}
-.kj-del{background:none;border:none;color:#A8B8AA;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px;transition:color .15s}
+.kj-note-btn{background:none;border:1px solid #BEB080;color:#6E7A5C;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:10px;transition:all .15s}
+.kj-note-btn:hover,.kj-note-btn.active{border-color:#A83830;color:#A83830;background:#C8A04033}
+.kj-del{background:none;border:none;color:#A0AA88;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px;transition:color .15s}
 .kj-del:hover{color:#ef4444;background:#F5E8E8}
-.kj-note-show{font-size:11px;color:#8A9E8A;margin-top:5px;padding:4px 8px;background:#F5F0E6;border-radius:6px;border-left:2px solid #A8C8B0;white-space:pre-wrap}
+.kj-note-show{font-size:11px;color:#8A9A78;margin-top:5px;padding:4px 8px;background:#F3ECD8;border-radius:6px;border-left:2px solid #BEB080;white-space:pre-wrap}
 .kj-note-edit{margin-top:6px;display:none}
 .kj-note-edit.open{display:block}
-.kj-note-inp{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
-.kj-note-inp:focus{outline:none;border-color:#4A8060}
-.kj-note-save{margin-top:4px;background:#A8C8B0;border:none;border-radius:6px;color:#2A6080;padding:4px 14px;font-size:11px;cursor:pointer}
-.kj-note-save:hover{background:#3A6B50}
+.kj-note-inp{width:100%;background:#D4C8A8;border:1px solid #BEB080;border-radius:8px;padding:6px 8px;font-size:12px;color:#1C2820;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-note-inp:focus{outline:none;border-color:#4A7050}
+.kj-note-save{margin-top:4px;background:#BEB080;border:none;border-radius:6px;color:#5A3820;padding:4px 14px;font-size:11px;cursor:pointer}
+.kj-note-save:hover{background:#3A5C40;color:#fff}
 
 /* BOOK READER */
-.read-para{font-size:14px;color:#2E4032;line-height:2.1;padding:10px 4px;border-bottom:1px dashed #D6EAE0}
+.read-para{font-size:14px;color:#2C3C24;line-height:2.1;padding:10px 4px;border-bottom:1px dashed #D4C8A8}
 .read-para:last-child{border-bottom:none}
-.read-song-hdr{font-size:13px;font-weight:bold;color:#4A8060;margin:16px 0 6px;padding:7px 11px;background:#E4DDD0;border-radius:8px;border-left:3px solid #4A8060}
+.read-song-hdr{font-size:13px;font-weight:bold;color:#4A7050;margin:16px 0 6px;padding:7px 11px;background:#DAD0B8;border-radius:8px;border-left:3px solid #4A7050}
 .read-song-hdr:first-child{margin-top:4px}
-.read-sec-hdr{font-size:12px;color:#4A8060;font-weight:bold;margin:10px 0 3px;padding:3px 10px;letter-spacing:1px;border-left:2px solid #A8C8B0;background:#E4DDD0;border-radius:0 6px 6px 0}
+.read-sec-hdr{font-size:12px;color:#4A7050;font-weight:bold;margin:10px 0 3px;padding:3px 10px;letter-spacing:1px;border-left:2px solid #BEB080;background:#DAD0B8;border-radius:0 6px 6px 0}
 
 /* KJ SOURCE ADD FORM */
-.kj-src-add{margin-top:12px;padding:10px;background:#E4DDD0;border-radius:8px;border:1px dashed #A8C8B0}
-.kj-src-add-label{font-size:11px;color:#8A9E8A;margin-bottom:5px;display:block}
-.kj-src-add-cat{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;font-family:inherit;box-sizing:border-box;margin-bottom:6px}
-.kj-src-add-cat:focus{outline:none;border-color:#4A8060}
-.kj-src-add-inp{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
-.kj-src-add-inp:focus{outline:none;border-color:#4A8060}
-.kj-src-add-btn{margin-top:6px;background:#3A6B50;border:none;border-radius:8px;color:#2A6080;padding:7px 0;font-size:12px;cursor:pointer;width:100%}
-.kj-src-add-btn:hover{background:#3A6B50}
+.kj-src-add{margin-top:12px;padding:10px;background:#DAD0B8;border-radius:8px;border:1px dashed #BEB080}
+.kj-src-add-label{font-size:11px;color:#8A9A78;margin-bottom:5px;display:block}
+.kj-src-add-cat{width:100%;background:#D4C8A8;border:1px solid #BEB080;border-radius:8px;padding:6px 8px;font-size:12px;color:#1C2820;font-family:inherit;box-sizing:border-box;margin-bottom:6px}
+.kj-src-add-cat:focus{outline:none;border-color:#4A7050}
+.kj-src-add-inp{width:100%;background:#D4C8A8;border:1px solid #BEB080;border-radius:8px;padding:6px 8px;font-size:12px;color:#1C2820;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-src-add-inp:focus{outline:none;border-color:#4A7050}
+.kj-src-add-btn{margin-top:6px;background:#3A5C40;border:none;border-radius:8px;color:#F0E4C0;padding:7px 0;font-size:12px;cursor:pointer;width:100%}
+.kj-src-add-btn:hover{background:#2C4C34}
 
 /* PRACTICE */
 .pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0}
-.pp-counter{font-size:12px;color:#6E8272}
-.pp-known{font-size:12px;color:#4A8060}
-.prog-wrap{height:4px;background:#EDE7D8;border-radius:2px;margin-bottom:12px;flex-shrink:0}
-.prog-fill{height:100%;border-radius:2px;background:#4A8060;transition:width .3s}
-.card{background:#EDE7D8;border-radius:18px;padding:18px 16px;flex:1;display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:box-shadow .15s;min-height:0}
-.card:hover{box-shadow:0 0 0 2px #C0D4C4}
+.pp-counter{font-size:12px;color:#6E7A5C}
+.pp-known{font-size:12px;color:#4A7050}
+.prog-wrap{height:4px;background:#E6DCC4;border-radius:2px;margin-bottom:12px;flex-shrink:0}
+.prog-fill{height:100%;border-radius:2px;background:#4A7050;transition:width .3s}
+.card{background:#E6DCC4;border-radius:18px;padding:18px 16px;flex:1;display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:box-shadow .15s;min-height:0}
+.card:hover{box-shadow:0 0 0 2px #BEB080}
 .card-badge{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-shrink:0}
 .badge-book{font-size:11px;font-weight:bold;padding:2px 9px;border-radius:8px;color:#fff}
-.b1{background:#3A6B50}.b2{background:#6B3A8C}.b3{background:#4A7A58}.b4{background:#7A5824}.b5{background:#8C2840}
-.badge-ctx{font-size:11px;color:#8A9E8A;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card-front{font-size:19px;line-height:2;color:#1E2E22;flex-shrink:0}
-.card-sep{border:none;border-top:1px dashed #C0D4C4;margin:12px 0;flex-shrink:0;position:relative}
-.card-sep::after{content:'▼ 点击揭示';position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#EDE7D8;padding:0 8px;font-size:11px;color:#8A9E8A}
+.b1{background:#3A5C40}.b2{background:#6A4020}.b3{background:#4A6838}.b4{background:#7A5020}.b5{background:#8A3028}
+.badge-ctx{font-size:11px;color:#8A9A78;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-front{font-size:19px;line-height:2;color:#1C2820;flex-shrink:0}
+.card-sep{border:none;border-top:1px dashed #BEB080;margin:12px 0;flex-shrink:0;position:relative}
+.card-sep::after{content:'▼ 点击揭示';position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#E6DCC4;padding:0 8px;font-size:11px;color:#8A9A78}
 .card-back-wrap{flex:1;overflow-y:auto;min-height:0}
-.card-back{font-size:19px;line-height:2;color:#4E6254}
+.card-back{font-size:19px;line-height:2;color:#4E5A3E}
 .card-back .hi{color:#C88020;font-weight:bold}
-.card-placeholder{display:flex;align-items:center;justify-content:center;flex:1;color:#A8B8AA;font-size:13px;text-align:center;padding:20px 0;flex-direction:column;gap:8px}
+.card-placeholder{display:flex;align-items:center;justify-content:center;flex:1;color:#A0AA88;font-size:13px;text-align:center;padding:20px 0;flex-direction:column;gap:8px}
 .card-placeholder-icon{font-size:32px;opacity:.4}
-.action-row{display:flex;gap:9px;margin-top:10px;flex-shrink:0;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:#F5F0E6;padding:6px 0 2px}
+.action-row{display:flex;gap:9px;margin-top:10px;flex-shrink:0;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:#F3ECD8;padding:6px 0 2px}
 .action-row .btn{flex:1;font-size:15px;padding:14px}
 
 /* RESULT */
 .res-hero{text-align:center;padding:20px 0 10px}
 .res-emoji{font-size:52px;margin-bottom:6px}
-.res-pct{font-size:56px;font-weight:bold;color:#4A8060;line-height:1}
-.res-lbl{font-size:11px;color:#8A9E8A;margin-top:4px;letter-spacing:2px}
+.res-pct{font-size:56px;font-weight:bold;color:#4A7050;line-height:1}
+.res-lbl{font-size:11px;color:#8A9A78;margin-top:4px;letter-spacing:2px}
 .res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:10px 0}
-.res-box{background:#EDE7D8;border-radius:11px;padding:10px 6px;text-align:center}
-.res-v{font-size:18px;font-weight:bold;color:#1E2E22}
-.res-l{font-size:10px;color:#8A9E8A;margin-top:2px}
-.review-list{background:#EDE7D8;border-radius:14px;padding:12px 14px;margin:8px 0;flex:1;overflow-y:auto}
+.res-box{background:#E6DCC4;border-radius:11px;padding:10px 6px;text-align:center}
+.res-v{font-size:18px;font-weight:bold;color:#1C2820}
+.res-l{font-size:10px;color:#8A9A78;margin-top:2px}
+.review-list{background:#E6DCC4;border-radius:14px;padding:12px 14px;margin:8px 0;flex:1;overflow-y:auto}
 .review-hdr{font-size:11px;color:#ef4444;margin-bottom:8px;font-weight:bold}
-.review-item{font-size:13px;color:#4E6254;padding:5px 0;border-bottom:1px solid #EDE7D8;line-height:1.6}
+.review-item{font-size:13px;color:#4E5A3E;padding:5px 0;border-bottom:1px solid #E6DCC4;line-height:1.6}
 .review-item:last-child{border-bottom:none}
-.review-ctx{font-size:10px;color:#8A9E8A;margin-bottom:1px}
+.review-ctx{font-size:10px;color:#8A9A78;margin-bottom:1px}
 
 /* KJ MODE TOGGLE */
 .kj-mode-row{display:flex;gap:6px;margin-bottom:8px;flex-shrink:0}
-.kj-mode-btn{flex:1;padding:7px 0;font-size:12px;font-weight:bold;border:none;border-radius:10px;cursor:pointer;background:#EDE7D8;color:#6E8272;transition:all .15s}
-.kj-mode-btn.active{background:#3A6B50;color:#2A6080}
-.kj-wk-hidden{color:#A8B8AA;letter-spacing:2px}
+.kj-mode-btn{flex:1;padding:7px 0;font-size:12px;font-weight:bold;border:none;border-radius:10px;cursor:pointer;background:#E6DCC4;color:#6E7A5C;transition:all .15s}
+.kj-mode-btn.active{background:#3A5C40;color:#F0E4C0}
+.kj-wk-hidden{color:#A0AA88;letter-spacing:2px}
 .kj-wk-hidden.revealed{color:#C88A20}
 .update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#4A8060;flex-shrink:0}
-.update-bar-text{font-size:12px;color:#6E8272;flex:1;letter-spacing:.5px}
-.update-bar-btn{font-size:12px;color:#4A8060;white-space:nowrap}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#4A7050;flex-shrink:0}
+.update-bar-text{font-size:12px;color:#6E7A5C;flex:1;letter-spacing:.5px}
+.update-bar-btn{font-size:12px;color:#4A7050;white-space:nowrap}
 .update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
-.dev-log{background:#EDE7D8;border-radius:12px;padding:10px 14px;margin-bottom:10px}
-.dev-log-title{font-size:10px;color:#8A9E8A;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
+.dev-log{background:#E6DCC4;border-radius:12px;padding:10px 14px;margin-bottom:10px}
+.dev-log-title{font-size:10px;color:#8A9A78;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
 
 /* ── 易学图谱 ── */
-.bg-sec-t{font-size:12px;font-weight:bold;color:#4A8060;letter-spacing:2px;margin:14px 0 8px;padding:5px 10px;border-left:3px solid #4A8060;background:#E4DDD0;border-radius:0 6px 6px 0}
+.bg-sec-t{font-size:12px;font-weight:bold;color:#4A7050;letter-spacing:2px;margin:14px 0 8px;padding:5px 10px;border-left:3px solid #A83830;background:#DAD0B8;border-radius:0 6px 6px 0}
 .bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:4px}
-.bg-cell{border-radius:10px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:72px;background:#EDE7D8}
-.bg-cell-ctr{background:#E4DDD0;border:1px solid #C8D8C4}
+.bg-cell{border-radius:10px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:72px;background:#E6DCC4}
+.bg-cell-ctr{background:#DAD0B8;border:1px solid #C0B490}
 .bg-sym{font-size:24px;line-height:1.1}
 .bg-name{font-size:13px;font-weight:bold}
-.bg-sub{font-size:10px;color:#8A9E8A}
-.bg-no{font-size:10px;color:#A8B8AA;margin-top:1px}
+.bg-sub{font-size:10px;color:#8A9A78}
+.bg-no{font-size:10px;color:#A0AA88;margin-top:1px}
 .c-jin .bg-sym,.c-jin .bg-name{color:#C88A20}
-.c-mu .bg-sym,.c-mu .bg-name{color:#4A8060}
+.c-mu .bg-sym,.c-mu .bg-name{color:#4A7050}
 .c-shui .bg-sym,.c-shui .bg-name{color:#38bdf8}
 .c-huo .bg-sym,.c-huo .bg-name{color:#f97316}
 .c-tu .bg-sym,.c-tu .bg-name{color:#8B5E3C}
-.bg64-grp{border-radius:12px;overflow:hidden;margin-bottom:7px;border:1px solid #EDE7D8}
-.bg64-hdr{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none;background:#D6EAE0;transition:background .15s}
-.bg64-hdr:hover{background:#C8DECE}
-.bg64-tri{font-size:10px;color:#6E8272;width:12px;flex-shrink:0;transition:transform .2s}
+.bg64-grp{border-radius:12px;overflow:hidden;margin-bottom:7px;border:1px solid #E6DCC4}
+.bg64-hdr{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none;background:#D4C8A8;transition:background .15s}
+.bg64-hdr:hover{background:#C4B898}
+.bg64-tri{font-size:10px;color:#6E7A5C;width:12px;flex-shrink:0;transition:transform .2s}
 .bg64-sym{font-size:18px;flex-shrink:0}
-.bg64-title{flex:1;font-size:13px;font-weight:bold;color:#4E6254}
-.bg64-body{display:none;padding:7px;background:#E4DDD0;border-top:1px solid #EDE7D8}
+.bg64-title{flex:1;font-size:13px;font-weight:bold;color:#4E5A3E}
+.bg64-body{display:none;padding:7px;background:#DAD0B8;border-top:1px solid #E6DCC4}
 .bg64-body.open{display:block}
 .bg64-cells{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-.bg64-cell{background:#EDE7D8;border-radius:8px;padding:7px 3px;text-align:center}
-.bg64-no{font-size:9px;color:#A8B8AA;margin-bottom:2px}
-.bg64-cname{font-size:11px;color:#2E4032;line-height:1.4}
+.bg64-cell{background:#E6DCC4;border-radius:8px;padding:7px 3px;text-align:center}
+.bg64-no{font-size:9px;color:#A0AA88;margin-bottom:2px}
+.bg64-cname{font-size:11px;color:#2C3C24;line-height:1.4}
 </style>
 </head>
 <body>
@@ -277,10 +277,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <!-- 模块四：易学图谱 -->
   <div class="module">
     <div class="mod-hdr" onclick="show('pbg')" style="border-radius:16px">
-      <span class="mod-tri" style="font-size:15px;color:#4A8060">☯</span>
+      <span class="mod-tri" style="font-size:15px;color:#4A7050">☯</span>
       <span class="mod-icon">🔯</span>
       <span class="mod-title">易学图谱 · 先天后天六十四卦</span>
-      <span style="font-size:12px;color:#8A9E8A">→</span>
+      <span style="font-size:12px;color:#8A9A78">→</span>
     </div>
   </div>
 
@@ -288,12 +288,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <div class="dev-log">
     <div class="dev-log-title">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding-right:2px">
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#6E8272;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E8272;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E8272;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E8272;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E8272;font-size:12px">📚 口诀库扩充至100+条·专题练习·全随机</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.17</span><span style="color:#6E8272;font-size:12px">🏗 项目初始化，杨公风水著作背诵正式上线</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#6E7A5C;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E7A5C;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E7A5C;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E7A5C;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E7A5C;font-size:12px">📚 口诀库扩充至100+条·专题练习·全随机</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E5A3E;font-size:11px;flex-shrink:0">26.6.17</span><span style="color:#6E7A5C;font-size:12px">🏗 项目初始化，杨公风水著作背诵正式上线</span></div>
     </div>
   </div>
 </div>
@@ -329,7 +329,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
       <div class="card-back" id="c-back">
         <div class="card-placeholder">
           <div class="card-placeholder-icon">💭</div>
-          <div>回忆后半段…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div>
+          <div>回忆后半段…<br><span style="font-size:11px;color:#8A9A78">点击揭示答案</span></div>
         </div>
       </div>
     </div>
@@ -350,7 +350,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   </div>
   <div class="res-grid">
     <div class="res-box"><div class="res-v" id="r-total">0</div><div class="res-l">本轮总数</div></div>
-    <div class="res-box"><div class="res-v" id="r-known" style="color:#4A8060">0</div><div class="res-l">记住了</div></div>
+    <div class="res-box"><div class="res-v" id="r-known" style="color:#4A7050">0</div><div class="res-l">记住了</div></div>
     <div class="res-box"><div class="res-v" id="r-review" style="color:#C88020">0</div><div class="res-l">需再看</div></div>
   </div>
   <div class="review-list" id="r-list" style="display:none">
@@ -378,16 +378,16 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <div class="prog-wrap"><div class="prog-fill" id="pkj-bar" style="width:0%"></div></div>
   <div class="card" id="pkj-card" onclick="kjFlipCard()">
     <div class="card-badge">
-      <span class="badge-book" id="pkj-badge" style="background:#D0E2D8;color:#2A6080"></span>
+      <span class="badge-book" id="pkj-badge" style="background:#CFC4A0;color:#3A5C40"></span>
       <span class="badge-ctx" id="pkj-ctx"></span>
     </div>
-    <div class="card-front" id="pkj-front" style="font-size:16px;color:#2E4032;text-align:center;padding:8px 0"></div>
+    <div class="card-front" id="pkj-front" style="font-size:16px;color:#2C3C24;text-align:center;padding:8px 0"></div>
     <hr class="card-sep" id="pkj-sep">
     <div class="card-back-wrap">
       <div class="card-back" id="pkj-back">
         <div class="card-placeholder">
           <div class="card-placeholder-icon">📋</div>
-          <div>回忆口诀…<br><span style="font-size:11px;color:#8A9E8A">点击查看</span></div>
+          <div>回忆口诀…<br><span style="font-size:11px;color:#8A9A78">点击查看</span></div>
         </div>
       </div>
     </div>
@@ -405,13 +405,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
     <!-- 先天八卦 -->
     <div class="bg-sec-t">先天八卦 · 伏羲</div>
-    <div style="text-align:center;font-size:10px;color:#8A9E8A;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为先天序</div>
+    <div style="text-align:center;font-size:10px;color:#8A9A78;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为先天序</div>
     <div class="bg-grid">
       <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">西北·风</div><div class="bg-no">⑤</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">正南·天</div><div class="bg-no">①</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">东南·泽</div><div class="bg-no">②</div></div>
       <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正西·水</div><div class="bg-no">⑥</div></div>
-      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A8060">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A7050">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
       <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正东·火</div><div class="bg-no">③</div></div>
       <div class="bg-cell c-tu"><div class="bg-sym">☶</div><div class="bg-name">艮</div><div class="bg-sub">西南·山</div><div class="bg-no">⑦</div></div>
       <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">正北·地</div><div class="bg-no">⑧</div></div>
@@ -420,13 +420,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
     <!-- 后天八卦 -->
     <div class="bg-sec-t">后天八卦 · 文王</div>
-    <div style="text-align:center;font-size:10px;color:#8A9E8A;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为洛书数</div>
+    <div style="text-align:center;font-size:10px;color:#8A9A78;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为洛书数</div>
     <div class="bg-grid">
       <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">西南·地</div><div class="bg-no">②</div></div>
       <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正南·火</div><div class="bg-no">⑨</div></div>
       <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">东南·风</div><div class="bg-no">④</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">正西·泽</div><div class="bg-no">⑦</div></div>
-      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A8060">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A7050">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
       <div class="bg-cell c-mu"><div class="bg-sym">☳</div><div class="bg-name">震</div><div class="bg-sub">正东·雷</div><div class="bg-no">③</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">西北·天</div><div class="bg-no">⑥</div></div>
       <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正北·水</div><div class="bg-no">①</div></div>
@@ -440,7 +440,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-1" onclick="togBG(1)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#C88A20">☰</span>
-        <span class="bg64-title">乾为天</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">乾为天</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-1"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☰<br>☰</div><div class="bg64-no">01</div><div class="bg64-cname">乾为天</div></div>
@@ -458,7 +458,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-2" onclick="togBG(2)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#38bdf8">☵</span>
-        <span class="bg64-title">坎为水</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">坎为水</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-2"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☵<br>☰</div><div class="bg64-no">05</div><div class="bg64-cname">水天需</div></div>
@@ -476,7 +476,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-3" onclick="togBG(3)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#8B5E3C">☶</span>
-        <span class="bg64-title">艮为山</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">艮为山</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-3"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☶<br>☰</div><div class="bg64-no">26</div><div class="bg64-cname">山天大畜</div></div>
@@ -493,8 +493,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <!-- 震上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-4" onclick="togBG(4)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4A8060">☳</span>
-        <span class="bg64-title">震为雷</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4A7050">☳</span>
+        <span class="bg64-title">震为雷</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-4"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☳<br>☰</div><div class="bg64-no">34</div><div class="bg64-cname">雷天大壮</div></div>
@@ -512,7 +512,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-5" onclick="togBG(5)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4ade80">☴</span>
-        <span class="bg64-title">巽为风</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">巽为风</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-5"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☴<br>☰</div><div class="bg64-no">09</div><div class="bg64-cname">风天小畜</div></div>
@@ -530,7 +530,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-6" onclick="togBG(6)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#f97316">☲</span>
-        <span class="bg64-title">离为火</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">离为火</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-6"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☲<br>☰</div><div class="bg64-no">14</div><div class="bg64-cname">火天大有</div></div>
@@ -548,7 +548,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-7" onclick="togBG(7)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#8B5E3C">☷</span>
-        <span class="bg64-title">坤为地</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">坤为地</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-7"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☷<br>☰</div><div class="bg64-no">11</div><div class="bg64-cname">地天泰</div></div>
@@ -566,7 +566,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-8" onclick="togBG(8)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#C88A20">☱</span>
-        <span class="bg64-title">兑为泽</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
+        <span class="bg64-title">兑为泽</span><span style="font-size:10px;color:#A0AA88">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-8"><div class="bg64-cells">
         <div class="bg64-cell"><div class="bg64-gua">☱<br>☰</div><div class="bg64-no">43</div><div class="bg64-cname">泽天夬</div></div>
@@ -1007,7 +1007,7 @@ function showCard(){
   document.getElementById('cb-book').className='badge-book '+card.cls;
   document.getElementById('cb-ctx').textContent=card.ctx;
   document.getElementById('c-front').textContent=card.front;
-  document.getElementById('c-back').innerHTML=`<div class="card-placeholder"><div class="card-placeholder-icon">💭</div><div>回忆后半段…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div></div>`;
+  document.getElementById('c-back').innerHTML=`<div class="card-placeholder"><div class="card-placeholder-icon">💭</div><div>回忆后半段…<br><span style="font-size:11px;color:#8A9A78">点击揭示答案</span></div></div>`;
   document.getElementById('c-sep').style.display='';
   document.getElementById('action-row').style.display='none';
   const total=G.deck.length;
@@ -1023,7 +1023,7 @@ function flipCard(){
   const front=card.front;
   const full=card.full;
   const rest=full.slice(front.length);
-  document.getElementById('c-back').innerHTML=`<span style="color:#1E2E22">${escHtml(front)}</span><span class="hi">${escHtml(rest)}</span>`;
+  document.getElementById('c-back').innerHTML=`<span style="color:#1C2820">${escHtml(front)}</span><span class="hi">${escHtml(rest)}</span>`;
   document.getElementById('c-sep').style.display='none';
   document.getElementById('action-row').style.display='flex';
 }
@@ -1517,11 +1517,11 @@ function kjShowCard(){
   if(_kjMode==='wk'){
     const frontTxt=kjMakeFront(card.text);
     const restTxt=card.text.slice(frontTxt.length);
-    front.innerHTML=`<span style="color:#1E2E22">${escHtml(frontTxt)}</span><span class="kj-wk-hidden" id="pkj-wk-hidden"> ＿ ＿ ＿ ＿ ＿ ＿</span>`;
-    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>补全后半部分…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div></div>';
+    front.innerHTML=`<span style="color:#1C2820">${escHtml(frontTxt)}</span><span class="kj-wk-hidden" id="pkj-wk-hidden"> ＿ ＿ ＿ ＿ ＿ ＿</span>`;
+    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>补全后半部分…<br><span style="font-size:11px;color:#8A9A78">点击揭示答案</span></div></div>';
   }else{
     front.textContent='【'+card.catName+'】';
-    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>回忆口诀…<br><span style="font-size:11px;color:#8A9E8A">点击查看</span></div></div>';
+    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>回忆口诀…<br><span style="font-size:11px;color:#8A9A78">点击查看</span></div></div>';
   }
   sep.style.display='';
   document.getElementById('pkj-actions').style.display='none';
