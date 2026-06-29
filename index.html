@@ -6,205 +6,205 @@
 <title>风水著作背诵</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;justify-content:center}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-serif;background:#F5F0E6;color:#1E2E22;min-height:100vh;display:flex;justify-content:center}
 .app{width:100%;max-width:480px;min-height:100vh}
-@media(min-width:600px){body{background:#060d1b;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.7)}.screen{min-height:0!important}}
+@media(min-width:600px){body{background:#EAE4D6;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.7)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px calc(env(safe-area-inset-bottom,0px) + 28px);min-height:100vh;min-height:100svh}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
-.tbk{background:none;border:none;color:#64748b;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
-.tbk:hover{background:#1e293b;color:#94a3b8}
-.tbtitle{flex:1;text-align:center;font-size:14px;color:#94a3b8}
+.tbk{background:none;border:none;color:#6E8272;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.tbk:hover{background:#EDE7D8;color:#4E6254}
+.tbtitle{flex:1;text-align:center;font-size:14px;color:#4E6254}
 .btn{width:100%;padding:12px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none}
 .btn:active{transform:scale(.98)}
-.btn-g{background:#10b981;color:#fff}.btn-g:hover{background:#059669}
-.btn-d{background:#1e293b;color:#94a3b8}.btn-d:hover{background:#273549}
-.btn-a{background:#78350f;color:#fcd34d}.btn-a:hover{background:#92400e}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#334155;color:#e2e8f0;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.btn-g{background:#4A8060;color:#fff}.btn-g:hover{background:#3A6B50}
+.btn-d{background:#EDE7D8;color:#4E6254}.btn-d:hover{background:#D8E8DC}
+.btn-a{background:#78350f;color:#fcd34d}.btn-a:hover{background:#7A5824}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#A8B8AA;color:#1E2E22;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)}
 .toast.show{opacity:1}
 
 /* HOME */
 .hdr{text-align:center;padding:22px 0 10px}
-.htitle{font-size:26px;font-weight:bold;color:#10b981;letter-spacing:4px}
-.hsub{font-size:11px;color:#475569;margin-top:4px;letter-spacing:4px}
-.hdate{font-size:12px;color:#334155;margin-top:8px;letter-spacing:1px}
-.hquote{margin:10px 0 4px;padding:11px 14px;background:#0a1628;border-radius:12px;border-left:3px solid #10b981;text-align:left}
-.hquote-text{font-size:13px;color:#7dd3fc;line-height:1.8;font-style:italic}
-.hquote-src{font-size:11px;color:#334155;margin-top:5px;text-align:right}
+.htitle{font-size:26px;font-weight:bold;color:#4A8060;letter-spacing:4px}
+.hsub{font-size:11px;color:#8A9E8A;margin-top:4px;letter-spacing:4px}
+.hdate{font-size:12px;color:#A8B8AA;margin-top:8px;letter-spacing:1px}
+.hquote{margin:10px 0 4px;padding:11px 14px;background:#E4DDD0;border-radius:12px;border-left:3px solid #4A8060;text-align:left}
+.hquote-text{font-size:13px;color:#2A607A;line-height:1.8;font-style:italic}
+.hquote-src{font-size:11px;color:#A8B8AA;margin-top:5px;text-align:right}
 .hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
-.hstat{background:#1e293b;border-radius:11px;padding:10px 6px;text-align:center}
-.hstat-v{font-size:20px;font-weight:bold;color:#10b981}
-.hstat-l{font-size:10px;color:#475569;margin-top:2px}
+.hstat{background:#EDE7D8;border-radius:11px;padding:10px 6px;text-align:center}
+.hstat-v{font-size:20px;font-weight:bold;color:#4A8060}
+.hstat-l{font-size:10px;color:#8A9E8A;margin-top:2px}
 .bk{border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;display:flex;align-items:center;gap:12px}
-.bk:hover{border-color:rgba(255,255,255,.12)}
+.bk:hover{border-color:rgba(0,0,0,.10)}
 .bk:active{transform:scale(.99)}
 .bk-icon{font-size:26px;flex-shrink:0;width:38px;text-align:center}
 .bk-info{flex:1}
-.bk-name{font-size:16px;font-weight:bold;color:#e2e8f0}
-.bk-meta{font-size:11px;color:#64748b;margin-top:2px}
+.bk-name{font-size:16px;font-weight:bold;color:#1E2E22}
+.bk-meta{font-size:11px;color:#6E8272;margin-top:2px}
 .bk-prog{text-align:right;flex-shrink:0}
-.bk-n{font-size:18px;font-weight:bold;color:#10b981}
-.bk-nl{font-size:10px;color:#475569}
-.bk-bar{height:4px;border-radius:2px;background:#1e293b;margin-top:5px;width:60px}
-.bk-bar-fill{height:100%;border-radius:2px;background:#10b981;transition:width .3s}
-.bk1{background:#0f1f3d}.bk2{background:#1a0f2e}.bk3{background:#0c2417}.bk4{background:#1c1000}.bk5{background:#1f0812}
+.bk-n{font-size:18px;font-weight:bold;color:#4A8060}
+.bk-nl{font-size:10px;color:#8A9E8A}
+.bk-bar{height:4px;border-radius:2px;background:#EDE7D8;margin-top:5px;width:60px}
+.bk-bar-fill{height:100%;border-radius:2px;background:#4A8060;transition:width .3s}
+.bk1{background:#E6EEF0}.bk2{background:#EEE8F2}.bk3{background:#E2EEE8}.bk4{background:#F0EAE0}.bk5{background:#F0E6EC}
 
 /* HEATMAP */
 .hmap{display:grid;grid-template-columns:repeat(35,1fr);gap:2px;margin-bottom:10px}
-.hmap-cell{height:10px;border-radius:2px;background:#1e293b;border:1px solid #1e3028}
-.hmap-cell.lv1{background:#1a5c3880;border-color:#2EA06880}.hmap-cell.lv2{background:#2EA06880;border-color:#10b981}.hmap-cell.lv3{background:#10b981B0;border-color:#2EA068}.hmap-cell.lv4{background:#10b981;border-color:#2EA068}
-.hmap-cell.today{outline:2px solid #5DD89A;outline-offset:1px}
-.hmap-label{font-size:10px;color:#94a3b8;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
-.bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #1e293b;background:rgba(0,0,0,.2)}
-.bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #163a28;border-radius:8px;background:#0a1628;color:#5DCEA0;cursor:pointer;transition:all .15s;user-select:none}
-.bt-song-btn:hover{background:#163a28;color:#fff}
-.all-btn{background:linear-gradient(135deg,#0f3a22,#1a6640);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
-.all-btn:hover{border-color:#10b981}.all-btn:active{transform:scale(.99)}
-.all-btn-t{font-size:16px;font-weight:bold;color:#e2e8f0}
-.all-btn-s{font-size:11px;color:#64748b;margin-top:3px}
+.hmap-cell{height:10px;border-radius:2px;background:#EDE7D8;border:1px solid #C0D4C4}
+.hmap-cell.lv1{background:#3A6B5080;border-color:#5B9A7080}.hmap-cell.lv2{background:#5B9A7080;border-color:#4A8060}.hmap-cell.lv3{background:#4A8060B0;border-color:#5B9A70}.hmap-cell.lv4{background:#4A8060;border-color:#5B9A70}
+.hmap-cell.today{outline:2px solid #4A8060;outline-offset:1px}
+.hmap-label{font-size:10px;color:#4E6254;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
+.bt-songs{display:flex;flex-wrap:wrap;gap:5px;padding:8px 10px 10px;border-top:1px solid #C8D8C0;background:rgba(74,128,96,0.07)}
+.bt-song-btn{font-size:11px;padding:5px 10px;border:1px solid #A8C8B0;border-radius:8px;background:#E4DDD0;color:#4A8060;cursor:pointer;transition:all .15s;user-select:none}
+.bt-song-btn:hover{background:#3A6B50;color:#fff}
+.all-btn{background:linear-gradient(135deg,#3A6B50,#4A7A58);border-radius:16px;padding:15px;text-align:center;cursor:pointer;border:2px solid transparent;margin-bottom:9px;transition:all .15s}
+.all-btn:hover{border-color:#2E5840}.all-btn:active{transform:scale(.99)}
+.all-btn-t{font-size:16px;font-weight:bold;color:#fff}
+.all-btn-s{font-size:11px;color:rgba(255,255,255,0.65);margin-top:3px}
 
 /* MODULE ACCORDION */
-.module{border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid #1e293b}
-.mod-hdr{display:flex;align-items:center;gap:10px;padding:14px 15px;cursor:pointer;user-select:none;background:#162218;transition:background .15s}
-.mod-hdr:hover{background:#172a1a}
+.module{border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid #EDE7D8}
+.mod-hdr{display:flex;align-items:center;gap:10px;padding:14px 15px;cursor:pointer;user-select:none;background:#D6EAE0;transition:background .15s}
+.mod-hdr:hover{background:#C8DECE}
 .mod-hdr:active{transform:scale(.99)}
-.mod-tri{font-size:11px;color:#64748b;width:14px;flex-shrink:0;transition:transform .2s}
+.mod-tri{font-size:11px;color:#6E8272;width:14px;flex-shrink:0;transition:transform .2s}
 .mod-icon{font-size:20px;flex-shrink:0}
-.mod-title{flex:1;font-size:15px;font-weight:bold;color:#cbd5e1}
-.mod-count{font-size:11px;color:#475569;flex-shrink:0}
-.mod-body{display:none;padding:10px;background:#0a1628;border-top:1px solid #1e293b}
+.mod-title{flex:1;font-size:15px;font-weight:bold;color:#2E4032}
+.mod-count{font-size:11px;color:#8A9E8A;flex-shrink:0}
+.mod-body{display:none;padding:10px;background:#E4DDD0;border-top:1px solid #EDE7D8}
 .mod-body.open{display:block}
 
 /* SOURCE ACCORDIONS (inside 口诀 module) */
-.sacc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid #1e293b}
-.sacc-hdr{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none;background:#131e14;transition:background .15s}
-.sacc-hdr:hover{background:#182614}
+.sacc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid #EDE7D8}
+.sacc-hdr{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none;background:#D3E8DD;transition:background .15s}
+.sacc-hdr:hover{background:#C5DBCB}
 .sacc-hdr:active{transform:scale(.98)}
-.sacc-tri{font-size:10px;color:#475569;width:12px;flex-shrink:0}
+.sacc-tri{font-size:10px;color:#8A9E8A;width:12px;flex-shrink:0}
 .sacc-icon{font-size:17px;flex-shrink:0}
-.sacc-title{flex:1;font-size:13px;font-weight:bold;color:#94a3b8}
-.sacc-prac{flex-shrink:0;background:#162840;border:1px solid #163a28;color:#5DCEA0;font-size:11px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
-.sacc-prac:hover{background:#1a5c38;border-color:#10b981;color:#fff}
-.sacc-body{display:none;padding:10px 12px;background:#0a1628;border-top:1px solid #1e293b}
+.sacc-title{flex:1;font-size:13px;font-weight:bold;color:#4E6254}
+.sacc-prac{flex-shrink:0;background:#D0E2D8;border:1px solid #A8C8B0;color:#4A8060;font-size:11px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
+.sacc-prac:hover{background:#3A6B50;border-color:#4A8060;color:#fff}
+.sacc-body{display:none;padding:10px 12px;background:#E4DDD0;border-top:1px solid #EDE7D8}
 .sacc-body.open{display:block}
 .kj-all-prac{margin-bottom:4px}
 
 /* KJ ITEMS */
-.kj-cat-hdr{font-size:11px;color:#64748b;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #1e293b}
+.kj-cat-hdr{font-size:11px;color:#6E8272;font-weight:bold;letter-spacing:1px;margin:10px 0 5px;padding-bottom:4px;border-bottom:1px solid #EDE7D8}
 .kj-cat-hdr:first-child{margin-top:2px}
 .kj-items{margin-bottom:6px}
-.kj-item{padding:8px 4px;border-bottom:1px dashed #162218}
+.kj-item{padding:8px 4px;border-bottom:1px dashed #D6EAE0}
 .kj-item:last-child{border-bottom:none}
-.kj-verse{font-size:13px;color:#cbd5e1;line-height:2.1;letter-spacing:.3px;display:block}
+.kj-verse{font-size:13px;color:#2E4032;line-height:2.1;letter-spacing:.3px;display:block}
 .kj-verse-line{display:block}
 .kj-item-actions{display:flex;gap:6px;margin-top:5px;justify-content:flex-end}
-.kj-note-btn{background:none;border:1px solid #163a28;color:#64748b;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:10px;transition:all .15s}
-.kj-note-btn:hover,.kj-note-btn.active{border-color:#10b981;color:#93c5fd;background:#163a2833}
-.kj-del{background:none;border:none;color:#334155;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px;transition:color .15s}
-.kj-del:hover{color:#ef4444;background:#2d1515}
-.kj-note-show{font-size:11px;color:#475569;margin-top:5px;padding:4px 8px;background:#0f172a;border-radius:6px;border-left:2px solid #163a28;white-space:pre-wrap}
+.kj-note-btn{background:none;border:1px solid #A8C8B0;color:#6E8272;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:10px;transition:all .15s}
+.kj-note-btn:hover,.kj-note-btn.active{border-color:#4A8060;color:#2A6080;background:#A8C8B033}
+.kj-del{background:none;border:none;color:#A8B8AA;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px;transition:color .15s}
+.kj-del:hover{color:#ef4444;background:#F5E8E8}
+.kj-note-show{font-size:11px;color:#8A9E8A;margin-top:5px;padding:4px 8px;background:#F5F0E6;border-radius:6px;border-left:2px solid #A8C8B0;white-space:pre-wrap}
 .kj-note-edit{margin-top:6px;display:none}
 .kj-note-edit.open{display:block}
-.kj-note-inp{width:100%;background:#162218;border:1px solid #163a28;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
-.kj-note-inp:focus{outline:none;border-color:#10b981}
-.kj-note-save{margin-top:4px;background:#163a28;border:none;border-radius:6px;color:#93c5fd;padding:4px 14px;font-size:11px;cursor:pointer}
-.kj-note-save:hover{background:#1a5c38}
+.kj-note-inp{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-note-inp:focus{outline:none;border-color:#4A8060}
+.kj-note-save{margin-top:4px;background:#A8C8B0;border:none;border-radius:6px;color:#2A6080;padding:4px 14px;font-size:11px;cursor:pointer}
+.kj-note-save:hover{background:#3A6B50}
 
 /* BOOK READER */
-.read-para{font-size:14px;color:#cbd5e1;line-height:2.1;padding:10px 4px;border-bottom:1px dashed #162218}
+.read-para{font-size:14px;color:#2E4032;line-height:2.1;padding:10px 4px;border-bottom:1px dashed #D6EAE0}
 .read-para:last-child{border-bottom:none}
-.read-song-hdr{font-size:13px;font-weight:bold;color:#10b981;margin:16px 0 6px;padding:7px 11px;background:#0a1628;border-radius:8px;border-left:3px solid #10b981}
+.read-song-hdr{font-size:13px;font-weight:bold;color:#4A8060;margin:16px 0 6px;padding:7px 11px;background:#E4DDD0;border-radius:8px;border-left:3px solid #4A8060}
 .read-song-hdr:first-child{margin-top:4px}
-.read-sec-hdr{font-size:12px;color:#5DCEA0;font-weight:bold;margin:10px 0 3px;padding:3px 10px;letter-spacing:1px;border-left:2px solid #163a28;background:#0a1628;border-radius:0 6px 6px 0}
+.read-sec-hdr{font-size:12px;color:#4A8060;font-weight:bold;margin:10px 0 3px;padding:3px 10px;letter-spacing:1px;border-left:2px solid #A8C8B0;background:#E4DDD0;border-radius:0 6px 6px 0}
 
 /* KJ SOURCE ADD FORM */
-.kj-src-add{margin-top:12px;padding:10px;background:#0a1628;border-radius:8px;border:1px dashed #163a28}
-.kj-src-add-label{font-size:11px;color:#475569;margin-bottom:5px;display:block}
-.kj-src-add-cat{width:100%;background:#162218;border:1px solid #163a28;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;font-family:inherit;box-sizing:border-box;margin-bottom:6px}
-.kj-src-add-cat:focus{outline:none;border-color:#10b981}
-.kj-src-add-inp{width:100%;background:#162218;border:1px solid #163a28;border-radius:8px;padding:6px 8px;font-size:12px;color:#e2e8f0;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
-.kj-src-add-inp:focus{outline:none;border-color:#10b981}
-.kj-src-add-btn{margin-top:6px;background:#0f3a22;border:none;border-radius:8px;color:#93c5fd;padding:7px 0;font-size:12px;cursor:pointer;width:100%}
-.kj-src-add-btn:hover{background:#1a5c38}
+.kj-src-add{margin-top:12px;padding:10px;background:#E4DDD0;border-radius:8px;border:1px dashed #A8C8B0}
+.kj-src-add-label{font-size:11px;color:#8A9E8A;margin-bottom:5px;display:block}
+.kj-src-add-cat{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;font-family:inherit;box-sizing:border-box;margin-bottom:6px}
+.kj-src-add-cat:focus{outline:none;border-color:#4A8060}
+.kj-src-add-inp{width:100%;background:#D6EAE0;border:1px solid #A8C8B0;border-radius:8px;padding:6px 8px;font-size:12px;color:#1E2E22;resize:none;font-family:inherit;line-height:1.6;box-sizing:border-box}
+.kj-src-add-inp:focus{outline:none;border-color:#4A8060}
+.kj-src-add-btn{margin-top:6px;background:#3A6B50;border:none;border-radius:8px;color:#2A6080;padding:7px 0;font-size:12px;cursor:pointer;width:100%}
+.kj-src-add-btn:hover{background:#3A6B50}
 
 /* PRACTICE */
 .pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0}
-.pp-counter{font-size:12px;color:#64748b}
-.pp-known{font-size:12px;color:#10b981}
-.prog-wrap{height:4px;background:#1e293b;border-radius:2px;margin-bottom:12px;flex-shrink:0}
-.prog-fill{height:100%;border-radius:2px;background:#10b981;transition:width .3s}
-.card{background:#1e293b;border-radius:18px;padding:18px 16px;flex:1;display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:box-shadow .15s;min-height:0}
-.card:hover{box-shadow:0 0 0 2px #1e3028}
+.pp-counter{font-size:12px;color:#6E8272}
+.pp-known{font-size:12px;color:#4A8060}
+.prog-wrap{height:4px;background:#EDE7D8;border-radius:2px;margin-bottom:12px;flex-shrink:0}
+.prog-fill{height:100%;border-radius:2px;background:#4A8060;transition:width .3s}
+.card{background:#EDE7D8;border-radius:18px;padding:18px 16px;flex:1;display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:box-shadow .15s;min-height:0}
+.card:hover{box-shadow:0 0 0 2px #C0D4C4}
 .card-badge{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-shrink:0}
 .badge-book{font-size:11px;font-weight:bold;padding:2px 9px;border-radius:8px;color:#fff}
-.b1{background:#0f3a22}.b2{background:#4c1d95}.b3{background:#1a6640}.b4{background:#92400e}.b5{background:#881337}
-.badge-ctx{font-size:11px;color:#475569;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card-front{font-size:19px;line-height:2;color:#e2e8f0;flex-shrink:0}
-.card-sep{border:none;border-top:1px dashed #1e3028;margin:12px 0;flex-shrink:0;position:relative}
-.card-sep::after{content:'▼ 点击揭示';position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#1e293b;padding:0 8px;font-size:11px;color:#475569}
+.b1{background:#3A6B50}.b2{background:#6B3A8C}.b3{background:#4A7A58}.b4{background:#7A5824}.b5{background:#8C2840}
+.badge-ctx{font-size:11px;color:#8A9E8A;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-front{font-size:19px;line-height:2;color:#1E2E22;flex-shrink:0}
+.card-sep{border:none;border-top:1px dashed #C0D4C4;margin:12px 0;flex-shrink:0;position:relative}
+.card-sep::after{content:'▼ 点击揭示';position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#EDE7D8;padding:0 8px;font-size:11px;color:#8A9E8A}
 .card-back-wrap{flex:1;overflow-y:auto;min-height:0}
-.card-back{font-size:19px;line-height:2;color:#94a3b8}
-.card-back .hi{color:#f59e0b;font-weight:bold}
-.card-placeholder{display:flex;align-items:center;justify-content:center;flex:1;color:#334155;font-size:13px;text-align:center;padding:20px 0;flex-direction:column;gap:8px}
+.card-back{font-size:19px;line-height:2;color:#4E6254}
+.card-back .hi{color:#C88020;font-weight:bold}
+.card-placeholder{display:flex;align-items:center;justify-content:center;flex:1;color:#A8B8AA;font-size:13px;text-align:center;padding:20px 0;flex-direction:column;gap:8px}
 .card-placeholder-icon{font-size:32px;opacity:.4}
-.action-row{display:flex;gap:9px;margin-top:10px;flex-shrink:0;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:#0f172a;padding:6px 0 2px}
+.action-row{display:flex;gap:9px;margin-top:10px;flex-shrink:0;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:#F5F0E6;padding:6px 0 2px}
 .action-row .btn{flex:1;font-size:15px;padding:14px}
 
 /* RESULT */
 .res-hero{text-align:center;padding:20px 0 10px}
 .res-emoji{font-size:52px;margin-bottom:6px}
-.res-pct{font-size:56px;font-weight:bold;color:#10b981;line-height:1}
-.res-lbl{font-size:11px;color:#475569;margin-top:4px;letter-spacing:2px}
+.res-pct{font-size:56px;font-weight:bold;color:#4A8060;line-height:1}
+.res-lbl{font-size:11px;color:#8A9E8A;margin-top:4px;letter-spacing:2px}
 .res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:10px 0}
-.res-box{background:#1e293b;border-radius:11px;padding:10px 6px;text-align:center}
-.res-v{font-size:18px;font-weight:bold;color:#e2e8f0}
-.res-l{font-size:10px;color:#475569;margin-top:2px}
-.review-list{background:#1e293b;border-radius:14px;padding:12px 14px;margin:8px 0;flex:1;overflow-y:auto}
+.res-box{background:#EDE7D8;border-radius:11px;padding:10px 6px;text-align:center}
+.res-v{font-size:18px;font-weight:bold;color:#1E2E22}
+.res-l{font-size:10px;color:#8A9E8A;margin-top:2px}
+.review-list{background:#EDE7D8;border-radius:14px;padding:12px 14px;margin:8px 0;flex:1;overflow-y:auto}
 .review-hdr{font-size:11px;color:#ef4444;margin-bottom:8px;font-weight:bold}
-.review-item{font-size:13px;color:#94a3b8;padding:5px 0;border-bottom:1px solid #1e293b;line-height:1.6}
+.review-item{font-size:13px;color:#4E6254;padding:5px 0;border-bottom:1px solid #EDE7D8;line-height:1.6}
 .review-item:last-child{border-bottom:none}
-.review-ctx{font-size:10px;color:#475569;margin-bottom:1px}
+.review-ctx{font-size:10px;color:#8A9E8A;margin-bottom:1px}
 
 /* KJ MODE TOGGLE */
 .kj-mode-row{display:flex;gap:6px;margin-bottom:8px;flex-shrink:0}
-.kj-mode-btn{flex:1;padding:7px 0;font-size:12px;font-weight:bold;border:none;border-radius:10px;cursor:pointer;background:#1e293b;color:#64748b;transition:all .15s}
-.kj-mode-btn.active{background:#0f3a22;color:#93c5fd}
-.kj-wk-hidden{color:#334155;letter-spacing:2px}
-.kj-wk-hidden.revealed{color:#fbbf24}
+.kj-mode-btn{flex:1;padding:7px 0;font-size:12px;font-weight:bold;border:none;border-radius:10px;cursor:pointer;background:#EDE7D8;color:#6E8272;transition:all .15s}
+.kj-mode-btn.active{background:#3A6B50;color:#2A6080}
+.kj-wk-hidden{color:#A8B8AA;letter-spacing:2px}
+.kj-wk-hidden.revealed{color:#C88A20}
 .update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#10b981;flex-shrink:0}
-.update-bar-text{font-size:12px;color:#64748b;flex:1;letter-spacing:.5px}
-.update-bar-btn{font-size:12px;color:#10b981;white-space:nowrap}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#4A8060;flex-shrink:0}
+.update-bar-text{font-size:12px;color:#6E8272;flex:1;letter-spacing:.5px}
+.update-bar-btn{font-size:12px;color:#4A8060;white-space:nowrap}
 .update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
-.dev-log{background:#1e293b;border-radius:12px;padding:10px 14px;margin-bottom:10px}
-.dev-log-title{font-size:10px;color:#475569;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
+.dev-log{background:#EDE7D8;border-radius:12px;padding:10px 14px;margin-bottom:10px}
+.dev-log-title{font-size:10px;color:#8A9E8A;letter-spacing:2px;margin-bottom:6px;font-weight:bold}
 
 /* ── 易学图谱 ── */
-.bg-sec-t{font-size:12px;font-weight:bold;color:#10b981;letter-spacing:2px;margin:14px 0 8px;padding:5px 10px;border-left:3px solid #10b981;background:#0a1628;border-radius:0 6px 6px 0}
+.bg-sec-t{font-size:12px;font-weight:bold;color:#4A8060;letter-spacing:2px;margin:14px 0 8px;padding:5px 10px;border-left:3px solid #4A8060;background:#E4DDD0;border-radius:0 6px 6px 0}
 .bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:4px}
-.bg-cell{border-radius:10px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:72px;background:#1e293b}
-.bg-cell-ctr{background:#0a1628;border:1px solid #263040}
+.bg-cell{border-radius:10px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:72px;background:#EDE7D8}
+.bg-cell-ctr{background:#E4DDD0;border:1px solid #C8D8C4}
 .bg-sym{font-size:24px;line-height:1.1}
 .bg-name{font-size:13px;font-weight:bold}
-.bg-sub{font-size:10px;color:#475569}
-.bg-no{font-size:10px;color:#334155;margin-top:1px}
-.c-jin .bg-sym,.c-jin .bg-name{color:#fbbf24}
-.c-mu .bg-sym,.c-mu .bg-name{color:#10b981}
+.bg-sub{font-size:10px;color:#8A9E8A}
+.bg-no{font-size:10px;color:#A8B8AA;margin-top:1px}
+.c-jin .bg-sym,.c-jin .bg-name{color:#C88A20}
+.c-mu .bg-sym,.c-mu .bg-name{color:#4A8060}
 .c-shui .bg-sym,.c-shui .bg-name{color:#38bdf8}
 .c-huo .bg-sym,.c-huo .bg-name{color:#f97316}
-.c-tu .bg-sym,.c-tu .bg-name{color:#a78bfa}
-.bg64-grp{border-radius:12px;overflow:hidden;margin-bottom:7px;border:1px solid #1e293b}
-.bg64-hdr{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none;background:#162218;transition:background .15s}
-.bg64-hdr:hover{background:#172a1a}
-.bg64-tri{font-size:10px;color:#64748b;width:12px;flex-shrink:0;transition:transform .2s}
+.c-tu .bg-sym,.c-tu .bg-name{color:#8B5E3C}
+.bg64-grp{border-radius:12px;overflow:hidden;margin-bottom:7px;border:1px solid #EDE7D8}
+.bg64-hdr{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none;background:#D6EAE0;transition:background .15s}
+.bg64-hdr:hover{background:#C8DECE}
+.bg64-tri{font-size:10px;color:#6E8272;width:12px;flex-shrink:0;transition:transform .2s}
 .bg64-sym{font-size:18px;flex-shrink:0}
-.bg64-title{flex:1;font-size:13px;font-weight:bold;color:#94a3b8}
-.bg64-body{display:none;padding:7px;background:#0a1628;border-top:1px solid #1e293b}
+.bg64-title{flex:1;font-size:13px;font-weight:bold;color:#4E6254}
+.bg64-body{display:none;padding:7px;background:#E4DDD0;border-top:1px solid #EDE7D8}
 .bg64-body.open{display:block}
 .bg64-cells{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-.bg64-cell{background:#1e293b;border-radius:8px;padding:7px 3px;text-align:center}
-.bg64-no{font-size:9px;color:#334155;margin-bottom:2px}
-.bg64-cname{font-size:11px;color:#cbd5e1;line-height:1.4}
+.bg64-cell{background:#EDE7D8;border-radius:8px;padding:7px 3px;text-align:center}
+.bg64-no{font-size:9px;color:#A8B8AA;margin-bottom:2px}
+.bg64-cname{font-size:11px;color:#2E4032;line-height:1.4}
 </style>
 </head>
 <body>
@@ -277,10 +277,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <!-- 模块四：易学图谱 -->
   <div class="module">
     <div class="mod-hdr" onclick="show('pbg')" style="border-radius:16px">
-      <span class="mod-tri" style="font-size:15px;color:#10b981">☯</span>
+      <span class="mod-tri" style="font-size:15px;color:#4A8060">☯</span>
       <span class="mod-icon">🔯</span>
       <span class="mod-title">易学图谱 · 先天后天六十四卦</span>
-      <span style="font-size:12px;color:#475569">→</span>
+      <span style="font-size:12px;color:#8A9E8A">→</span>
     </div>
   </div>
 
@@ -288,12 +288,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <div class="dev-log">
     <div class="dev-log-title">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding-right:2px">
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#64748b;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#64748b;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#64748b;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#64748b;font-size:12px">📚 口诀库扩充至100+条·专题练习·全随机</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#94a3b8;font-size:11px;flex-shrink:0">26.6.17</span><span style="color:#64748b;font-size:12px">🏗 项目初始化，杨公风水著作背诵正式上线</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#6E8272;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E8272;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6E8272;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E8272;font-size:12px">📖 书本原文阅读模块·口诀编辑/删除功能</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.22</span><span style="color:#6E8272;font-size:12px">📚 口诀库扩充至100+条·专题练习·全随机</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#4E6254;font-size:11px;flex-shrink:0">26.6.17</span><span style="color:#6E8272;font-size:12px">🏗 项目初始化，杨公风水著作背诵正式上线</span></div>
     </div>
   </div>
 </div>
@@ -329,7 +329,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
       <div class="card-back" id="c-back">
         <div class="card-placeholder">
           <div class="card-placeholder-icon">💭</div>
-          <div>回忆后半段…<br><span style="font-size:11px;color:#475569">点击揭示答案</span></div>
+          <div>回忆后半段…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div>
         </div>
       </div>
     </div>
@@ -350,8 +350,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   </div>
   <div class="res-grid">
     <div class="res-box"><div class="res-v" id="r-total">0</div><div class="res-l">本轮总数</div></div>
-    <div class="res-box"><div class="res-v" id="r-known" style="color:#10b981">0</div><div class="res-l">记住了</div></div>
-    <div class="res-box"><div class="res-v" id="r-review" style="color:#f59e0b">0</div><div class="res-l">需再看</div></div>
+    <div class="res-box"><div class="res-v" id="r-known" style="color:#4A8060">0</div><div class="res-l">记住了</div></div>
+    <div class="res-box"><div class="res-v" id="r-review" style="color:#C88020">0</div><div class="res-l">需再看</div></div>
   </div>
   <div class="review-list" id="r-list" style="display:none">
     <div class="review-hdr" id="r-list-hdr"></div>
@@ -378,16 +378,16 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
   <div class="prog-wrap"><div class="prog-fill" id="pkj-bar" style="width:0%"></div></div>
   <div class="card" id="pkj-card" onclick="kjFlipCard()">
     <div class="card-badge">
-      <span class="badge-book" id="pkj-badge" style="background:#162840;color:#93c5fd"></span>
+      <span class="badge-book" id="pkj-badge" style="background:#D0E2D8;color:#2A6080"></span>
       <span class="badge-ctx" id="pkj-ctx"></span>
     </div>
-    <div class="card-front" id="pkj-front" style="font-size:16px;color:#cbd5e1;text-align:center;padding:8px 0"></div>
+    <div class="card-front" id="pkj-front" style="font-size:16px;color:#2E4032;text-align:center;padding:8px 0"></div>
     <hr class="card-sep" id="pkj-sep">
     <div class="card-back-wrap">
       <div class="card-back" id="pkj-back">
         <div class="card-placeholder">
           <div class="card-placeholder-icon">📋</div>
-          <div>回忆口诀…<br><span style="font-size:11px;color:#475569">点击查看</span></div>
+          <div>回忆口诀…<br><span style="font-size:11px;color:#8A9E8A">点击查看</span></div>
         </div>
       </div>
     </div>
@@ -405,13 +405,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
     <!-- 先天八卦 -->
     <div class="bg-sec-t">先天八卦 · 伏羲</div>
-    <div style="text-align:center;font-size:10px;color:#475569;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为先天序</div>
+    <div style="text-align:center;font-size:10px;color:#8A9E8A;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为先天序</div>
     <div class="bg-grid">
       <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">西北·风</div><div class="bg-no">⑤</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">正南·天</div><div class="bg-no">①</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">东南·泽</div><div class="bg-no">②</div></div>
       <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正西·水</div><div class="bg-no">⑥</div></div>
-      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#10b981">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A8060">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
       <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正东·火</div><div class="bg-no">③</div></div>
       <div class="bg-cell c-tu"><div class="bg-sym">☶</div><div class="bg-name">艮</div><div class="bg-sub">西南·山</div><div class="bg-no">⑦</div></div>
       <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">正北·地</div><div class="bg-no">⑧</div></div>
@@ -420,13 +420,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 
     <!-- 后天八卦 -->
     <div class="bg-sec-t">后天八卦 · 文王</div>
-    <div style="text-align:center;font-size:10px;color:#475569;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为洛书数</div>
+    <div style="text-align:center;font-size:10px;color:#8A9E8A;margin-bottom:8px;letter-spacing:1px">上南下北 · 左西右东 · 圆圈数为洛书数</div>
     <div class="bg-grid">
       <div class="bg-cell c-tu"><div class="bg-sym">☷</div><div class="bg-name">坤</div><div class="bg-sub">西南·地</div><div class="bg-no">②</div></div>
       <div class="bg-cell c-huo"><div class="bg-sym">☲</div><div class="bg-name">离</div><div class="bg-sub">正南·火</div><div class="bg-no">⑨</div></div>
       <div class="bg-cell c-mu"><div class="bg-sym">☴</div><div class="bg-name">巽</div><div class="bg-sub">东南·风</div><div class="bg-no">④</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☱</div><div class="bg-name">兑</div><div class="bg-sub">正西·泽</div><div class="bg-no">⑦</div></div>
-      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#10b981">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
+      <div class="bg-cell bg-cell-ctr"><div style="font-size:28px;color:#4A8060">☯</div><div class="bg-sub" style="margin-top:3px">太极</div></div>
       <div class="bg-cell c-mu"><div class="bg-sym">☳</div><div class="bg-name">震</div><div class="bg-sub">正东·雷</div><div class="bg-no">③</div></div>
       <div class="bg-cell c-jin"><div class="bg-sym">☰</div><div class="bg-name">乾</div><div class="bg-sub">西北·天</div><div class="bg-no">⑥</div></div>
       <div class="bg-cell c-shui"><div class="bg-sym">☵</div><div class="bg-name">坎</div><div class="bg-sub">正北·水</div><div class="bg-no">①</div></div>
@@ -439,18 +439,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <!-- 乾上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-1" onclick="togBG(1)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#fbbf24">☰</span>
-        <span class="bg64-title">乾上 · 天___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#C88A20">☰</span>
+        <span class="bg64-title">乾上 · 天___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-1"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">01</div><div class="bg64-cname">乾为天</div></div>
-        <div class="bg64-cell"><div class="bg64-no">06</div><div class="bg64-cname">天水讼</div></div>
-        <div class="bg64-cell"><div class="bg64-no">33</div><div class="bg64-cname">天山遁</div></div>
-        <div class="bg64-cell"><div class="bg64-no">25</div><div class="bg64-cname">天雷无妄</div></div>
-        <div class="bg64-cell"><div class="bg64-no">44</div><div class="bg64-cname">天风姤</div></div>
-        <div class="bg64-cell"><div class="bg64-no">13</div><div class="bg64-cname">天火同人</div></div>
-        <div class="bg64-cell"><div class="bg64-no">12</div><div class="bg64-cname">天地否</div></div>
-        <div class="bg64-cell"><div class="bg64-no">10</div><div class="bg64-cname">天泽履</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☰</div><div class="bg64-no">01</div><div class="bg64-cname">乾为天</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☵</div><div class="bg64-no">06</div><div class="bg64-cname">天水讼</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☶</div><div class="bg64-no">33</div><div class="bg64-cname">天山遁</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☳</div><div class="bg64-no">25</div><div class="bg64-cname">天雷无妄</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☴</div><div class="bg64-no">44</div><div class="bg64-cname">天风姤</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☲</div><div class="bg64-no">13</div><div class="bg64-cname">天火同人</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☷</div><div class="bg64-no">12</div><div class="bg64-cname">天地否</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☰<br>☱</div><div class="bg64-no">10</div><div class="bg64-cname">天泽履</div></div>
       </div></div>
     </div>
 
@@ -458,53 +458,53 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-2" onclick="togBG(2)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#38bdf8">☵</span>
-        <span class="bg64-title">坎上 · 水___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-title">坎上 · 水___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-2"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">05</div><div class="bg64-cname">水天需</div></div>
-        <div class="bg64-cell"><div class="bg64-no">29</div><div class="bg64-cname">坎为水</div></div>
-        <div class="bg64-cell"><div class="bg64-no">39</div><div class="bg64-cname">水山蹇</div></div>
-        <div class="bg64-cell"><div class="bg64-no">03</div><div class="bg64-cname">水雷屯</div></div>
-        <div class="bg64-cell"><div class="bg64-no">48</div><div class="bg64-cname">水风井</div></div>
-        <div class="bg64-cell"><div class="bg64-no">63</div><div class="bg64-cname">水火既济</div></div>
-        <div class="bg64-cell"><div class="bg64-no">08</div><div class="bg64-cname">水地比</div></div>
-        <div class="bg64-cell"><div class="bg64-no">60</div><div class="bg64-cname">水泽节</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☰</div><div class="bg64-no">05</div><div class="bg64-cname">水天需</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☵</div><div class="bg64-no">29</div><div class="bg64-cname">坎为水</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☶</div><div class="bg64-no">39</div><div class="bg64-cname">水山蹇</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☳</div><div class="bg64-no">03</div><div class="bg64-cname">水雷屯</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☴</div><div class="bg64-no">48</div><div class="bg64-cname">水风井</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☲</div><div class="bg64-no">63</div><div class="bg64-cname">水火既济</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☷</div><div class="bg64-no">08</div><div class="bg64-cname">水地比</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☵<br>☱</div><div class="bg64-no">60</div><div class="bg64-cname">水泽节</div></div>
       </div></div>
     </div>
 
     <!-- 艮上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-3" onclick="togBG(3)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#a78bfa">☶</span>
-        <span class="bg64-title">艮上 · 山___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#8B5E3C">☶</span>
+        <span class="bg64-title">艮上 · 山___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-3"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">26</div><div class="bg64-cname">山天大畜</div></div>
-        <div class="bg64-cell"><div class="bg64-no">04</div><div class="bg64-cname">山水蒙</div></div>
-        <div class="bg64-cell"><div class="bg64-no">52</div><div class="bg64-cname">艮为山</div></div>
-        <div class="bg64-cell"><div class="bg64-no">27</div><div class="bg64-cname">山雷颐</div></div>
-        <div class="bg64-cell"><div class="bg64-no">18</div><div class="bg64-cname">山风蛊</div></div>
-        <div class="bg64-cell"><div class="bg64-no">22</div><div class="bg64-cname">山火贲</div></div>
-        <div class="bg64-cell"><div class="bg64-no">23</div><div class="bg64-cname">山地剥</div></div>
-        <div class="bg64-cell"><div class="bg64-no">41</div><div class="bg64-cname">山泽损</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☰</div><div class="bg64-no">26</div><div class="bg64-cname">山天大畜</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☵</div><div class="bg64-no">04</div><div class="bg64-cname">山水蒙</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☶</div><div class="bg64-no">52</div><div class="bg64-cname">艮为山</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☳</div><div class="bg64-no">27</div><div class="bg64-cname">山雷颐</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☴</div><div class="bg64-no">18</div><div class="bg64-cname">山风蛊</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☲</div><div class="bg64-no">22</div><div class="bg64-cname">山火贲</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☷</div><div class="bg64-no">23</div><div class="bg64-cname">山地剥</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☶<br>☱</div><div class="bg64-no">41</div><div class="bg64-cname">山泽损</div></div>
       </div></div>
     </div>
 
     <!-- 震上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-4" onclick="togBG(4)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#10b981">☳</span>
-        <span class="bg64-title">震上 · 雷___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4A8060">☳</span>
+        <span class="bg64-title">震上 · 雷___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-4"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">34</div><div class="bg64-cname">雷天大壮</div></div>
-        <div class="bg64-cell"><div class="bg64-no">40</div><div class="bg64-cname">雷水解</div></div>
-        <div class="bg64-cell"><div class="bg64-no">62</div><div class="bg64-cname">雷山小过</div></div>
-        <div class="bg64-cell"><div class="bg64-no">51</div><div class="bg64-cname">震为雷</div></div>
-        <div class="bg64-cell"><div class="bg64-no">32</div><div class="bg64-cname">雷风恒</div></div>
-        <div class="bg64-cell"><div class="bg64-no">55</div><div class="bg64-cname">雷火丰</div></div>
-        <div class="bg64-cell"><div class="bg64-no">16</div><div class="bg64-cname">雷地豫</div></div>
-        <div class="bg64-cell"><div class="bg64-no">54</div><div class="bg64-cname">雷泽归妹</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☰</div><div class="bg64-no">34</div><div class="bg64-cname">雷天大壮</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☵</div><div class="bg64-no">40</div><div class="bg64-cname">雷水解</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☶</div><div class="bg64-no">62</div><div class="bg64-cname">雷山小过</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☳</div><div class="bg64-no">51</div><div class="bg64-cname">震为雷</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☴</div><div class="bg64-no">32</div><div class="bg64-cname">雷风恒</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☲</div><div class="bg64-no">55</div><div class="bg64-cname">雷火丰</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☷</div><div class="bg64-no">16</div><div class="bg64-cname">雷地豫</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☳<br>☱</div><div class="bg64-no">54</div><div class="bg64-cname">雷泽归妹</div></div>
       </div></div>
     </div>
 
@@ -512,17 +512,17 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-5" onclick="togBG(5)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#4ade80">☴</span>
-        <span class="bg64-title">巽上 · 风___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-title">巽上 · 风___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-5"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">09</div><div class="bg64-cname">风天小畜</div></div>
-        <div class="bg64-cell"><div class="bg64-no">59</div><div class="bg64-cname">风水涣</div></div>
-        <div class="bg64-cell"><div class="bg64-no">53</div><div class="bg64-cname">风山渐</div></div>
-        <div class="bg64-cell"><div class="bg64-no">42</div><div class="bg64-cname">风雷益</div></div>
-        <div class="bg64-cell"><div class="bg64-no">57</div><div class="bg64-cname">巽为风</div></div>
-        <div class="bg64-cell"><div class="bg64-no">37</div><div class="bg64-cname">风火家人</div></div>
-        <div class="bg64-cell"><div class="bg64-no">20</div><div class="bg64-cname">风地观</div></div>
-        <div class="bg64-cell"><div class="bg64-no">61</div><div class="bg64-cname">风泽中孚</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☰</div><div class="bg64-no">09</div><div class="bg64-cname">风天小畜</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☵</div><div class="bg64-no">59</div><div class="bg64-cname">风水涣</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☶</div><div class="bg64-no">53</div><div class="bg64-cname">风山渐</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☳</div><div class="bg64-no">42</div><div class="bg64-cname">风雷益</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☴</div><div class="bg64-no">57</div><div class="bg64-cname">巽为风</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☲</div><div class="bg64-no">37</div><div class="bg64-cname">风火家人</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☷</div><div class="bg64-no">20</div><div class="bg64-cname">风地观</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☴<br>☱</div><div class="bg64-no">61</div><div class="bg64-cname">风泽中孚</div></div>
       </div></div>
     </div>
 
@@ -530,53 +530,53 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-6" onclick="togBG(6)">
         <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#f97316">☲</span>
-        <span class="bg64-title">离上 · 火___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-title">离上 · 火___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-6"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">14</div><div class="bg64-cname">火天大有</div></div>
-        <div class="bg64-cell"><div class="bg64-no">64</div><div class="bg64-cname">火水未济</div></div>
-        <div class="bg64-cell"><div class="bg64-no">56</div><div class="bg64-cname">火山旅</div></div>
-        <div class="bg64-cell"><div class="bg64-no">21</div><div class="bg64-cname">火雷噬嗑</div></div>
-        <div class="bg64-cell"><div class="bg64-no">50</div><div class="bg64-cname">火风鼎</div></div>
-        <div class="bg64-cell"><div class="bg64-no">30</div><div class="bg64-cname">离为火</div></div>
-        <div class="bg64-cell"><div class="bg64-no">35</div><div class="bg64-cname">火地晋</div></div>
-        <div class="bg64-cell"><div class="bg64-no">38</div><div class="bg64-cname">火泽睽</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☰</div><div class="bg64-no">14</div><div class="bg64-cname">火天大有</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☵</div><div class="bg64-no">64</div><div class="bg64-cname">火水未济</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☶</div><div class="bg64-no">56</div><div class="bg64-cname">火山旅</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☳</div><div class="bg64-no">21</div><div class="bg64-cname">火雷噬嗑</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☴</div><div class="bg64-no">50</div><div class="bg64-cname">火风鼎</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☲</div><div class="bg64-no">30</div><div class="bg64-cname">离为火</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☷</div><div class="bg64-no">35</div><div class="bg64-cname">火地晋</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☲<br>☱</div><div class="bg64-no">38</div><div class="bg64-cname">火泽睽</div></div>
       </div></div>
     </div>
 
     <!-- 坤上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-7" onclick="togBG(7)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#a78bfa">☷</span>
-        <span class="bg64-title">坤上 · 地___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#8B5E3C">☷</span>
+        <span class="bg64-title">坤上 · 地___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-7"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">11</div><div class="bg64-cname">地天泰</div></div>
-        <div class="bg64-cell"><div class="bg64-no">07</div><div class="bg64-cname">地水师</div></div>
-        <div class="bg64-cell"><div class="bg64-no">15</div><div class="bg64-cname">地山谦</div></div>
-        <div class="bg64-cell"><div class="bg64-no">24</div><div class="bg64-cname">地雷复</div></div>
-        <div class="bg64-cell"><div class="bg64-no">46</div><div class="bg64-cname">地风升</div></div>
-        <div class="bg64-cell"><div class="bg64-no">36</div><div class="bg64-cname">地火明夷</div></div>
-        <div class="bg64-cell"><div class="bg64-no">02</div><div class="bg64-cname">坤为地</div></div>
-        <div class="bg64-cell"><div class="bg64-no">19</div><div class="bg64-cname">地泽临</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☰</div><div class="bg64-no">11</div><div class="bg64-cname">地天泰</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☵</div><div class="bg64-no">07</div><div class="bg64-cname">地水师</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☶</div><div class="bg64-no">15</div><div class="bg64-cname">地山谦</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☳</div><div class="bg64-no">24</div><div class="bg64-cname">地雷复</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☴</div><div class="bg64-no">46</div><div class="bg64-cname">地风升</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☲</div><div class="bg64-no">36</div><div class="bg64-cname">地火明夷</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☷</div><div class="bg64-no">02</div><div class="bg64-cname">坤为地</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☷<br>☱</div><div class="bg64-no">19</div><div class="bg64-cname">地泽临</div></div>
       </div></div>
     </div>
 
     <!-- 兑上 -->
     <div class="bg64-grp">
       <div class="bg64-hdr" id="bg64h-8" onclick="togBG(8)">
-        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#fbbf24">☱</span>
-        <span class="bg64-title">兑上 · 泽___</span><span style="font-size:10px;color:#334155">8卦</span>
+        <span class="bg64-tri">▶</span><span class="bg64-sym" style="color:#C88A20">☱</span>
+        <span class="bg64-title">兑上 · 泽___</span><span style="font-size:10px;color:#A8B8AA">8卦</span>
       </div>
       <div class="bg64-body" id="bg64-8"><div class="bg64-cells">
-        <div class="bg64-cell"><div class="bg64-no">43</div><div class="bg64-cname">泽天夬</div></div>
-        <div class="bg64-cell"><div class="bg64-no">47</div><div class="bg64-cname">泽水困</div></div>
-        <div class="bg64-cell"><div class="bg64-no">31</div><div class="bg64-cname">泽山咸</div></div>
-        <div class="bg64-cell"><div class="bg64-no">17</div><div class="bg64-cname">泽雷随</div></div>
-        <div class="bg64-cell"><div class="bg64-no">28</div><div class="bg64-cname">泽风大过</div></div>
-        <div class="bg64-cell"><div class="bg64-no">49</div><div class="bg64-cname">泽火革</div></div>
-        <div class="bg64-cell"><div class="bg64-no">45</div><div class="bg64-cname">泽地萃</div></div>
-        <div class="bg64-cell"><div class="bg64-no">58</div><div class="bg64-cname">兑为泽</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☰</div><div class="bg64-no">43</div><div class="bg64-cname">泽天夬</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☵</div><div class="bg64-no">47</div><div class="bg64-cname">泽水困</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☶</div><div class="bg64-no">31</div><div class="bg64-cname">泽山咸</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☳</div><div class="bg64-no">17</div><div class="bg64-cname">泽雷随</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☴</div><div class="bg64-no">28</div><div class="bg64-cname">泽风大过</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☲</div><div class="bg64-no">49</div><div class="bg64-cname">泽火革</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☷</div><div class="bg64-no">45</div><div class="bg64-cname">泽地萃</div></div>
+        <div class="bg64-cell"><div class="bg64-gua">☱<br>☱</div><div class="bg64-no">58</div><div class="bg64-cname">兑为泽</div></div>
       </div></div>
     </div>
 
@@ -1007,7 +1007,7 @@ function showCard(){
   document.getElementById('cb-book').className='badge-book '+card.cls;
   document.getElementById('cb-ctx').textContent=card.ctx;
   document.getElementById('c-front').textContent=card.front;
-  document.getElementById('c-back').innerHTML=`<div class="card-placeholder"><div class="card-placeholder-icon">💭</div><div>回忆后半段…<br><span style="font-size:11px;color:#475569">点击揭示答案</span></div></div>`;
+  document.getElementById('c-back').innerHTML=`<div class="card-placeholder"><div class="card-placeholder-icon">💭</div><div>回忆后半段…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div></div>`;
   document.getElementById('c-sep').style.display='';
   document.getElementById('action-row').style.display='none';
   const total=G.deck.length;
@@ -1023,7 +1023,7 @@ function flipCard(){
   const front=card.front;
   const full=card.full;
   const rest=full.slice(front.length);
-  document.getElementById('c-back').innerHTML=`<span style="color:#e2e8f0">${escHtml(front)}</span><span class="hi">${escHtml(rest)}</span>`;
+  document.getElementById('c-back').innerHTML=`<span style="color:#1E2E22">${escHtml(front)}</span><span class="hi">${escHtml(rest)}</span>`;
   document.getElementById('c-sep').style.display='none';
   document.getElementById('action-row').style.display='flex';
 }
@@ -1517,11 +1517,11 @@ function kjShowCard(){
   if(_kjMode==='wk'){
     const frontTxt=kjMakeFront(card.text);
     const restTxt=card.text.slice(frontTxt.length);
-    front.innerHTML=`<span style="color:#e2e8f0">${escHtml(frontTxt)}</span><span class="kj-wk-hidden" id="pkj-wk-hidden"> ＿ ＿ ＿ ＿ ＿ ＿</span>`;
-    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>补全后半部分…<br><span style="font-size:11px;color:#475569">点击揭示答案</span></div></div>';
+    front.innerHTML=`<span style="color:#1E2E22">${escHtml(frontTxt)}</span><span class="kj-wk-hidden" id="pkj-wk-hidden"> ＿ ＿ ＿ ＿ ＿ ＿</span>`;
+    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>补全后半部分…<br><span style="font-size:11px;color:#8A9E8A">点击揭示答案</span></div></div>';
   }else{
     front.textContent='【'+card.catName+'】';
-    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>回忆口诀…<br><span style="font-size:11px;color:#475569">点击查看</span></div></div>';
+    back.innerHTML='<div class="card-placeholder"><div class="card-placeholder-icon">📋</div><div>回忆口诀…<br><span style="font-size:11px;color:#8A9E8A">点击查看</span></div></div>';
   }
   sep.style.display='';
   document.getElementById('pkj-actions').style.display='none';
