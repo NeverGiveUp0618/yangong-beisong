@@ -236,7 +236,7 @@ body{
 .hmap-label{color:var(--muted);font-weight:500}.hmap-cell{background:#E4E6E1;border-color:#D8DAD4}.hmap-cell.lv1{background:#C9CDCE;border-color:#C9CDCE}.hmap-cell.lv2{background:#9DA4A7;border-color:#9DA4A7}.hmap-cell.lv3{background:#687277;border-color:#687277}.hmap-cell.lv4{background:var(--pine);border-color:var(--pine)}.hmap-cell.today{outline-color:var(--bronze)}
 .daily{padding:16px;margin:16px 0;border:1px solid rgba(164,135,85,.48);border-radius:12px;background:linear-gradient(145deg,rgba(250,249,245,.96),rgba(238,240,235,.9));box-shadow:0 8px 28px rgba(23,34,31,.06)}
 .daily-h b{color:var(--pine);font-size:17px;letter-spacing:.06em}.daily-h span{color:var(--bronze)}.daily-topic{color:var(--ink-2);margin:9px 0 12px}
-.daily-actions{gap:8px}.daily-actions button{padding:11px 13px;border-color:var(--hair);border-radius:8px;background:rgba(255,255,255,.55);color:var(--ink);font-size:13px}.daily-actions button:after{color:var(--bronze)}
+.daily-actions{gap:8px}.daily-item{display:grid;grid-template-columns:36px 1fr;gap:7px}.daily-actions button{padding:11px 13px;border:1px solid var(--hair);border-radius:8px;background:rgba(255,255,255,.55);color:var(--ink);font-size:13px;text-align:left}.daily-check{padding:0!important;text-align:center!important;font-size:17px!important;color:var(--muted)!important}.daily-check:after{content:none!important}.daily-check.done{background:var(--bronze)!important;border-color:var(--bronze)!important;color:#fff!important}.daily-go:after{content:'›';float:right;color:var(--bronze)}
 .module{border-color:var(--hair);border-radius:11px;background:var(--surface);box-shadow:none;margin-bottom:9px}
 .mod-hdr{padding:14px 15px;background:var(--pine)}.mod-hdr:hover{background:var(--pine-deep)}.mod-title{font-size:14px;letter-spacing:.04em}.mod-icon{filter:grayscale(1);opacity:.78}.mod-body{background:var(--surface-soft);border-color:var(--hair)}
 .bk{border-radius:9px;border:1px solid var(--hair)!important;background:rgba(250,249,245,.84)!important}.bk-name{color:var(--ink);font-weight:600}.bk-meta,.bk-nl{color:var(--muted)}.bk-n{color:var(--pine)}.bk-bar{background:#DFE2DC}.bk-bar-fill{background:var(--bronze)}.bk-icon{filter:grayscale(1);opacity:.68}
@@ -961,12 +961,14 @@ function initHome(){
   document.getElementById('h-quote').innerHTML=
     `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
   const dailyBook=ALL_BOOKS[Math.floor(now.getTime()/86400000)%ALL_BOOKS.length];
+  const dailyKey='yang_daily_'+localDay(),dailyDone=JSON.parse(localStorage.getItem(dailyKey)||'{}');
+  const dailyItem=(id,label,action)=>`<div class="daily-item"><button class="daily-check ${dailyDone[id]?'done':''}" onclick="toggleDaily('${id}')">${dailyDone[id]?'✓':'○'}</button><button class="daily-go" onclick="${action}">${label}</button></div>`;
   document.getElementById('daily').innerHTML=`<div class="daily-h"><b>今日学习清单</b><span>约 5–10 分钟</span></div>
     <div class="daily-topic">今日主题：《${RAW[dailyBook].name}》</div>
     <div class="daily-actions">
-      <button onclick="openBook('${dailyBook}')">① 精读今日原文 3 段</button>
-      <button onclick="startDailySession('${dailyBook}')">② 背诵今日闪卡 3 张</button>
-      <button onclick="startDailyKj()">③ 复习今日口诀 3 条</button>
+      ${dailyItem('read','① 精读今日原文 3 段',`openBook('${dailyBook}')`)}
+      ${dailyItem('cards','② 背诵今日闪卡 3 张',`startDailySession('${dailyBook}')`)}
+      ${dailyItem('formula','③ 复习今日口诀 3 条','startDailyKj()')}
     </div>`;
 
   const store=getStore();
@@ -1051,6 +1053,8 @@ function initHome(){
     </div>`;
   }).join('');
 }
+function localDay(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function toggleDaily(id){const key='yang_daily_'+localDay(),done=JSON.parse(localStorage.getItem(key)||'{}');done[id]=!done[id];localStorage.setItem(key,JSON.stringify(done));initHome()}
 
 // ══ MODULE TOGGLE ══
 function toggleMod(bodyId,triId){
