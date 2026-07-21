@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#24483F">
 <title>风水著作背诵</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -209,6 +210,44 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .bg64-cell{background:#F6F0EA;border-radius:8px;padding:9px 3px;text-align:center}
 .bg64-no{font-size:11px;color:#766E6A;font-weight:bold;margin-bottom:2px}
 .bg64-cname{font-size:12px;color:#241C1A;font-weight:bold;line-height:1.4}
+/* ══ 书斋视觉系统 · 宣纸灰 / 松烟墨 / 旧金 ══ */
+:root{
+  --paper:#F3F1EA;--paper-deep:#E8E7E0;--surface:#FAF9F5;--surface-soft:#EEF0EB;
+  --ink:#17221F;--ink-2:#42504B;--muted:#78827E;
+  --pine:#24483F;--pine-deep:#19362F;--bronze:#A48755;--hair:#D8D9D2;
+}
+body{
+  color:var(--ink);background:
+    radial-gradient(circle at 18% 5%,rgba(164,135,85,.08),transparent 25%),
+    linear-gradient(180deg,#F6F4EE 0%,var(--paper) 100%);
+  font-family:"Songti SC","STSong","Noto Serif SC","PingFang SC",serif;
+}
+.app{background:transparent}
+@media(min-width:600px){body{background:#E5E5DF}.app{background:var(--paper);box-shadow:0 18px 70px rgba(23,34,31,.13);border:1px solid rgba(255,255,255,.65)}}
+.screen{padding-left:18px;padding-right:18px}
+.hdr{padding:32px 4px 18px;text-align:left;border-bottom:1px solid var(--hair);margin-bottom:14px}
+.htitle{font-size:31px;line-height:1.1;letter-spacing:.18em;color:var(--ink);font-weight:600}
+.hsub{margin-top:9px;color:var(--bronze);letter-spacing:.28em;font-size:10px}
+.hdate{color:var(--muted);letter-spacing:.08em;text-align:right;margin-top:-14px}
+.hquote{margin:22px 0 0;padding:13px 16px;background:transparent;border:0;border-left:2px solid var(--bronze);border-radius:0}
+.hquote-text{color:var(--ink-2);font-size:13px;line-height:1.9}.hquote-src{color:var(--muted)}
+.hstats{gap:8px;margin-bottom:14px}.hstat{background:rgba(250,249,245,.72);border:1px solid var(--hair);border-radius:9px;padding:11px 6px}
+.hstat-v{color:var(--pine);font-family:"PingFang SC",sans-serif;font-size:19px}.hstat-l{color:var(--muted);letter-spacing:.08em}
+.hmap-label{color:var(--muted);font-weight:500}.hmap-cell{background:#E4E6E1;border-color:#D8DAD4}.hmap-cell.lv1{background:#B8C8C1;border-color:#B8C8C1}.hmap-cell.lv2{background:#82A096;border-color:#82A096}.hmap-cell.lv3{background:#4F756A;border-color:#4F756A}.hmap-cell.lv4{background:var(--pine);border-color:var(--pine)}.hmap-cell.today{outline-color:var(--bronze)}
+.daily{padding:16px;margin:16px 0;border:1px solid rgba(164,135,85,.48);border-radius:12px;background:linear-gradient(145deg,rgba(250,249,245,.96),rgba(238,240,235,.9));box-shadow:0 8px 28px rgba(23,34,31,.06)}
+.daily-h b{color:var(--pine);font-size:17px;letter-spacing:.06em}.daily-h span{color:var(--bronze)}.daily-topic{color:var(--ink-2);margin:9px 0 12px}
+.daily-actions{gap:8px}.daily-actions button{padding:11px 13px;border-color:var(--hair);border-radius:8px;background:rgba(255,255,255,.55);color:var(--ink);font-size:13px}.daily-actions button:after{color:var(--bronze)}
+.module{border-color:var(--hair);border-radius:11px;background:var(--surface);box-shadow:none;margin-bottom:9px}
+.mod-hdr{padding:14px 15px;background:var(--pine)}.mod-hdr:hover{background:var(--pine-deep)}.mod-title{font-size:14px;letter-spacing:.04em}.mod-icon{filter:grayscale(1);opacity:.78}.mod-body{background:var(--surface-soft);border-color:var(--hair)}
+.bk{border-radius:9px;border:1px solid var(--hair)!important;background:rgba(250,249,245,.84)!important}.bk-name{color:var(--ink);font-weight:600}.bk-meta,.bk-nl{color:var(--muted)}.bk-n{color:var(--pine)}.bk-bar{background:#DFE2DC}.bk-bar-fill{background:var(--bronze)}.bk-icon{filter:grayscale(1);opacity:.68}
+.all-btn{border-radius:10px;background:var(--pine);border:1px solid var(--pine)}.all-btn:hover{border-color:var(--bronze);background:var(--pine-deep)}
+.btn{border-radius:8px}.btn-g,.btn-a{background:var(--pine);color:#fff}.btn-g:hover,.btn-a:hover{background:var(--pine-deep)}.btn-d{background:var(--surface-soft);color:var(--ink-2);border:1px solid var(--hair)}
+.tbar{border-bottom:1px solid var(--hair);margin-bottom:10px}.tbtitle{color:var(--ink-2);letter-spacing:.08em}.tbk{color:var(--pine)}
+.card,.kj-card{border-color:var(--hair)!important;background:var(--surface)!important;box-shadow:0 10px 35px rgba(23,34,31,.07)!important}
+.read-para{color:var(--ink);border-color:var(--hair);font-size:15px;line-height:2.15}.read-song-hdr,.read-sec-hdr{color:var(--pine);background:var(--surface-soft);border-color:var(--bronze)}
+.sacc{border-color:var(--hair);border-radius:9px}.sacc-hdr{background:#E3E7E1}.sacc-title{color:var(--ink-2)}.sacc-prac{background:transparent;border-color:#BCC7C1;color:var(--pine)}.sacc-prac:hover{background:var(--pine);border-color:var(--pine)}.sacc-body{background:var(--surface);border-color:var(--hair)}
+.kj-cat-hdr{color:var(--bronze);border-color:var(--hair)}.kj-verse{color:var(--ink)}
+.toast{background:var(--ink);color:#fff}.update-bar{filter:saturate(.35);opacity:.72}
 </style>
 </head>
 <body>
@@ -923,7 +962,7 @@ function initHome(){
     `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
   const dailyBook=ALL_BOOKS[Math.floor(now.getTime()/86400000)%ALL_BOOKS.length];
   document.getElementById('daily').innerHTML=`<div class="daily-h"><b>今日学习清单</b><span>约 5–10 分钟</span></div>
-    <div class="daily-topic">今日主题：${RAW[dailyBook].icon}《${RAW[dailyBook].name}》</div>
+    <div class="daily-topic">今日主题：《${RAW[dailyBook].name}》</div>
     <div class="daily-actions">
       <button onclick="openBook('${dailyBook}')">① 精读今日原文 3 段</button>
       <button onclick="startDailySession('${dailyBook}')">② 背诵今日闪卡 3 张</button>
