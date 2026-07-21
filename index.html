@@ -35,6 +35,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
 .hstat{background:#F6F0EA;border-radius:11px;padding:10px 6px;text-align:center}
 .hstat-v{font-size:20px;font-weight:bold;color:#8F2E28}
 .hstat-l{font-size:10px;color:#8B817C;margin-top:2px}
+.daily{margin-bottom:12px;padding:15px;border:1px solid #D7C9C0;border-radius:16px;background:#FFFDFB;box-shadow:0 5px 18px rgba(36,28,26,.06)}
+.daily-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}.daily-h b{font-size:17px;color:#8F2E28}.daily-h span{font-size:11px;color:#8B817C}
+.daily-topic{font-size:13px;color:#514946;margin-bottom:10px}.daily-actions{display:grid;gap:7px}.daily-actions button{padding:10px 12px;border:1px solid #E4D6CC;border-radius:11px;background:#F6F0EA;color:#241C1A;text-align:left;font-family:inherit;cursor:pointer}.daily-actions button:after{content:'›';float:right;color:#8F2E28;font-size:18px;line-height:12px}
 .bk{border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;display:flex;align-items:center;gap:12px}
 .bk:hover{border-color:rgba(0,0,0,.10)}
 .bk:active{transform:scale(.99)}
@@ -229,6 +232,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC','SimSun',sans-se
     <div class="hstat"><div class="hstat-v" id="h-known">0</div><div class="hstat-l">记住</div></div>
     <div class="hstat"><div class="hstat-v" id="h-streak">0</div><div class="hstat-l">连续天数</div></div>
   </div>
+  <div class="daily" id="daily"></div>
   <div class="hmap-label" id="h-hmap-label">近35天练习</div>
   <div class="hmap" id="h-hmap"></div>
 
@@ -917,6 +921,14 @@ function initHome(){
   const q=QUOTES[Math.floor(now.getTime()/86400000)%QUOTES.length];
   document.getElementById('h-quote').innerHTML=
     `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
+  const dailyBook=ALL_BOOKS[Math.floor(now.getTime()/86400000)%ALL_BOOKS.length];
+  document.getElementById('daily').innerHTML=`<div class="daily-h"><b>今日学习清单</b><span>约 5–10 分钟</span></div>
+    <div class="daily-topic">今日主题：${RAW[dailyBook].icon}《${RAW[dailyBook].name}》</div>
+    <div class="daily-actions">
+      <button onclick="openBook('${dailyBook}')">① 精读今日原文 3 段</button>
+      <button onclick="startDailySession('${dailyBook}')">② 背诵今日闪卡 3 张</button>
+      <button onclick="startDailyKj()">③ 复习今日口诀 3 条</button>
+    </div>`;
 
   const store=getStore();
   const today=todayStr();
@@ -1026,6 +1038,13 @@ function startSession(bookKey,songCtx){
   G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now()};
   show('pp');
   showCard();
+}
+
+function startDailySession(bookKey){
+  const deck=shuffle(BOOK_CARDS[bookKey]).slice(0,3);
+  document.getElementById('pp-title').textContent='今日背诵 · '+RAW[bookKey].name;
+  G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now()};
+  show('pp');showCard();
 }
 
 function showCard(){
@@ -1532,6 +1551,12 @@ function startKjPractice(srcId){
   KJ_G={deck:shuffle(items),idx:0,known:new Set(),review:new Set(),flipped:false,srcId,startTime:Date.now()};
   document.getElementById('pkj-title').textContent=title;
   show('pkj');kjShowCard();
+}
+function startDailyKj(){
+  const d=getKjData();
+  const items=d.flatMap(src=>src.cats.flatMap(cat=>cat.items.map(item=>({id:item.id,srcName:src.name,srcIcon:src.icon,catName:cat.name,text:item.text}))));
+  KJ_G={deck:shuffle(items).slice(0,3),idx:0,known:new Set(),review:new Set(),flipped:false,srcId:'daily',startTime:Date.now()};
+  document.getElementById('pkj-title').textContent='今日口诀 · 3 条';show('pkj');kjShowCard();
 }
 
 function kjShowCard(){
