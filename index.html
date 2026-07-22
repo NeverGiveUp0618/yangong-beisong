@@ -845,7 +845,8 @@ ALL_BOOKS.forEach(k=>{BOOK_CARDS[k]=buildCards(k);});
 // ══ STORAGE ══
 function getStore(){try{return JSON.parse(localStorage.getItem('yangpu')||'{}')}catch{return{}}}
 function saveStore(d){localStorage.setItem('yangpu',JSON.stringify(d))}
-function todayStr(){return new Date().toISOString().slice(0,10)}
+function dayStr(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function todayStr(){return dayStr()}
 
 // ══ STATE ══
 let G={deck:[],idx:0,known:new Set(),review:new Set(),flipped:false,bookKey:'',startTime:0};
@@ -913,7 +914,7 @@ function openBook(key){
   }
   body.innerHTML=html;
   body.scrollTop=0;
-  const dailyBook=ALL_BOOKS[Math.floor(Date.now()/86400000)%ALL_BOOKS.length],started=Date.now();
+  const dailyBook=ALL_BOOKS[Math.floor(new Date().setHours(0,0,0,0)/86400000)%ALL_BOOKS.length],started=Date.now();
   let confirmed=false;const confirmRead=()=>{if(confirmed||key!==dailyBook)return;const shortText=body.scrollHeight<=body.clientHeight+4,max=Math.max(1,body.scrollHeight-body.clientHeight),ratio=body.scrollTop/max;if(Date.now()-started>=8000&&(shortText||ratio>=.35)){confirmed=true;markDailyAuto('read');toast('已自动完成：精读今日原文')}};
   body.onscroll=confirmRead;setTimeout(confirmRead,8200);
   show('pread');
@@ -960,10 +961,10 @@ function initHome(){
   const weeks=['日','一','二','三','四','五','六'];
   document.getElementById('h-date').textContent=
     `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日  星期${weeks[now.getDay()]}`;
-  const q=QUOTES[Math.floor(now.getTime()/86400000)%QUOTES.length];
+  const q=QUOTES[Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()/86400000)%QUOTES.length];
   document.getElementById('h-quote').innerHTML=
     `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
-  const dailyBook=ALL_BOOKS[Math.floor(now.getTime()/86400000)%ALL_BOOKS.length];
+  const dailyBook=ALL_BOOKS[Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()/86400000)%ALL_BOOKS.length];
   const dailyKey='yang_daily_'+localDay(),dailyDone=JSON.parse(localStorage.getItem(dailyKey)||'{}');
   const dailyItem=(id,label,action)=>`<div class="daily-item"><button class="daily-check ${dailyDone[id]?'done':''}" disabled aria-label="${dailyDone[id]?'系统已确认完成':'等待系统确认'}">${dailyDone[id]?'✓':'○'}</button><button class="daily-go" onclick="${action}">${label}</button></div>`;
   document.getElementById('daily').innerHTML=`<div class="daily-h"><b>今日学习清单</b><span>约 5–10 分钟</span></div>
@@ -983,7 +984,7 @@ function initHome(){
   document.getElementById('h-known').textContent=knownToday;
   let streak=0,dt=new Date();
   for(let i=0;i<60;i++){
-    const ds=dt.toISOString().slice(0,10);
+    const ds=dayStr(dt);
     const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0)||(store['_kj']&&store['_kj'].date===ds&&(store['_kj'].seen||0)>0);
     if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
   }
@@ -1030,7 +1031,7 @@ function initHome(){
     const cells=[];
     for(let i=34;i>=0;i--){
       const d=new Date();d.setDate(d.getDate()-i);
-      const ds=d.toISOString().slice(0,10);
+      const ds=dayStr(d);
       const cnt=dayMap[ds]||0;
       const lv=cnt===0?'':cnt<5?'lv1':cnt<15?'lv2':cnt<30?'lv3':'lv4';
       const isToday=ds===today;
@@ -1788,6 +1789,7 @@ function renderKj(){
 // ══ INIT ══
 initHome();
 renderKj();
+try{const _ys=getStore(),_yt=todayStr();let _seen=0,_known=0;Object.values(_ys).forEach(v=>{if(v&&v.date===_yt){_seen+=+v.seen||0;_known+=+v.known||0}});parent.postMessage({type:'yst-progress',app:'yangong',text:_seen?`今日已背 ${_seen} · 记住 ${_known}`:'今日尚未开始'},'https://nevergiveup0618.github.io')}catch(e){}
 </script>
 <!-- 返回五术堂首页 · portal -->
 <a href="https://nevergiveup0618.github.io/all-project/" id="wst-home-portal" aria-label="返回首页" title="返回首页" style="position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:2147483000;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;color:#f0d9a0;text-decoration:none;background:rgba(20,16,12,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(201,167,95,.5);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.4);opacity:.6;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.6" ontouchstart="this.style.opacity=1">&#8962;</a>
