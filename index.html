@@ -913,6 +913,9 @@ function openBook(key){
   }
   body.innerHTML=html;
   body.scrollTop=0;
+  const dailyBook=ALL_BOOKS[Math.floor(Date.now()/86400000)%ALL_BOOKS.length],started=Date.now();
+  let confirmed=false;const confirmRead=()=>{if(confirmed||key!==dailyBook)return;const max=Math.max(1,body.scrollHeight-body.clientHeight),ratio=body.scrollTop/max;if(Date.now()-started>=8000&&ratio>=.35){confirmed=true;markDailyAuto('read');toast('已自动完成：精读今日原文')}};
+  body.onscroll=confirmRead;setTimeout(confirmRead,8200);
   show('pread');
 }
 function toast(msg){const t=document.getElementById('el-toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
@@ -962,7 +965,7 @@ function initHome(){
     `<div class="hquote-text">「${q.t}」</div>${q.s?`<div class="hquote-src">—— ${q.s}</div>`:''}`;
   const dailyBook=ALL_BOOKS[Math.floor(now.getTime()/86400000)%ALL_BOOKS.length];
   const dailyKey='yang_daily_'+localDay(),dailyDone=JSON.parse(localStorage.getItem(dailyKey)||'{}');
-  const dailyItem=(id,label,action)=>`<div class="daily-item"><button class="daily-check ${dailyDone[id]?'done':''}" onclick="toggleDaily('${id}')">${dailyDone[id]?'✓':'○'}</button><button class="daily-go" onclick="${action}">${label}</button></div>`;
+  const dailyItem=(id,label,action)=>`<div class="daily-item"><button class="daily-check ${dailyDone[id]?'done':''}" disabled aria-label="${dailyDone[id]?'系统已确认完成':'等待系统确认'}">${dailyDone[id]?'✓':'○'}</button><button class="daily-go" onclick="${action}">${label}</button></div>`;
   document.getElementById('daily').innerHTML=`<div class="daily-h"><b>今日学习清单</b><span>约 5–10 分钟</span></div>
     <div class="daily-topic">今日主题：《${RAW[dailyBook].name}》</div>
     <div class="daily-actions">
@@ -1054,7 +1057,7 @@ function initHome(){
   }).join('');
 }
 function localDay(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
-function toggleDaily(id){const key='yang_daily_'+localDay(),done=JSON.parse(localStorage.getItem(key)||'{}');done[id]=!done[id];localStorage.setItem(key,JSON.stringify(done));initHome()}
+function markDailyAuto(id){const key='yang_daily_'+localDay(),done=JSON.parse(localStorage.getItem(key)||'{}');done[id]=true;localStorage.setItem(key,JSON.stringify(done));initHome()}
 
 // ══ MODULE TOGGLE ══
 function toggleMod(bodyId,triId){
@@ -1086,7 +1089,7 @@ function startSession(bookKey,songCtx){
 function startDailySession(bookKey){
   const deck=shuffle(BOOK_CARDS[bookKey]).slice(0,3);
   document.getElementById('pp-title').textContent='今日背诵 · '+RAW[bookKey].name;
-  G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now()};
+  G={deck,idx:0,known:new Set(),review:new Set(),flipped:false,bookKey,startTime:Date.now(),daily:true};
   show('pp');showCard();
 }
 
@@ -1167,6 +1170,7 @@ function endSession(){
   hist.unshift({date:today,type:'book',bookKey:G.bookKey,total,kn});
   store._history=hist.slice(0,180);
   saveStore(store);
+  if(G.daily&&total>=3)markDailyAuto('cards');
   const reviewCards=G.deck.filter(c=>G.review.has(c.id));
   const rl=document.getElementById('r-list');
   const ri=document.getElementById('r-items');
@@ -1598,7 +1602,7 @@ function startKjPractice(srcId){
 function startDailyKj(){
   const d=getKjData();
   const items=d.flatMap(src=>src.cats.flatMap(cat=>cat.items.map(item=>({id:item.id,srcName:src.name,srcIcon:src.icon,catName:cat.name,text:item.text}))));
-  KJ_G={deck:shuffle(items).slice(0,3),idx:0,known:new Set(),review:new Set(),flipped:false,srcId:'daily',startTime:Date.now()};
+  KJ_G={deck:shuffle(items).slice(0,3),idx:0,known:new Set(),review:new Set(),flipped:false,srcId:'daily',startTime:Date.now(),daily:true};
   document.getElementById('pkj-title').textContent='今日口诀 · 3 条';show('pkj');kjShowCard();
 }
 
@@ -1677,6 +1681,7 @@ function kjEndSession(){
   _p.seen+=total;_p.known+=kn;_s['_kj']={..._p};
   const _h=_s._history||[];_h.unshift({date:_t,type:'kj',total,kn});_s._history=_h.slice(0,180);
   saveStore(_s);
+  if(KJ_G.daily&&total>=3)markDailyAuto('formula');
   show('pr');
 }
 
