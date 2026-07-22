@@ -914,7 +914,7 @@ function openBook(key){
   body.innerHTML=html;
   body.scrollTop=0;
   const dailyBook=ALL_BOOKS[Math.floor(Date.now()/86400000)%ALL_BOOKS.length],started=Date.now();
-  let confirmed=false;const confirmRead=()=>{if(confirmed||key!==dailyBook)return;const max=Math.max(1,body.scrollHeight-body.clientHeight),ratio=body.scrollTop/max;if(Date.now()-started>=8000&&ratio>=.35){confirmed=true;markDailyAuto('read');toast('已自动完成：精读今日原文')}};
+  let confirmed=false;const confirmRead=()=>{if(confirmed||key!==dailyBook)return;const shortText=body.scrollHeight<=body.clientHeight+4,max=Math.max(1,body.scrollHeight-body.clientHeight),ratio=body.scrollTop/max;if(Date.now()-started>=8000&&(shortText||ratio>=.35)){confirmed=true;markDailyAuto('read');toast('已自动完成：精读今日原文')}};
   body.onscroll=confirmRead;setTimeout(confirmRead,8200);
   show('pread');
 }
