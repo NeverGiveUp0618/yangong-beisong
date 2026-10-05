@@ -257,6 +257,43 @@ body{
 .kj-cat-hdr{color:var(--bronze);border-color:var(--hair)}.kj-verse{color:var(--ink)}
 .toast{background:var(--ink);color:#fff}.update-bar{filter:saturate(.35);opacity:.72}
 
+
+/* ── 罗盘度数助记（2026-10-05）：每个罗盘字一行折叠，收起只见字与度数，点开看画面与逻辑 ── */
+.dg-rule{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:11px 13px;margin-bottom:10px;font-size:13px;line-height:1.85;color:var(--ink-2)}
+.dg-rule b{color:var(--pine)}
+.dg-codes{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.dg-codes div{background:var(--surface-soft);border-radius:6px;padding:3px 4px;text-align:center;font-size:12px;font-family:"PingFang SC",sans-serif}
+.dg-codes i{font-style:normal;color:var(--bronze);font-weight:bold;margin-right:3px}
+.dg-tabs{display:flex;gap:6px;margin:4px 0 10px}
+.dg-tabs button{flex:1;padding:8px 0;border-radius:8px;border:1px solid var(--hair);background:var(--surface-soft);color:var(--ink-2);font-size:13px;font-weight:bold;cursor:pointer}
+.dg-tabs button.on{background:var(--pine);border-color:var(--pine);color:#fff}
+.dg-grp{font-size:12px;font-weight:bold;color:#8F2E28;letter-spacing:1px;margin:12px 0 6px;padding:5px 10px;border-left:3px solid #8F2E28;background:#F2EAE3;border-radius:0 6px 6px 0}
+.dg-grp span{font-weight:normal;color:var(--muted);margin-left:6px}
+.dg-item{border:1px solid var(--hair);border-radius:9px;background:var(--surface);margin-bottom:6px;overflow:hidden}
+.dg-item>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:9px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dg-item>summary::-webkit-details-marker{display:none}
+.dg-zi{width:38px;height:38px;border-radius:8px;background:var(--pine);color:#fff;display:grid;place-items:center;font-size:21px;font-weight:600;flex-shrink:0}
+.dg-deg{font-family:"PingFang SC",sans-serif;font-size:19px;font-weight:bold;color:var(--pine);min-width:56px}
+.dg-deg small{font-size:11px;color:var(--muted);font-weight:normal;margin-left:1px}
+.dg-hint{flex:1;font-size:12px;color:var(--muted);text-align:right}
+.dg-item>summary::after{content:'▶';font-size:10px;color:var(--muted);transition:transform .2s}
+.dg-item[open]>summary::after{transform:rotate(90deg)}
+.dg-item[open]>summary .dg-hint{visibility:hidden}
+.dg-body{padding:2px 14px 12px 62px;font-size:14px;line-height:1.85}
+.dg-pic{color:var(--ink);font-weight:600}
+.dg-pic em{font-style:normal;color:var(--bronze)}
+.dg-logic{color:var(--ink-2);margin-top:3px}
+.dg-why{color:var(--muted);font-size:12.5px;margin-top:2px}
+.dg-q{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:18px 14px;text-align:center;margin-bottom:10px}
+.dg-q-t{font-size:12px;color:var(--muted);letter-spacing:1px}
+.dg-q-big{font-size:42px;font-weight:600;color:var(--pine);margin:6px 0 2px;font-family:"PingFang SC",sans-serif}
+.dg-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.dg-opts button{padding:14px 0;font-size:20px;font-weight:bold;border-radius:10px;border:1px solid var(--hair);background:var(--surface);color:var(--ink);cursor:pointer;font-family:"PingFang SC",sans-serif}
+.dg-opts button.ok{background:#3B6E5B;border-color:#3B6E5B;color:#fff}
+.dg-opts button.no{background:#8F2E28;border-color:#8F2E28;color:#fff}
+.dg-fb{background:var(--surface-soft);border-left:3px solid var(--bronze);border-radius:0 8px 8px 0;padding:9px 12px;font-size:13.5px;line-height:1.8;margin-bottom:10px}
+.dg-score{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px;font-family:"PingFang SC",sans-serif}
+
 /* ⭐ 2026-08-12 开发时间节点默认收起，点标题展开。
    它是给自己看的变更记录，天天占着首页一大块不合适。
    ⚠️ 内层原有的 max-height/overflow-y 保留——展开后仍然是可滚动的短列表。 */
@@ -347,10 +384,21 @@ body{
     </div>
   </div>
 
+  <!-- 模块五：罗盘度数助记 -->
+  <div class="module">
+    <div class="mod-hdr" onclick="dgOpen()" style="border-radius:16px">
+      <span class="mod-tri" style="font-size:15px;color:#fff">🧭</span>
+      <span class="mod-icon">🔢</span>
+      <span class="mod-title">罗盘度数 · 助记</span>
+      <span style="font-size:12px;color:rgba(255,255,255,0.72)" id="dg-home-n">→</span>
+    </div>
+  </div>
+
   <!-- 开发时间节点 -->
   <details class="dev-log devlog" style="margin-bottom:9px">
-    <summary class="dev-log-title">开发时间节点<span>6 条</span></summary>
+    <summary class="dev-log-title">开发时间节点<span>7 条</span></summary>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#514946;font-size:11px;flex-shrink:0">26.10.5</span><span style="color:#766E6A;font-size:12px">🧭 罗盘度数助记——二十四山度数画面记忆·看度数认字/看字说度数练习</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#514946;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#766E6A;font-size:12px">🔯 易学图谱——先天后天八卦图·六十四卦分组速查</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#514946;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#766E6A;font-size:12px">🔥 八条歌分歌练习·35天热力图·挖空模式</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#514946;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#766E6A;font-size:12px">💾 口诀备份导出/导入·键盘快捷键</span></div>
@@ -647,6 +695,14 @@ body{
   </div>
 </div>
 
+<!-- 罗盘度数助记 -->
+<div id="pdeg" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">← 首页</button><div class="tbtitle">罗盘度数 · 助记</div></div>
+  <div class="dg-tabs"><button id="dg-t-list" class="on" onclick="dgTab('list')">助记卡</button><button id="dg-t-prac" onclick="dgTab('prac')">练习</button></div>
+  <div id="dg-list"></div>
+  <div id="dg-prac" style="display:none"></div>
+</div>
+
 </div>
 <div class="toast" id="el-toast"></div>
 <script>
@@ -901,6 +957,103 @@ window.addEventListener('popstate',function(e){
 });
 try{history.replaceState({i:0},'');}catch(e){}
 function goHome(){initHome();show('ph');}
+
+// ══ 罗盘度数助记（2026-10-05 用户提供）══
+// 规则：0–90 度不加数量；105–195 度 = 1 个；210–285 度 = 2 个；300–345 度 = 3 个。后两位用编码物。
+const DG_CODE={'00':'望远镜','05':'老虎','10':'棒球','15':'鹦鹉','20':'铃铛','25':'二胡','30':'山洞','35':'珊瑚','40':'司令','45':'水壶','50':'武僧','55':'火车','60':'榴莲','65':'锣鼓','70':'冰激凌','75':'鸡毛','80':'巴黎','85':'宝物盒','90':'精灵','95':'酒壶'};
+const DG=[
+ // [字, 度数, 本象, 数量(含量词), 编码物, 逻辑, 合理性]
+ ['子',0,'老鼠','','望远镜','一只在地窖里偷吃的老鼠，为了防猫，举着一个高倍望远镜四处放哨。','防备 ➔ 偷用望远镜'],
+ ['癸',15,'雨水','','鹦鹉','一场突如其来的冰冷雨水，把树上一只正在炫耀羽毛的鹦鹉淋成了落汤鸡。','暴雨 ➔ 淋湿鸟类'],
+ ['丑',30,'老牛','','山洞','炎热的夏天，一头耕完地的老牛热得受不了，跑进了一个阴凉的山洞里避暑。','避暑 ➔ 钻进山洞'],
+ ['艮',45,'巨石','','水壶','山上滚落下一块巨大的石头，不偏不倚刚好砸扁了登山者放在地上的水壶。','落石 ➔ 砸毁水壶'],
+ ['寅',60,'老虎','','榴莲','一只饥饿的老虎一口咬在坚硬的榴莲上，扎得满嘴是血。','饥不择食 ➔ 误咬带刺水果'],
+ ['甲',75,'大树','','鸡毛','冬天大树掉光了叶子，为了保暖，大树给自己树干上贴满了一层厚厚的鸡毛。','御寒 ➔ 找动物羽毛保暖'],
+ ['卯',90,'兔子','','精灵','一只兔子误食了仙草，瞬间变异成了一个长着长耳朵的蓝色精灵。','基因突变 ➔ 变成精灵'],
+ ['乙',105,'小草','1只','老虎','茂密深邃的小草丛中，刚好完美隐藏着1只老虎，正准备伏击猎物。','草丛是最佳掩体 ➔ 刚好够藏1只猛兽'],
+ ['辰',120,'巨龙','1个','铃铛','威武的巨龙脖子上，极其突兀地挂着1个巨大的铃铛，飞起来震耳欲聋。','神兽需要信物 ➔ 挂1个巨型铃铛彰显地位'],
+ ['巽',135,'狂风','1棵','珊瑚','海面刮起恐怖的狂风引发海啸，把海底最珍贵的1棵红珊瑚直接吹上了岸。','狂风卷起海底重物 ➔ 只有最独特的那1棵珊瑚被刮上来'],
+ ['巳',150,'毒蛇','1个','武僧','一条剧毒的毒蛇从树上倒挂下来，死死缠住正在树下打坐的1个武僧。','毒蛇领地意识强 ➔ 攻击入侵地盘的这1个出家人'],
+ ['丙',165,'烈日','1面','锣鼓','夏天的烈日当空暴晒，把广场上放着的1面铜锣鼓晒得滚烫，甚至能煎熟鸡蛋。','烈日直射金属吸热 ➔ 唯一的1面锣鼓变成了煎锅'],
+ ['午',180,'骏马','1座','巴黎','一匹脱缰的骏马狂奔不止，一口气跨越欧亚大陆，跑到了1座巴黎铁塔下才停下来。','马匹拥有极强的耐力 ➔ 一口气跑到那1座标志性建筑下'],
+ ['丁',195,'烛火','1把','酒壶','桌上一根微弱的烛火倒下，刚好点燃了旁边放着的1把装满烈酒的酒壶，瞬间爆炸。','明火遇到高浓度酒精 ➔ 引爆这1把致命的酒壶'],
+ ['未',210,'绵羊','2个','棒球','一只贪吃的绵羊，把掉在草地上的2个白色的棒球当成了大蒜，一口吞了下去。','羊视力不好且贪吃 ➔ 误吞2个形状相似的球体'],
+ ['坤',225,'大地','2把','二胡','荒凉的大地上，犹如坟墓般插着2把破旧的二胡，风一吹自动发出凄凉的声音。','空旷的大地适合声音传播 ➔ 2把二胡形成天然的共鸣悲歌'],
+ ['申',240,'猴子','2个','司令','一只胆大包天的猴子突然跳上检阅台，左右开弓，同时抢走了2个司令的军帽。','猴子动作极其敏捷 ➔ 瞬间制服了2个高级军官'],
+ ['庚',255,'巨斧','2列','火车','巨人挥舞一把开山巨斧，一斧头劈下去，竟然把铁轨上并排行驶的2列火车同时劈成了两半。','神话级巨斧威力无穷 ➔ 切割金属如切豆腐，一招毁灭2列载具'],
+ ['酉',270,'公鸡','2个','冰激凌','一只打鸣喊破嗓子发炎的公鸡，为了给喉咙降温，左右翅膀各拿一个，同时舔着2个冰激凌。','喉咙发炎急需冰敷 ➔ 2个冰激凌双管齐下快速止痛'],
+ ['辛',285,'金银珠宝','2个','宝物盒','海盗挖出来的金银珠宝数量实在太多了，足足塞满了2个巨大的宝物盒才勉强装下。','珠宝体积庞大 ➔ 必须动用2个顶级容器才能收纳'],
+ ['戌',300,'土狗','3个','望远镜','一条神犬为了看清三个不同方向的偷鸡贼，竟然用两只前爪和嘴巴，同时架起了3个望远镜。','多线防御需求 ➔ 狗的三点支撑刚好固定3个设备'],
+ ['乾',315,'天空','3只','鹦鹉','广阔无垠的天空中突然打了一道闪电，劈中了一架走私飞机，天上掉下来3只五彩斑斓的鹦鹉。','天空异象导致飞行物解体 ➔ 刚好掉落3只稀有鸟类'],
+ ['亥',330,'野猪','3个','山洞','一头被激怒且力大无穷的野猪对着山崖发疯冲撞，竟然一口气在坚硬的石壁上连着撞出了3个山洞。','野猪冲刺破坏力极大 ➔ 连续三次撞击留下3个深坑'],
+ ['壬',345,'江河大水','3把','水壶','滔滔的江河大水决堤袭来，神仙从云端丢下3把神奇的水壶，瞬间就把整条江的水全吸干了。','凡水无法抵挡 ➔ 动用3把空间法宝抽干江河']
+];
+const DG_GROUPS=[[0,90,'第一组 · 0–90 度','百位为 0，不加数量'],[105,195,'第二组 · 105–195 度','百位为 1，数量＝1'],[210,285,'第三组 · 210–285 度','百位为 2，数量＝2'],[300,345,'第四组 · 300–345 度','百位为 3，数量＝3']];
+const dgCode=d=>String(d%100).padStart(2,'0');
+function dgOpen(){dgTab('list');show('pdeg');}
+function dgTab(t){
+  document.getElementById('dg-t-list').classList.toggle('on',t==='list');
+  document.getElementById('dg-t-prac').classList.toggle('on',t==='prac');
+  document.getElementById('dg-list').style.display=t==='list'?'':'none';
+  document.getElementById('dg-prac').style.display=t==='prac'?'':'none';
+  if(t==='list')dgRenderList();else dgStart();
+}
+function dgRenderList(){
+  const rule=`<div class="dg-rule"><b>解码规则</b>：画面＝<b>本象</b>（生肖/自然）＋<b>数量</b>＋<b>两位数编码</b>。<br>
+    百位看数量：没有数量是 0 字头，1 个是 1 字头，2 个是 2 字头，3 个是 3 字头；后两位看编码物。<br>
+    例：240 度＝2 个＋40（司令）→ 猴子抢了 2 个司令的帽子 → <b>申</b>。
+    <div class="dg-codes">${Object.keys(DG_CODE).sort().map(k=>`<div><i>${k}</i>${DG_CODE[k]}</div>`).join('')}</div></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px">每个字先自己回忆画面，再点开核对。</div>`;
+  const grp=DG_GROUPS.map(([a,b,t,sub])=>`<div class="dg-grp">${t}<span>${sub}</span></div>`+DG.filter(x=>x[1]>=a&&x[1]<=b).map(x=>
+    `<details class="dg-item"><summary><span class="dg-zi">${x[0]}</span><span class="dg-deg">${x[1]}<small>度</small></span><span class="dg-hint">点开看助记</span></summary>
+     <div class="dg-body"><div class="dg-pic">${x[2]} ＋ ${x[3]?x[3]+' ＋ ':''}${x[4]}<em>（${dgCode(x[1])}）</em></div>
+     <div class="dg-logic">${x[5]}</div><div class="dg-why">（${x[6]}）</div></div></details>`).join('')).join('');
+  document.getElementById('dg-list').innerHTML=rule+grp;
+}
+let DGP={deck:[],i:0,ok:0,wrong:[],done:false};
+function dgShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function dgStart(onlyWrong){
+  const base=onlyWrong&&DGP.wrong.length?DGP.wrong:DG;
+  DGP={deck:dgShuffle(base).slice(0,12).map(x=>({x,mode:Math.random()<.5?'deg2zi':'zi2deg'})),i:0,ok:0,wrong:[],done:false};
+  dgRenderQ();
+}
+function dgRenderQ(){
+  const el=document.getElementById('dg-prac');
+  if(DGP.i>=DGP.deck.length){dgFinish();return;}
+  const {x,mode}=DGP.deck[DGP.i];
+  const right=mode==='deg2zi'?x[0]:x[1]+'°';
+  const pool=dgShuffle(DG.filter(y=>y!==x)).slice(0,3).map(y=>mode==='deg2zi'?y[0]:y[1]+'°');
+  const opts=dgShuffle([right,...pool]);
+  el.innerHTML=`<div class="dg-score"><span>第 ${DGP.i+1} / ${DGP.deck.length} 题</span><span>答对 ${DGP.ok}</span></div>
+    <div class="dg-q"><div class="dg-q-t">${mode==='deg2zi'?'这个度数是哪个字？':'这个字是多少度？'}</div><div class="dg-q-big">${mode==='deg2zi'?x[1]+'°':x[0]}</div></div>
+    <div class="dg-opts">${opts.map(o=>`<button data-v="${o}">${o}</button>`).join('')}</div><div id="dg-fb"></div>`;
+  el.querySelectorAll('.dg-opts button').forEach(b=>b.onclick=()=>{
+    if(el.dataset.lock==='1')return;el.dataset.lock='1';
+    const good=b.dataset.v===right;
+    b.classList.add(good?'ok':'no');if(!good)el.querySelector(`[data-v="${right}"]`).classList.add('ok');
+    if(good)DGP.ok++;else DGP.wrong.push(x);
+    dgRecord(good);
+    document.getElementById('dg-fb').innerHTML=`<div class="dg-fb"><b>${x[0]} ＝ ${x[1]} 度</b>：${x[2]} ＋ ${x[3]?x[3]+' ＋ ':''}${x[4]}（${dgCode(x[1])}）<br>${x[5]}</div>
+      <button class="btn btn-g" onclick="DGP.i++;document.getElementById('dg-prac').dataset.lock='0';dgRenderQ()">${DGP.i+1<DGP.deck.length?'下一题':'看结果'}</button>`;
+  });
+  el.dataset.lock='0';
+}
+function dgRecord(good){
+  const s=getStore(),t=todayStr();
+  const d=s['_deg']&&s['_deg'].date===t?s['_deg']:{date:t,seen:0,known:0};
+  d.seen++;if(good)d.known++;s['_deg']=d;saveStore(s);
+}
+function dgFinish(){
+  const s=getStore(),t=todayStr(),total=DGP.deck.length,kn=DGP.ok;
+  const h=s._history||[];h.unshift({date:t,type:'deg',total,kn});s._history=h.slice(0,180);saveStore(s);
+  const w=[...new Set(DGP.wrong)];
+  document.getElementById('dg-prac').innerHTML=`<div class="dg-q"><div class="dg-q-t">本轮结果</div><div class="dg-q-big">${kn} / ${total}</div></div>
+    ${w.length?`<div class="dg-fb"><b>答错的字</b>：<br>${w.map(x=>`${x[0]} ${x[1]}°：${x[2]} ＋ ${x[3]?x[3]+' ＋ ':''}${x[4]}（${dgCode(x[1])}）`).join('<br>')}</div>
+    <button class="btn btn-g" style="margin-bottom:8px" onclick="dgStart(true)">只练答错的</button>`:'<div class="dg-fb">全对！</div>'}
+    <button class="btn btn-d" onclick="dgStart()">再来一轮</button>`;
+  DGP.wrong=w;
+}
+
 function confirmHome(){
   if(G.deck.length>0&&G.idx>0&&!confirm('退出当前练习？'))return;
   goHome();
@@ -998,13 +1151,13 @@ function initHome(){
   const today=todayStr();
   let totalToday=0,knownToday=0;
   ALL_BOOKS.forEach(k=>{if(store[k]&&store[k].date===today){totalToday+=store[k].seen||0;knownToday+=store[k].known||0;}});
-  if(store['_kj']&&store['_kj'].date===today){totalToday+=store['_kj'].seen||0;knownToday+=store['_kj'].known||0;}
+  ['_kj','_deg'].forEach(k=>{if(store[k]&&store[k].date===today){totalToday+=store[k].seen||0;knownToday+=store[k].known||0;}});
   document.getElementById('h-total').textContent=totalToday;
   document.getElementById('h-known').textContent=knownToday;
   let streak=0,dt=new Date();
   for(let i=0;i<60;i++){
     const ds=dayStr(dt);
-    const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0)||(store['_kj']&&store['_kj'].date===ds&&(store['_kj'].seen||0)>0);
+    const hasSeen=ALL_BOOKS.some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0)||['_kj','_deg'].some(k=>store[k]&&store[k].date===ds&&(store[k].seen||0)>0);
     if(hasSeen){streak++;dt.setDate(dt.getDate()-1);}else break;
   }
   document.getElementById('h-streak').textContent=streak;
