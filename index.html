@@ -256,6 +256,7 @@ body{
 /* 书籍阅读：字号字体与象义随身「断事图」一致（正文17px/行高1.95/无衬线，标题用宋体） */
 .read-para{font-size:17px;line-height:1.95;letter-spacing:.01em;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
 .read-song-hdr{font-size:18px;font-weight:600;line-height:1.5;font-family:"Noto Serif SC",Songti SC,serif;letter-spacing:.04em}
+.read-para .rl{display:block}
 .read-sec-hdr{font-size:16px;font-weight:600;line-height:1.6;letter-spacing:.04em;font-family:"Noto Serif SC",Songti SC,serif}
 .sacc{border-color:var(--hair);border-radius:9px}.sacc-hdr{background:#E3E7E1}.sacc-title{color:var(--ink-2)}.sacc-prac{background:transparent;border-color:#BCC7C1;color:var(--pine)}.sacc-prac:hover{background:var(--pine);border-color:var(--pine)}.sacc-body{background:var(--surface);border-color:var(--hair)}
 .kj-cat-hdr{color:var(--bronze);border-color:var(--hair)}.kj-verse{color:var(--ink)}
@@ -1070,6 +1071,17 @@ function togBG(n){
 }
 
 // ══ 书本阅读 ══
+// 四句一段的歌诀：一行放不下 4 句，按「两句一行」换行（阳宅断／阴宅断／形穴歌）
+const VERSE_BOOKS=new Set(['yangzhai','yinzhai','sanbailiushi']);
+function verseLines(p){
+  const lines=[];
+  (p.match(/[^。！？]+[。！？]?/g)||[p]).forEach(u=>{
+    const cl=u.match(/[^，；。！？]+[，；。！？]?/g)||[u];
+    if(cl.length>=4){for(let i=0;i<cl.length;i+=2)lines.push(cl.slice(i,i+2).join(''));}
+    else lines.push(u);
+  });
+  return lines.map(l=>`<span class="rl">${escHtml(l)}</span>`).join('');
+}
 function openBook(key){
   const raw=RAW[key];
   document.getElementById('pread-title').textContent=raw.icon+' '+raw.name;
@@ -1086,7 +1098,7 @@ function openBook(key){
       }
     }
   }else{
-    html=raw.paras.map(p=>`<div class="read-para">${escHtml(p)}</div>`).join('');
+    html=raw.paras.map(p=>`<div class="read-para">${VERSE_BOOKS.has(key)?verseLines(p):escHtml(p)}</div>`).join('');
   }
   body.innerHTML=html;
   body.scrollTop=0;
