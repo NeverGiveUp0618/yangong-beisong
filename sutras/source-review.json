@@ -4,7 +4,10 @@
     "T09n0262.xml": "c8975bef9da3bbe0faec9d47ab3f2efb8147fb530d5c17f130045a336c5df017",
     "T12n0366.xml": "93da2ce198913efcd8d7dbe47ea37bbeb22f11c6a02d0aea610151b29d4a9b7f",
     "fopusha-pinyin.html": "e031a84d14cf1c1fc0809657ea2e65f8f56730bd038b38b85ebe100ff35e603d",
-    "lengyan-lines.js": "456797c2770dcfb97c47a1eecc1480b33e51ff3e032c1ad7676b1f1263bbcc5b"
+    "lengyan-lines.js": "456797c2770dcfb97c47a1eecc1480b33e51ff3e032c1ad7676b1f1263bbcc5b",
+    "T19n0945.xml": "ae261d68ba2457fcf3d556ac1ffa251594e3ca1479b74407cab2ffee3e7764e9",
+    "T08n0251.xml": "f5507df86309f861ef2b92e9ba9db985c6db0ad357553599c6e921e15deca761",
+    "dabei-pinyin.html": "c9c63b8ade7866b8b0d176a562866382c491c4caa42480735c664ffc40b0e560"
   },
   "books": [
     {
@@ -21,6 +24,24 @@
       "id": "lengyan",
       "characters": 2620,
       "plainSHA256": "c8f215edeb19182c8325be1df87ef0502ce03db33f8931cc6fe1b5c50d1821a7"
+    },
+    {
+      "id": "wenshu",
+      "characters": 1220,
+      "plainSHA256": "fbb9d94ff2c9fbf9528744928ffc875c50f34b9cdda02b58b37d75a2438feb95",
+      "verseLines": 122,
+      "start": "觉海性澄圆，圆澄觉元妙；",
+      "end": "圆通超余者，真实心如是。"
+    },
+    {
+      "id": "xinjing",
+      "characters": 260,
+      "plainSHA256": "d790c72516f21d8651db4615cf3efb2f7778fcfa52a512b233b5f7ae9a320b67"
+    },
+    {
+      "id": "dabei",
+      "characters": 415,
+      "plainSHA256": "db12f3fb03f2cf281e9321a1a03ac3720c6bba32e1e2861a13960ebcf14e8042"
     }
   ],
   "mantraSections": [
@@ -59,7 +80,10 @@
     "T09n0262.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T09/T09n0262.xml",
     "T12n0366.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T12/T12n0366.xml",
     "fopusha-pinyin.html": "https://fopusha.com/nianjing/lengyan/",
-    "lengyan-lines.js": "https://fopusha.com/assets/lengyan-BEh3J72y.js"
+    "lengyan-lines.js": "https://fopusha.com/assets/lengyan-BEh3J72y.js",
+    "T19n0945.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T19/T19n0945.xml",
+    "T08n0251.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T08/T08n0251.xml",
+    "dabei-pinyin.html": "https://fopusha.com/nianjing/dabeizhou/"
   },
-  "method": "两篇经文从CBETA TEI正文提取，排除校勘附注，保留原段与偈颂，OpenCC t2s转简体；楞严咒427句及逐字注音与公开页面2620个ruby顺序逐一相同，不拼接其他版本。"
+  "method": "两篇经文从CBETA TEI正文提取，排除校勘附注，保留原段与偈颂，OpenCC t2s转简体；楞严咒427句及逐字注音与公开页面2620个ruby顺序逐一相同，不拼接其他版本。 楞严经卷六文殊偈颂从CBETA TEI主正文提取完整122行，排除校勘附注，OpenCC t2s转简体，仅去说偈外围引号。 心经取CBETA玄奘译本主正文，去序文；大悲咒84句415字和逐字注音与来源页面全部ruby顺序一致。"
 }

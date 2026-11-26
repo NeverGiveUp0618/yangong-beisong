@@ -10,7 +10,7 @@ function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-be
  let b=browser(html),{w,doc}=b;
  w.eval(fs.readFileSync('sutras/data.js','utf8'));w.eval(fs.readFileSync('sutras/app.js','utf8'));await sleep(50);
  check('原五本书/口诀/24山助记数据逐项未变',()=>{for(const name of ['RAW','DEFAULT_KJ','DG','DG_CODE','DG_GROUPS'])assert.equal(w.eval('JSON.stringify('+name+')'),old.w.eval('JSON.stringify('+name+')'),name)});old.dom.window.close();
- check('新增经文模块默认折叠，三篇均有阅读入口',()=>{assert(!doc.querySelector('#mod-sutras').classList.contains('open'));assert.equal(doc.querySelectorAll('[data-open-sutra]').length,3)});
+ check('新增经文模块默认折叠，六篇按顺序均有阅读入口',()=>{assert(!doc.querySelector('#mod-sutras').classList.contains('open'));assert.deepEqual([...doc.querySelectorAll('[data-open-sutra]')].map(x=>x.dataset.openSutra),['yaowang','amituo','lengyan','wenshu','xinjing','dabei']);assert(html.includes('<span class="mod-count">6篇</span>'))});
  const data=w.YANGONG_SUTRAS;
  for(const id of ['yaowang','amituo']){
   doc.querySelector('[data-open-sutra="'+id+'"]').click();await sleep(30);
@@ -18,6 +18,12 @@ function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-be
   check(id+'：全文所有字逐一保留、自然段排版且可回首页',()=>{assert(doc.getElementById('psutra').classList.contains('active'));assert.equal(doc.querySelector('.sutra-text').textContent,expected);assert.equal(doc.querySelectorAll('.sutra-sentence, .sutra-paragraph br').length,0);assert.equal(doc.querySelectorAll('.sutra-paragraph').length,id==='yaowang'?16:19);if(id==='amituo')assert(doc.querySelector('.sutra-paragraph').textContent.startsWith('如是我闻：一时'));assert(doc.querySelectorAll('.sutra-verse>span').length===(id==='yaowang'?6:0));assert(doc.querySelector('.sutra-source a').href===book.source.url);assert(doc.querySelector('.sutra-footer').textContent.includes('全文终'))});
   w.closeSutra();await sleep(30);assert(doc.getElementById('ph').classList.contains('active'));
  }
+ for(const id of ['wenshu','xinjing']){
+  w.openSutra(id);await sleep(30);const book=data.books.find(x=>x.id===id);
+  check(id+'：节选首尾、偈颂及心经全文原样显示',()=>{assert.equal(doc.querySelector('.sutra-text').textContent,book.blocks.map(x=>x.text||x.lines.join('')).join(''));assert.equal(doc.querySelectorAll('.sutra-verse>span').length,id==='wenshu'?122:1);assert(!doc.querySelector('ruby'));assert(doc.querySelector('.sutra-footer').textContent.includes(id==='wenshu'?'节选终':'全文终'))});
+ }
+ w.openSutra('dabei');await sleep(30);
+ check('大悲咒84句415字音完整、无楞严咒分会标签且开关可用',()=>{assert.equal(doc.querySelectorAll('.sutra-mantra-line').length,84);assert.equal(doc.querySelectorAll('ruby').length,415);assert(!doc.querySelector('#sutra-section-select'));assert(doc.querySelector('.sutra-heading').textContent.includes('84句'));assert(!doc.querySelector('.sutra-heading').textContent.includes('427'));for(const line of data.books.find(b=>b.id==='dabei').sections[0].lines){const rs=[...doc.querySelectorAll('#sutra-line-'+line.n+' ruby')];assert.equal(rs.map(r=>r.firstChild.textContent).join(''),line.text);assert.deepEqual(rs.map(r=>r.querySelector('rt').textContent),Array.from(line.pinyin))}assert(doc.querySelectorAll('ruby.sutra-repeat').length>0);doc.getElementById('sutra-pinyin').click();assert(doc.querySelector('.sutra-text').classList.contains('hide-pinyin'));doc.getElementById('sutra-pinyin').click();doc.getElementById('sutra-repeat').click();assert(doc.querySelector('.sutra-text').classList.contains('hide-repeats'));doc.getElementById('sutra-repeat').click()});
  w.openSutra('lengyan');await sleep(30);
  check('楞严咒五会427句齐全，每句单独一行',()=>{assert.equal(doc.querySelectorAll('.sutra-mantra-section').length,5);assert.equal(doc.querySelectorAll('.sutra-mantra-line').length,427);assert(doc.getElementById('sutra-line-1'));assert(doc.getElementById('sutra-line-427'))});
  check('2620个字与2620个注音一一对应，无自动猜音',()=>{assert.equal(doc.querySelectorAll('.sutra-text ruby').length,2620);for(const s of data.books[2].sections)for(const line of s.lines){const rs=[...doc.querySelectorAll('#sutra-line-'+line.n+' ruby')];assert.equal(rs.map(r=>r.firstChild.textContent).join(''),line.text);assert.deepEqual(rs.map(r=>r.querySelector('rt').textContent),Array.from(line.pinyin))}});
