@@ -35,3 +35,20 @@
 .hide-pinyin rt{display:none}
 .sutra-footer{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--hair);margin-top:28px;padding:24px 0 10px;color:var(--bronze);font-size:16px}
 @media(min-width:481px){.sutra-text{font-size:18px}.sutra-ruby-text ruby{font-size:22px;min-width:1.5em}.sutra-ruby-text rt{font-size:11px}.sutra-heading h1{font-size:29px}}
+
+/* Continuous chant layout: shared left edge, compact rhythm, no per-line rules. */
+.sutra-mantra-section{margin-bottom:36px}
+.sutra-mantra-section h2{text-align:left;padding:20px 0 12px 30px;margin-bottom:12px;font-size:20px}
+.sutra-mantra-section h2 small{display:inline;margin-left:12px;font-size:12px;letter-spacing:0}
+.sutra-mantra-line{display:grid;grid-template-columns:22px minmax(0,1fr);align-items:start;gap:8px;justify-content:normal;line-height:1.6!important;padding:3px 0 7px;border:0}
+.sutra-mantra-line.sutra-breath{margin-top:12px}
+.sutra-line-no{width:auto;font-size:10px;line-height:1.6;padding-top:21px;opacity:.75}
+.sutra-ruby-text{flex:none;text-align:left;line-height:2.25;overflow-wrap:anywhere}
+.sutra-ruby-text ruby{font-size:20px;min-width:1.08em;padding:0 .07em;line-height:1.55}
+.sutra-ruby-text rt{font-size:10px;line-height:1.6;color:#68716c}
+.sutra-repeat,.sutra-repeat rt{color:#A52F29!important}
+.hide-repeats .sutra-repeat{color:var(--ink)!important}
+.hide-repeats .sutra-repeat rt{color:#68716c!important}
+.hide-pinyin .sutra-line-no{padding-top:7px}
+.hide-pinyin .sutra-ruby-text{line-height:1.8}
+@media(min-width:481px){.sutra-mantra-section h2{padding-left:38px}.sutra-mantra-line{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:4px 0 8px}.sutra-ruby-text ruby{font-size:22px;min-width:1.12em}.sutra-ruby-text rt{font-size:11px}}
