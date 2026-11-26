@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-26",
+  "sources": {
+    "T09n0262.xml": "c8975bef9da3bbe0faec9d47ab3f2efb8147fb530d5c17f130045a336c5df017",
+    "T12n0366.xml": "93da2ce198913efcd8d7dbe47ea37bbeb22f11c6a02d0aea610151b29d4a9b7f",
+    "fopusha-pinyin.html": "e031a84d14cf1c1fc0809657ea2e65f8f56730bd038b38b85ebe100ff35e603d",
+    "lengyan-lines.js": "456797c2770dcfb97c47a1eecc1480b33e51ff3e032c1ad7676b1f1263bbcc5b"
+  },
+  "books": [
+    {
+      "id": "yaowang",
+      "characters": 2798,
+      "plainSHA256": "c49e6f7bf741c230f2297b52f0289ebf8135f118b216bdb57d538d1624838d09"
+    },
+    {
+      "id": "amituo",
+      "characters": 1857,
+      "plainSHA256": "bd9b5c849b14ebf13ae2587cfde49ae8b37c83eaaa006dab3ef64318decf3d8c"
+    },
+    {
+      "id": "lengyan",
+      "characters": 2620,
+      "plainSHA256": "c8f215edeb19182c8325be1df87ef0502ce03db33f8931cc6fe1b5c50d1821a7"
+    }
+  ],
+  "mantraSections": [
+    {
+      "title": "第一会",
+      "first": 1,
+      "last": 137,
+      "count": 137
+    },
+    {
+      "title": "第二会",
+      "first": 138,
+      "last": 178,
+      "count": 41
+    },
+    {
+      "title": "第三会",
+      "first": 179,
+      "last": 272,
+      "count": 94
+    },
+    {
+      "title": "第四会",
+      "first": 273,
+      "last": 332,
+      "count": 60
+    },
+    {
+      "title": "第五会",
+      "first": 333,
+      "last": 427,
+      "count": 95
+    }
+  ],
+  "sourceURLs": {
+    "T09n0262.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T09/T09n0262.xml",
+    "T12n0366.xml": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T12/T12n0366.xml",
+    "fopusha-pinyin.html": "https://fopusha.com/nianjing/lengyan/",
+    "lengyan-lines.js": "https://fopusha.com/assets/lengyan-BEh3J72y.js"
+  },
+  "method": "两篇经文从CBETA TEI正文提取，排除校勘附注，保留原段与偈颂，OpenCC t2s转简体；楞严咒427句及逐字注音与公开页面2620个ruby顺序逐一相同，不拼接其他版本。"
+}
