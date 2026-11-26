@@ -15,7 +15,7 @@ function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-be
  for(const id of ['yaowang','amituo']){
   doc.querySelector('[data-open-sutra="'+id+'"]').click();await sleep(30);
   const book=data.books.find(x=>x.id===id),expected=book.blocks.map(x=>x.text||x.lines.join('')).join('');
-  check(id+'：全文所有字逐一保留、按句换行且可回首页',()=>{assert(doc.getElementById('psutra').classList.contains('active'));assert.equal(doc.querySelector('.sutra-text').textContent,expected);assert(doc.querySelectorAll('.sutra-sentence').length>20);assert(doc.querySelectorAll('.sutra-verse>span').length===(id==='yaowang'?6:0));assert(doc.querySelector('.sutra-source a').href===book.source.url);assert(doc.querySelector('.sutra-footer').textContent.includes('全文终'))});
+  check(id+'：全文所有字逐一保留、自然段排版且可回首页',()=>{assert(doc.getElementById('psutra').classList.contains('active'));assert.equal(doc.querySelector('.sutra-text').textContent,expected);assert.equal(doc.querySelectorAll('.sutra-sentence, .sutra-paragraph br').length,0);assert.equal(doc.querySelectorAll('.sutra-paragraph').length,id==='yaowang'?16:19);if(id==='amituo')assert(doc.querySelector('.sutra-paragraph').textContent.startsWith('如是我闻：一时'));assert(doc.querySelectorAll('.sutra-verse>span').length===(id==='yaowang'?6:0));assert(doc.querySelector('.sutra-source a').href===book.source.url);assert(doc.querySelector('.sutra-footer').textContent.includes('全文终'))});
   w.closeSutra();await sleep(30);assert(doc.getElementById('ph').classList.contains('active'));
  }
  w.openSutra('lengyan');await sleep(30);
