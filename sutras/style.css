@@ -18,7 +18,7 @@
 .sutra-source{margin:0 0 24px;padding:12px;border:1px solid var(--hair);border-radius:8px;font-size:14px;line-height:1.8;color:var(--ink-2);overflow-wrap:anywhere}
 .sutra-source summary{cursor:pointer;color:var(--pine)}
 .sutra-source a{color:var(--pine);text-decoration:underline}
-.sutra-text{font-family:"Songti SC","STSong","Noto Serif SC","PingFang SC",serif;color:var(--ink);font-size:20px;line-height:2.15;letter-spacing:.04em;min-width:0}
+.sutra-text{font-family:"Songti SC","STSong","Noto Serif SC","PingFang SC",serif;color:var(--ink);font-size:16px;line-height:2.15;letter-spacing:.04em;min-width:0}
 .sutra-paragraph{margin:0 0 1.5em;text-align:left}
 .sutra-sentence{display:block;margin-bottom:.4em;overflow-wrap:break-word}
 .sutra-verse{margin:1.5em 0;text-align:center;line-height:2.2}
@@ -29,9 +29,9 @@
 .sutra-mantra-line{position:relative;display:flex;align-items:baseline;justify-content:center;gap:8px;line-height:2.6!important;margin:0;padding:10px 0 14px;border-bottom:1px dashed var(--hair);min-width:0}
 .sutra-line-no{font:12px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--muted);width:26px;text-align:right;flex-shrink:0;letter-spacing:0}
 .sutra-ruby-text{display:block;min-width:0;max-width:100%;flex:0 1 auto;text-align:center;overflow-wrap:anywhere}
-.sutra-ruby-text ruby{display:inline-flex;flex-direction:column-reverse;align-items:center;justify-content:center;vertical-align:bottom;font-size:26px;line-height:1.5;min-width:1.38em;padding:0 .09em;letter-spacing:0;break-inside:avoid;white-space:nowrap}
-.sutra-ruby-text rt{display:block;flex:none;font:14px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--ink-2);text-align:center;letter-spacing:0}
+.sutra-ruby-text ruby{display:inline-flex;flex-direction:column-reverse;align-items:center;justify-content:center;vertical-align:bottom;font-size:20px;line-height:1.5;min-width:1.38em;padding:0 .09em;letter-spacing:0;break-inside:avoid;white-space:nowrap}
+.sutra-ruby-text rt{display:block;flex:none;font:10px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--ink-2);text-align:center;letter-spacing:0}
 .sutra-ruby-text rp{display:none}
 .hide-pinyin rt{display:none}
 .sutra-footer{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--hair);margin-top:28px;padding:24px 0 10px;color:var(--bronze);font-size:16px}
-@media(min-width:481px){.sutra-text{font-size:22px}.sutra-ruby-text ruby{font-size:28px;min-width:1.5em}.sutra-ruby-text rt{font-size:15px}.sutra-heading h1{font-size:29px}}
+@media(min-width:481px){.sutra-text{font-size:18px}.sutra-ruby-text ruby{font-size:22px;min-width:1.5em}.sutra-ruby-text rt{font-size:11px}.sutra-heading h1{font-size:29px}}
