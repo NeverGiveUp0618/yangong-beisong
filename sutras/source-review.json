@@ -12,13 +12,13 @@
   "books": [
     {
       "id": "yaowang",
-      "characters": 2798,
-      "plainSHA256": "c49e6f7bf741c230f2297b52f0289ebf8135f118b216bdb57d538d1624838d09"
+      "characters": 2808,
+      "plainSHA256": "75d3d7b782613cc076977bd10b5c2222770cd3f854e4e65af76ac41f4812ac9e"
     },
     {
       "id": "amituo",
-      "characters": 1857,
-      "plainSHA256": "bd9b5c849b14ebf13ae2587cfde49ae8b37c83eaaa006dab3ef64318decf3d8c"
+      "characters": 1863,
+      "plainSHA256": "3f349a3b5f201e242705fcf1e400763b554f4a2e769271d4d55a972f29bf450f"
     },
     {
       "id": "lengyan",
