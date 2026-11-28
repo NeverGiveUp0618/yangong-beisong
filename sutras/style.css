@@ -55,3 +55,12 @@
 /* All three requested texts use bold body characters; pronunciation stays light. */
 .sutra-paragraph,.sutra-verse,.sutra-ruby-text ruby{font-weight:700}
 .sutra-ruby-text rt{font-weight:400}
+
+/* Natural voice audio player bar & active segment highlight */
+.sutra-audio-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;margin:0 0 16px;border:1px solid var(--hair);border-radius:10px;background:var(--surface)}
+.sutra-play-btn{background:var(--pine);color:#fff;border-color:var(--pine);font-weight:600}
+.sutra-rate-label{display:inline-flex;align-items:center;gap:6px;font:13px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--ink-2)}
+.sutra-rate-label select{padding:6px 8px;border:1px solid var(--hair);background:var(--bg);color:var(--ink);border-radius:6px;font-size:14px;min-height:36px}
+.sutra-audio-status{font:13px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--bronze);margin-left:auto}
+.sutra-playing{background:rgba(165,127,63,.13);border-radius:6px;box-shadow:inset 3px 0 0 var(--bronze);transition:background .2s}
+.sutra-paragraph,.sutra-verse>span,.sutra-mantra-line{cursor:pointer}

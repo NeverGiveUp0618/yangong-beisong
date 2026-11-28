@@ -1,14 +1,14 @@
 const fs=require('fs'),assert=require('assert'),cp=require('child_process'),{JSDOM,VirtualConsole}=require('jsdom');
 let n=0;const check=(name,fn)=>{fn();n++;console.log('✓ '+name)},sleep=ms=>new Promise(r=>setTimeout(r,ms));
-function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-beisong/'){
+ function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-beisong/'){
  const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
- const dom=new JSDOM(html.replace(/<script\b[^>]*src=[^>]*>[\s\S]*?<\/script>/g,''),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc,beforeParse(w){w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=function(){this.dataset.scrolled='yes'};for(const[k,v]of Object.entries(saved))w.localStorage.setItem(k,v)}});
+ const dom=new JSDOM(html.replace(/<script\b[^>]*src=[^>]*>[\s\S]*?<\/script>/g,''),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc,beforeParse(w){w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=function(){this.dataset.scrolled='yes'};w.Audio=function(){this.src='';this.playbackRate=1;this.paused=true;this.play=()=>{this.paused=false;return Promise.resolve()};this.pause=()=>{this.paused=true}};for(const[k,v]of Object.entries(saved))w.localStorage.setItem(k,v)}});
  return {dom,w:dom.window,doc:dom.window.document,errors};
 }
 (async()=>{
  const html=fs.readFileSync('index.html','utf8'),old=browser(cp.execFileSync('git',['show','1d0a99e:index.html'],{encoding:'utf8'}));
  let b=browser(html),{w,doc}=b;
- w.eval(fs.readFileSync('sutras/data.js','utf8'));w.eval(fs.readFileSync('sutras/app.js','utf8'));await sleep(50);
+ w.eval(fs.readFileSync('sutras/data.js','utf8'));w.eval(fs.readFileSync('sutras/audio-manifest.js','utf8'));w.eval(fs.readFileSync('sutras/app.js','utf8'));await sleep(50);
  check('原五本书/口诀/24山助记数据逐项未变',()=>{for(const name of ['RAW','DEFAULT_KJ','DG','DG_CODE','DG_GROUPS'])assert.equal(w.eval('JSON.stringify('+name+')'),old.w.eval('JSON.stringify('+name+')'),name)});old.dom.window.close();
  check('新增经文模块默认折叠，六篇按顺序均有阅读入口',()=>{assert(!doc.querySelector('#mod-sutras').classList.contains('open'));assert.deepEqual([...doc.querySelectorAll('[data-open-sutra]')].map(x=>x.dataset.openSutra),['yaowang','amituo','lengyan','wenshu','xinjing','dabei']);assert(html.includes('<span class="mod-count">6篇</span>'))});
  const data=w.YANGONG_SUTRAS;
@@ -33,6 +33,23 @@ function browser(html,saved={},url='https://nevergiveup0618.github.io/yangong-be
  const jump=doc.getElementById('sutra-section-select');jump.value='4';jump.dispatchEvent(new w.Event('change'));await sleep(70);
  check('五会跳转到相应标题，篇目切换不混正文',()=>{const sel=doc.getElementById('sutra-section-select');sel.value='4';assert.equal(doc.getElementById('sutra-section-4').dataset.scrolled,'yes');const book=doc.getElementById('sutra-book-select');book.value='amituo';book.dispatchEvent(new w.Event('change'));assert(doc.querySelector('h1').textContent.includes('阿弥陀经'));assert(!doc.querySelector('ruby'))});
  check('纯阅读不修改练习成绩、口诀和自定义数据',()=>{assert.equal(w.localStorage.getItem('yangpu'),null);assert.equal(w.localStorage.getItem('yangpu_kj'),null);assert(JSON.parse(w.localStorage.getItem('yangpu_sutra_reader_v1')).last==='amituo')});
+ check('六篇自然人声MP3齐全且朗读控制/点段起读可用',()=>{
+  const man=w.YANGONG_SUTRA_AUDIO;assert.deepEqual(Object.keys(man),['yaowang','amituo','lengyan','wenshu','xinjing','dabei']);
+  let cnt=0;for(const k of Object.keys(man))for(const t of man[k]){assert(fs.statSync('sutras/audio/'+t.file).size>1000,'empty mp3: '+t.file);cnt++}
+  assert.equal(cnt,88);
+  w.openSutra('amituo');
+  doc.getElementById('sutra-play').click();
+  assert(doc.getElementById('sutra-audio-status').textContent.includes('朗读中'));
+  assert(!doc.getElementById('sutra-stop').hidden);
+  assert(doc.getElementById('sutra-block-0').classList.contains('sutra-playing'));
+  doc.getElementById('sutra-block-2').click();
+  assert(doc.getElementById('sutra-block-2').classList.contains('sutra-playing'));
+  doc.getElementById('sutra-play').click();
+  assert(doc.getElementById('sutra-audio-status').textContent.includes('已暂停'));
+  doc.getElementById('sutra-stop').click();
+  assert(doc.getElementById('sutra-stop').hidden);
+  assert.equal(doc.querySelectorAll('.sutra-playing').length,0);
+ });
  check('新旧页面运行均无脚本异常',()=>assert.deepEqual(b.errors,[]));
  b.dom.window.close();b=browser(html,{'yangpu':'{"keep":true}','yangpu_kj':'[{"custom":"原样"}]','yangpu_sutra_reader_v1':'{bad'},'https://nevergiveup0618.github.io/yangong-beisong/#sutra/lengyan');w=b.w;doc=b.doc;w.eval(fs.readFileSync('sutras/data.js','utf8'));w.eval(fs.readFileSync('sutras/app.js','utf8'));await sleep(30);
  check('直链可打开注音全文，损坏阅读位置不影响旧个人数据',()=>{assert.equal(doc.querySelectorAll('.sutra-mantra-line').length,427);assert.equal(w.localStorage.getItem('yangpu'),'{"keep":true}');assert.equal(w.localStorage.getItem('yangpu_kj'),'[{"custom":"原样"}]')});
